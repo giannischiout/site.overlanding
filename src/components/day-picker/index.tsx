@@ -16,6 +16,9 @@ export function DayPicker({ numberOfMonths = 2 }: Props) {
     <ReactDayPicker
       animate
       mode="range"
+      weekStartsOn={1}
+      disabled={{ before: new Date() }}
+      startMonth={new Date()}
       selected={{
         from: range.from || undefined,
         to: range.to || undefined,

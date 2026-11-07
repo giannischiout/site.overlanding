@@ -10,7 +10,7 @@ export const satoshi = localFont({
     {
       path: "./Satoshi-Medium.woff2",
       weight: "500",
-      style: "medium",
+      style: "normal",
     },
     {
       path: "./Satoshi-Italic.woff2",

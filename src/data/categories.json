@@ -1,0 +1,37 @@
+[
+  {
+    "id": "suv",
+    "name": "SUV",
+    "description": "Roomy and high off the ground, for gravel roads and winter driving.",
+    "image": { "url": "/assets/offroadmatte.png", "alt": "Matte black SUV with a roof rack" },
+    "landscape_image": { "url": "/assets/landscape-4x4.jpg", "alt": "4x4 driving through flying mud on a forest track" }
+  },
+  {
+    "id": "campervan",
+    "name": "Campervan",
+    "description": "Compact van with built-in living space for road trips and camping.",
+    "image": { "url": "/assets/trailhunter.png", "alt": "White off-road camper van" },
+    "landscape_image": { "url": "/assets/landscape-camper.jpg", "alt": "Pine trees and snowy peaks under low cloud" }
+  },
+  {
+    "id": "4x4-rooftop-tent",
+    "name": "4x4 with Rooftop Tent",
+    "description": "A 4x4 with a tent on the roof, so you can sleep wherever camping is allowed.",
+    "image": { "url": "/assets/trail-pro.png", "alt": "Silver pickup with a rooftop tent set up" },
+    "landscape_image": { "url": "/assets/overlanding.jpg", "alt": "Black overland truck parked in a forest" }
+  },
+  {
+    "id": "caravan",
+    "name": "Caravan",
+    "description": "Towable, with room to sleep, cook and relax. A good fit for families.",
+    "image": { "url": "/assets/landscape-caravan.jpg", "alt": "Blue pop-top camper among pine trees" },
+    "landscape_image": { "url": "/assets/landscape-caravan.jpg", "alt": "Blue pop-top camper among pine trees" }
+  },
+  {
+    "id": "overland-truck",
+    "name": "Overland Truck",
+    "description": "Heavy-duty trucks designed for long-distance expeditions with camping gear.",
+    "image": { "url": "/assets/overlanding.jpg", "alt": "Black overland truck parked in a forest" },
+    "landscape_image": { "url": "/assets/overlandVan001.png", "alt": "Orange lifted overland van in a forest" }
+  }
+]

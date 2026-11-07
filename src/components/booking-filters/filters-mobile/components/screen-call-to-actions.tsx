@@ -1,31 +1,28 @@
-import { Calendar, ChevronDown } from "lucide-react";
+import { Calendar, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useFilterStore } from "@/store/use-filters-store";
 
 export function CallToActionScreen() {
   const { currentScreen, setCurrentScreen } = useFilterStore();
   return (
-    <div
+    <button
+      type="button"
       onClick={() => setCurrentScreen("filters")}
       className={cn(
-        "items-center justify-center gap-6",
+        "min-h-16 w-full items-center gap-3 rounded-lg px-3 text-left",
         currentScreen === "callToAction" ? "flex" : "hidden",
       )}
     >
-      <div className="flex gap-2">
-        <span className="flex h-10 w-10 items-center justify-center rounded-md bg-gray-100">
-          <Calendar size={22} className="text-primary" />
+      <span className="bg-primary/10 flex size-10 shrink-0 items-center justify-center rounded-md">
+        <Calendar size={20} className="text-link" />
+      </span>
+      <span className="flex min-w-0 flex-1 flex-col">
+        <span className="text-base font-medium">Book your vehicle</span>
+        <span className="text-muted-foreground text-sm">
+          Add your dates and pickup location
         </span>
-        <div className="flex flex-col text-sm">
-          <p className="text-[16px] font-medium">Start your adventure</p>
-          <span className="text-muted-foreground text-[13px]">
-            Enter your trip details
-          </span>
-        </div>
-      </div>
-      <div className="rounded-full border border-gray-200 p-1">
-        <ChevronDown className="text-gray-500" size={18} />
-      </div>
-    </div>
+      </span>
+      <ChevronRight size={20} className="text-muted-foreground shrink-0" />
+    </button>
   );
 }

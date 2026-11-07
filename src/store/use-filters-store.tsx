@@ -1,7 +1,8 @@
 import { create } from "zustand";
 import { timeOptions } from "@/_mockup";
 import type { DateRange } from "react-day-picker";
-import type { PickupLocation } from "@/payload-types";
+import type { PickupLocation } from "@/types/content";
+import pickupLocations from "@/data/pickup-locations.json";
 
 export enum POPOVERS {
   pickup = "pickup",
@@ -37,22 +38,25 @@ type FiltersActions = {
   onOpen: (popover: PopoverKey) => void;
   onClose: (key: PopoverKey) => void;
   setDateField: (range: DateRange) => void;
-  onInitLocations: (locations: PickupLocation[]) => void;
   // mobile only:
   setCurrentScreen: (screen: FiltersState["currentScreen"]) => void;
 };
 
 type FiltersStore = FiltersState & FiltersActions;
 
+const locations = pickupLocations as PickupLocation[];
+const defaultTime =
+  timeOptions.find((option) => option.value === "10:00") ?? timeOptions[0];
+
 export const createFiltersStore = () =>
   create<FiltersStore>((set) => ({
-    locations: [],
+    locations,
     // isMobileOpen: false,
     dayPickerMounted: false,
-    pickup: null,
-    dropoff: null,
-    pickupTime: timeOptions[0],
-    dropoffTime: timeOptions[1],
+    pickup: locations[0],
+    dropoff: locations[0],
+    pickupTime: defaultTime,
+    dropoffTime: defaultTime,
     range: { from: null, to: null },
     openPopover: null,
     setField: (key, value) =>
@@ -91,14 +95,6 @@ export const createFiltersStore = () =>
         openPopover: state.openPopover === popover ? null : popover,
       })),
 
-    onInitLocations: (loc) => {
-      set((state) => ({
-        ...state,
-        locations: loc,
-        pickup: loc[0],
-        dropoff: loc[0],
-      }));
-    },
     // MOBILE:
     currentScreen: "callToAction",
     setCurrentScreen: (screen) => {

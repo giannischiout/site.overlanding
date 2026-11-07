@@ -1,40 +1,40 @@
 "use client";
 
+import Link from "next/link";
 import { Logo } from "@/components/logo";
 import { DesktopMenu } from "@/components/nav/desktop-menu";
-import type { Navigation } from "@/payload-types";
 import { MobileMenu } from "@/components/nav/mobile-menu";
+import { useBookNow } from "@/components/nav/components/use-book-now";
+import { Button } from "@/components/ui/button";
+import type { Navigation } from "@/types/content";
 
 type Props = {
   data: Navigation;
 };
 
-// ===================================================
-// padding is 2% : main website container has 96% width
-// ===================================================
-
-// export function Navbar({ data }: Props) {
-//   return (
-//     <div
-//       className="bg-background relative grid h-[100px] w-full grid-cols-[auto_1fr_auto] items-center justify-center text-lg font-medium lg:grid-cols-[200px_1fr_200px]"
-//       style={{ zIndex: 200 }}
-//     >
-//       <Logo />
-//       <DesktopMenu data={data} />
-//       <MobileMenu data={data} />
-//     </div>
-//   );
-// }
-
 export function Navbar({ data }: Props) {
+  const onBookNow = useBookNow();
+
   return (
-    <div
-      className="bg-background relative grid h-[100px] w-full grid-cols-[auto_1fr_auto] items-center justify-center text-lg font-medium lg:grid-cols-[200px_1fr_200px]"
-      style={{ zIndex: 200 }}
-    >
-      <Logo />
-      <DesktopMenu data={data} />
-      <MobileMenu data={data} />
-    </div>
+    <header className="sticky top-0 z-50 border-b border-border bg-white">
+      <div className="page-container flex h-[var(--nav-height)] items-center gap-10">
+        <Link
+          href="/"
+          className="flex shrink-0 items-center gap-3 rounded-md text-[17px] font-bold tracking-[-0.01em]"
+        >
+          <Logo />
+          {data.brand}
+        </Link>
+        <DesktopMenu data={data} />
+        <Button
+          size="lg"
+          onClick={onBookNow}
+          className="ml-auto hidden text-[15px] lg:inline-flex"
+        >
+          Book now
+        </Button>
+        <MobileMenu data={data} onBookNow={onBookNow} />
+      </div>
+    </header>
   );
 }

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "summit-cruiser-4x4",
+    "model": "Summit Cruiser 4x4",
+    "description": "Rugged off-road vehicle designed for overlanding and adventure trips.",
+    "brand": "summit-ridge-outfitters",
+    "category": "suv",
+    "image": { "url": "/assets/offroadmatte.png", "alt": "Matte black Summit Cruiser with a roof rack" },
+    "basePricePerDay": 150,
+    "stock": 3,
+    "sleeps": 2,
+    "seats": 5
+  },
+  {
+    "id": "ironpeak-expedition",
+    "model": "IronPeak Expedition",
+    "description": "Heavy-duty expedition vehicle with optional rooftop tents and full off-road kit.",
+    "brand": "ironpeak-overland",
+    "category": "4x4-rooftop-tent",
+    "image": { "url": "/assets/trail-pro.png", "alt": "Silver IronPeak Expedition with its rooftop tent set up" },
+    "basePricePerDay": 200,
+    "stock": 2,
+    "sleeps": 2,
+    "seats": 4
+  },
+  {
+    "id": "trailhaven-voyager",
+    "model": "TrailHaven Voyager",
+    "description": "Comfort-oriented 4x4 with modular interior and optional family tent setup.",
+    "brand": "trailhaven",
+    "category": "campervan",
+    "image": { "url": "/assets/trailhunter.png", "alt": "White TrailHaven Voyager camper van" },
+    "basePricePerDay": 180,
+    "stock": 4,
+    "sleeps": 4,
+    "seats": 4
+  },
+  {
+    "id": "venturex-offroad",
+    "model": "VentureX Offroad",
+    "description": "Innovative overland vehicle with built-in storage and rooftop tent compatibility.",
+    "brand": "venturex-gear-co",
+    "category": "campervan",
+    "image": { "url": "/assets/overlandVan001.png", "alt": "Orange VentureX Offroad van in a forest" },
+    "basePricePerDay": 175,
+    "stock": 5,
+    "sleeps": 3,
+    "seats": 5
+  },
+  {
+    "id": "ridgeway-explorer",
+    "model": "Ridgeway Explorer",
+    "description": "Reliable overlanding vehicle for serious explorers with optional tent setups.",
+    "brand": "ridgeway-expeditions",
+    "category": "overland-truck",
+    "image": { "url": "/assets/overlanding.jpg", "alt": "Black Ridgeway Explorer parked in a forest" },
+    "basePricePerDay": 190,
+    "stock": 2,
+    "sleeps": 2,
+    "seats": 5
+  }
+]

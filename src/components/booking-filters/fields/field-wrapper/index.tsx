@@ -1,47 +1,47 @@
 import { cn } from "@/lib/utils";
-import type { RefObject } from "react";
-import { MapPin } from "lucide-react";
 
+/** One labelled cell of the booking bar. Location, date and time all use it. */
 export const FieldWrapper = ({
   label,
-  isPrimary = false,
-  onToggle,
-  anchorRef,
   value,
-  isDatePickerOpen,
-  className,
+  onClick,
+  active = false,
+  muted = false,
+  isPlaceholder = false,
+  expanded,
 }: {
   label: string;
-  isPrimary?: boolean;
-  onToggle: () => void;
   value: string;
-  className?: string;
-
-  isDatePickerOpen?: boolean;
-  anchorRef?: RefObject<HTMLDivElement | null>;
+  onClick: () => void;
+  active?: boolean;
+  muted?: boolean;
+  isPlaceholder?: boolean;
+  expanded?: boolean;
 }) => {
-  const labelStyle = isPrimary ? "text-primary font-medium" : "text-gray-500";
   return (
-    <div
-      ref={anchorRef}
-      onClick={onToggle}
+    <button
+      type="button"
+      onClick={onClick}
+      aria-expanded={expanded}
       className={cn(
-        "relative flex cursor-pointer flex-col gap-0.5 opacity-100",
-        isDatePickerOpen && "opacity-15",
+        "flex h-16 w-full min-w-0 flex-col justify-center gap-0.5 rounded-lg px-4 text-left transition-[background-color,opacity] duration-150 ease-out",
+        "hover:bg-hover",
+        active && "bg-primary/10 hover:bg-primary/10",
+        muted && "opacity-40",
       )}
     >
-      <span className={cn("text-sm", labelStyle)}>{label}</span>
-      <div
+      <span className="text-muted-foreground text-[13px] leading-tight">
+        {label}
+      </span>
+      <span
+        title={value}
         className={cn(
-          "border-primary/20 flex h-[40px] items-center gap-2 rounded-md border px-2 whitespace-nowrap",
-          className,
+          "truncate text-[15px] leading-tight font-medium",
+          isPlaceholder && "text-link",
         )}
       >
-        <MapPin size={20} className="text-primary" />
-        <span className="max-w-[110px] truncate overflow-hidden text-sm">
-          {value}
-        </span>
-      </div>
-    </div>
+        {value}
+      </span>
+    </button>
   );
 };

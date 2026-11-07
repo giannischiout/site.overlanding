@@ -4,13 +4,6 @@ type Props = {
   filters: IFilters;
 };
 export function VehiclesView({ filters }: Props) {
-  if (filters.error) {
-    return (
-      <div className="flex items-center justify-center p-2">
-        {filters.error}
-      </div>
-    );
-  }
   return (
     <section className="bg-bac min-h-[50vh] p-4">
       a{/*<div className="m-auto flex w-[65%] flex-col gap-10 pt-6">*/}

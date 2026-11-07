@@ -1,31 +1,21 @@
 import Image from "next/image";
-import { Reviews } from "@/components/reviews";
 
-const HIGHTLIGHTS = [
+const HIGHLIGHTS = [
   {
-    id: 1,
-    label: "Embark on Your Iceland Adventure with Confidence",
-    image: "/assets/highlights-discovery.jpg",
+    label: "Ready for Iceland's roads",
     description:
-      "At Northern Wheels, exploring Iceland is simple, safe, and unforgettable. From rugged highland tracks to scenic coastal drives, our vehicles are ready for every adventure.",
+      "Choose a vehicle that fits your route, from the Ring Road to marked mountain roads.",
   },
   {
-    id: 2,
-    label: "Secure & Flexible Deposits",
-    image: "/assets/highlights-security.jpg",
-    description:
-      "We offer transparent security deposits and flexible payment options. Live your adventure without the logistics ",
+    label: "Clear deposits",
+    description: "See the security deposit up front and choose how you pay.",
   },
   {
-    id: 3,
-    label: "Diverse Fleet for Every Adventure",
-    image: "/assets/highlights-diverse.jpg",
-    description: "From compact city cars to 4x4 adventure vehicles.",
+    label: "A vehicle for every trip",
+    description: "From compact city cars to 4x4s and campervans.",
   },
   {
-    id: 4,
-    label: "Reliable Support & Safety",
-    image: "/assets/highlights-discovery.jpg",
+    label: "Support on the road",
     description:
       "Every rental comes with 24/7 support and full insurance options.",
   },
@@ -33,36 +23,30 @@ const HIGHTLIGHTS = [
 
 export function Highlights() {
   return (
-    <section className="container mx-auto flex flex-col gap-12 px-4 py-16">
-      <header className="flex flex-col gap-4">
-        <div className="flex items-center gap-2">
-          <h2 className="text-5xl font-semibold">Why Choose us</h2>
-          <Reviews />
-        </div>
-        <p className="max-w-[500px]">
-          At Northern Wheels, exploring Iceland is simple, safe, and
-          unforgettable. From rugged highland tracks to scenic
-        </p>
-      </header>
-      <div className="grid grid-cols-4 gap-6">
-        {HIGHTLIGHTS.map((h) => (
-          <figure
-            key={h.id}
-            className="relative min-h-[500px] overflow-hidden rounded-lg"
-          >
-            <Image
-              alt="hightlights-discovery"
-              fill
-              src={h.image}
-              className="object-cover"
-            />
-            <figcaption className="text-background absolute bottom-4 left-4 z-2 p-4">
-              <span className="text-lg font-semibold">{h.label}</span>
-              <p className="font-sm text-gray-200">{h.description}</p>
-            </figcaption>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent" />
-          </figure>
-        ))}
+    <section className="bg-sky grid overflow-hidden rounded-xl lg:grid-cols-[2fr_3fr]">
+      <div className="relative min-h-[320px]">
+        <Image
+          alt="Small silver 4x4 parked on a wet road beside bright green hills"
+          fill
+          sizes="(min-width: 1024px) 40vw, 100vw"
+          src="/assets/highlights-diverse.jpg"
+          className="object-cover"
+        />
+      </div>
+      <div className="flex flex-col gap-8 p-6 md:p-12">
+        <h2 className="text-4xl font-black tracking-[-0.02em] md:text-5xl">
+          Why rent with us
+        </h2>
+        <dl className="grid gap-x-10 gap-y-6 sm:grid-cols-2">
+          {HIGHLIGHTS.map((highlight) => (
+            <div key={highlight.label} className="flex flex-col gap-1">
+              <dt className="text-xl font-bold">{highlight.label}</dt>
+              <dd className="text-muted-foreground leading-snug">
+                {highlight.description}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   );

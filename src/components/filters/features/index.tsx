@@ -1,4 +1,4 @@
-import type { Feature } from "@/payload-types";
+import type { Feature } from "@/types/content";
 
 export function FeaturesFilter({ features }: { features: Feature[] }) {
   return (

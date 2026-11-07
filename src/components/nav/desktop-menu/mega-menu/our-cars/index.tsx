@@ -1,84 +1,88 @@
-import { Button } from "@/components/ui/button";
-import type { Category, Media, Navigation, Vehicle } from "@/payload-types";
-import { FaCarAlt } from "react-icons/fa";
-import { VehicleSmallCard } from "@/components/cards/vehicle-card-small";
-import { MediaCard } from "@/components/cards/media-card";
-import { Divider } from "@/components/divider";
-import type { ReactElement } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import type { Media, Navigation } from "@/types/content";
 
 type Props = {
   vehicles: Navigation["vehicles"];
+  onNavigate?: () => void;
 };
 
-export function OurCars({ vehicles }: Props) {
-  const categories = vehicles?.categories as Category[];
-  const bestSellingVehicles = vehicles?.bestSellingVehicles as Vehicle[];
+export function OurCars({ vehicles, onNavigate }: Props) {
+  const { categories, bestSellingVehicles } = vehicles;
 
   return (
-    <div className="grid-rows grid w-full gap-1 p-2 lg:grid-cols-[1fr_1px_1fr_1px_1fr]">
-      <div className="flex flex-col items-start justify-center gap-8 p-3 lg:items-center">
-        <div className="flex flex-col">
-          <span className="text-3xl font-medium">Our</span>
-          <span className="text-4xl font-bold">Special Offers</span>
-          <div className="mt-4">
-            <Button className="w-full bg-black">View all</Button>
-          </div>
-        </div>
-      </div>
-      <div className="flex items-center">
-        <Divider />
-      </div>
-      {/* display: categories */}
-      <div className="gap-2 lg:px-6">
-        <div className="flex flex-col gap-4 p-2">
-          <IconTitle
-            icon={<FaCarAlt size={24} className="text-primary mt-[2px]" />}
-            label="Categories"
-          />
-          {categories?.map((c) => {
-            const image = c.image as Media;
-            return (
-              <MediaCard
-                key={c.id}
-                image={image}
-                title={c.name}
-                subtitle={c.description ?? ""}
-              />
-            );
-          })}
-        </div>
-      </div>
-      <div className="flex items-center">
-        <Divider />
-      </div>
-      {/* display: best Selling vehicles */}
-      <div className="flex gap-2 lg:px-6">
-        <div className="flex flex-col gap-4 p-2">
-          <IconTitle
-            icon={<FaCarAlt size={24} className="text-primary mt-[2px]" />}
-            label="Best Selling Vehicles"
-          />
-          {bestSellingVehicles?.map((v) => (
-            <VehicleSmallCard key={v.id} vehicle={v} />
+    // -mx-2 lines the rows' content up with the page edge; their padding is the hover area
+    <div className="-mx-2 grid gap-8 lg:grid-cols-[2fr_1fr] lg:gap-12">
+      <div>
+        <h2 className="text-muted-foreground mb-3 px-2 text-sm">
+          Vehicle types
+        </h2>
+        <ul className="grid gap-1 lg:grid-cols-2">
+          {categories.map((category) => (
+            <MenuRow
+              key={category.id}
+              image={category.image}
+              title={category.name}
+              subtitle={category.description}
+              onNavigate={onNavigate}
+            />
           ))}
-        </div>
+        </ul>
+      </div>
+      <div>
+        <h2 className="text-muted-foreground mb-3 px-2 text-sm">
+          Best sellers
+        </h2>
+        <ul className="grid gap-1">
+          {bestSellingVehicles.map((vehicle) => (
+            <MenuRow
+              key={vehicle.id}
+              image={vehicle.image}
+              title={vehicle.model}
+              subtitle={`Seats ${vehicle.seats}, sleeps ${vehicle.sleeps}`}
+              onNavigate={onNavigate}
+            />
+          ))}
+        </ul>
       </div>
     </div>
   );
 }
 
-export const IconTitle = ({
-  icon,
-  label,
+function MenuRow({
+  image,
+  title,
+  subtitle,
+  onNavigate,
 }: {
-  icon: ReactElement;
-  label: string;
-}) => {
+  image: Media;
+  title: string;
+  subtitle: string;
+  onNavigate?: () => void;
+}) {
   return (
-    <div className="flex items-center gap-2">
-      {/*<FaCarAlt size={24} className="text-primary mt-[2px]" />*/}
-      {icon}
-      <span className="text-lg font-bold">{label}</span>
-    </div>
+    <li>
+      <Link
+        href="/#vehicles"
+        onClick={onNavigate}
+        className="flex items-center gap-4 rounded-lg p-2 transition-colors duration-150 ease-out hover:bg-hover"
+      >
+        <span className="relative h-16 w-20 shrink-0 overflow-hidden rounded-md bg-hover">
+          <Image
+            src={image.url}
+            alt=""
+            fill
+            sizes="80px"
+            className="object-cover"
+          />
+        </span>
+        <span className="flex min-w-0 flex-col gap-0.5">
+          <span className="text-[15px] font-medium">{title}</span>
+          <span className="text-muted-foreground line-clamp-2 text-sm leading-snug">
+            {subtitle}
+          </span>
+        </span>
+      </Link>
+    </li>
   );
-};
+}

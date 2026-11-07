@@ -1,0 +1,27 @@
+[
+  {
+    "id": "waterproof",
+    "name": "Waterproof",
+    "description": "Keeps you dry even during heavy rainfall and wet conditions."
+  },
+  {
+    "id": "uv-protection",
+    "name": "UV Protection",
+    "description": "Blocks harmful UV rays, keeping the interior cool and safe."
+  },
+  {
+    "id": "quick-setup",
+    "name": "Quick Setup",
+    "description": "Can be assembled in under 5 minutes without special tools."
+  },
+  {
+    "id": "lightweight",
+    "name": "Lightweight",
+    "description": "Easy to transport and mount, perfect for solo travelers."
+  },
+  {
+    "id": "all-season",
+    "name": "All-Season",
+    "description": "Durable design suitable for winter, summer, and rainy seasons."
+  }
+]

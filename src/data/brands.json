@@ -1,0 +1,27 @@
+[
+  {
+    "id": "summit-ridge-outfitters",
+    "name": "Summit Ridge Outfitters",
+    "description": "Premium outdoor gear designed for high-altitude adventures."
+  },
+  {
+    "id": "ironpeak-overland",
+    "name": "IronPeak Overland",
+    "description": "Durable vehicles and accessories built for the toughest terrain."
+  },
+  {
+    "id": "trailhaven",
+    "name": "TrailHaven",
+    "description": "Comfort-focused overland equipment for extended journeys."
+  },
+  {
+    "id": "venturex-gear-co",
+    "name": "VentureX Gear Co.",
+    "description": "Innovative camping gear with a focus on modularity and efficiency."
+  },
+  {
+    "id": "ridgeway-expeditions",
+    "name": "Ridgeway Expeditions",
+    "description": "Trusted brand for serious explorers and weekend adventurers alike."
+  }
+]

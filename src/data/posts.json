@@ -1,0 +1,23 @@
+[
+  {
+    "id": "black-sand-beaches",
+    "title": "Driving the south coast to the black sand beaches",
+    "short_description": "Follow the Ring Road east from Reykjavík to Reynisfjara, with stops for basalt columns and the sea stacks off Vík.",
+    "read": 6,
+    "featuredImage": { "url": "/assets/post-overlanding-iceland.jpg", "alt": "Waves on a black sand beach with sea stacks offshore" }
+  },
+  {
+    "id": "chasing-the-northern-lights",
+    "title": "Chasing the Northern Lights by car",
+    "short_description": "How to read the forecast, find dark skies away from town, and stay warm while you wait for the aurora.",
+    "read": 4,
+    "featuredImage": { "url": "/assets/iceland-aurora.jpg", "alt": "Green aurora over a frozen shoreline" }
+  },
+  {
+    "id": "glacier-country",
+    "title": "A road trip through glacier country",
+    "short_description": "Plan a few days around Vatnajökull, from ice-cave tours to the lagoon at Jökulsárlón.",
+    "read": 5,
+    "featuredImage": { "url": "/assets/iceland-glacier-2h.jpg", "alt": "Blue-white glacier face meeting dark ground" }
+  }
+]

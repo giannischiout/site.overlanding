@@ -1,4 +1,4 @@
-import { IoIosMenu, IoMdClose } from "react-icons/io";
+import { Menu, X } from "lucide-react";
 
 type Props = {
   onToggle: () => void;
@@ -6,8 +6,14 @@ type Props = {
 };
 export const Hamburger = ({ onToggle, open }: Props) => {
   return (
-    <div onClick={onToggle} className="block lg:hidden">
-      {!open ? <IoIosMenu size={28} /> : <IoMdClose size={20} />}
-    </div>
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-expanded={open}
+      aria-label={open ? "Close menu" : "Open menu"}
+      className="-mr-2 ml-auto flex size-11 items-center justify-center rounded-md lg:hidden"
+    >
+      {open ? <X size={24} /> : <Menu size={24} />}
+    </button>
   );
 };

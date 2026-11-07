@@ -1,23 +1,18 @@
 import { PortalDialog } from "@/components/booking-filters/filters-mobile/components/portal-dialog";
 import { MobileHeader } from "@/components/booking-filters/filters-mobile/components/mobile-header";
 import { MobileFieldWrapper } from "@/components/booking-filters/filters-mobile/components/field-wrapper";
-import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import type { ReactNode } from "react";
 import type { PopoverKey } from "@/store/use-filters-store";
 import { useFilterStore } from "@/store/use-filters-store";
 import dayjs from "dayjs";
 
-// Recreate your Row component if needed
-const Row = ({ children }: { children: ReactNode }) => {
-  return <div className="flex w-full gap-2 self-start p-6">{children}</div>;
-};
+const formatDate = (date?: Date | null) =>
+  date ? dayjs(date).format("MMM D") : "Add date";
 
 export function FiltersScreen() {
   const {
     setCurrentScreen,
     currentScreen,
-    setField,
     pickup,
     dropoff,
     dropoffTime,
@@ -30,43 +25,43 @@ export function FiltersScreen() {
     setCurrentScreen("summary");
     onOpen(key);
   };
-  console.log({ pickup });
 
   return (
     <PortalDialog isOpen={currentScreen === "filters"}>
-      {/* header */}
       <MobileHeader
-        label="Select your travel dates and location"
+        label="Your trip details"
         onClick={() => setCurrentScreen("callToAction")}
       />
-      {/* content (fills everything between header + footer) */}
-      <div className="flex flex-1 flex-col">
-        <Row>
-          <MobileFieldWrapper
-            onClick={() => handleChange("pickup")}
-            label="Pickup"
-            value={pickup?.label ?? ""}
-          />
-          <MobileFieldWrapper
-            onClick={() => handleChange("dateRange")}
-            label="DateRange"
-            value={dayjs(range?.from ?? "").format("MMM D")}
-          />
-          <MobileFieldWrapper
-            onClick={() => handleChange("pickupTime")}
-            label="Time"
-            value={pickupTime.value}
-          />
-        </Row>
-
-        <Separator className="bg-gray-200" />
-        <Row>
-          <MobileFieldWrapper onClick={() => {}} label="Return Pickup" />
-        </Row>
+      <div className="flex flex-1 flex-col gap-4 overflow-y-auto p-4">
+        <MobileFieldWrapper
+          onClick={() => handleChange("dateRange")}
+          label="Dates"
+          value={`${formatDate(range.from)} to ${formatDate(range.to)}`}
+        />
+        <MobileFieldWrapper
+          onClick={() => handleChange("pickup")}
+          label="Pickup location"
+          value={pickup?.label ?? "Select location"}
+        />
+        <MobileFieldWrapper
+          onClick={() => handleChange("pickupTime")}
+          label="Pickup time"
+          value={pickupTime.label}
+        />
+        <MobileFieldWrapper
+          onClick={() => handleChange("dropoff")}
+          label="Dropoff location"
+          value={dropoff?.label ?? "Select location"}
+        />
+        <MobileFieldWrapper
+          onClick={() => handleChange("dropoffTime")}
+          label="Dropoff time"
+          value={dropoffTime.label}
+        />
       </div>
 
-      <div className="p-4">
-        <Button className="w-full">Submit</Button>
+      <div className="border-t p-4">
+        <Button className="h-12 w-full text-base">Search vehicles</Button>
       </div>
     </PortalDialog>
   );

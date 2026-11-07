@@ -1,19 +1,18 @@
 import { cn } from "@/lib/utils";
 import { Popover } from "@/components/popover";
+import { FieldWrapper } from "@/components/booking-filters/fields/field-wrapper";
+import { Check } from "lucide-react";
 import type { RefObject } from "react";
 
 type TimeOption = {
   label: string;
   value: string;
-  // icon: keyof typeof pickupIcons;
 };
 
 type Props = {
+  label: string;
   anchorRef: RefObject<HTMLDivElement | null>;
-  value: {
-    label: string;
-    value: string;
-  };
+  value: TimeOption;
   options: TimeOption[];
   open: boolean;
   onClose: () => void;
@@ -24,6 +23,7 @@ type Props = {
 };
 
 export function TimeTrigger({
+  label,
   top,
   anchorRef,
   alignRight = false,
@@ -39,40 +39,41 @@ export function TimeTrigger({
     onClose();
   };
   return (
-    <>
-      <div
-        ref={anchorRef}
+    <div ref={anchorRef} className="relative w-[112px] shrink-0">
+      <FieldWrapper
+        label={label}
+        value={value.label}
+        active={open}
+        expanded={open}
         onClick={onToggle}
-        className="flex cursor-pointer items-center gap-2 text-sm text-gray-600"
-      >
-        <span>{value.label}</span>
-      </div>
+      />
       <Popover
         top={top}
         alignRight={alignRight}
         anchorRef={anchorRef}
         open={open}
         onClose={onClose}
-        maxMenuHeight={400}
+        maxMenuHeight={280}
+        className="w-[140px] min-w-0"
       >
-        {options.map((option, index) => {
-          const isActive = option.label === value?.label;
+        {options.map((option) => {
+          const isActive = option.value === value.value;
           return (
-            <div
+            <button
+              type="button"
               key={option.value}
-              onDragStart={(e) => e.preventDefault()}
               onClick={() => handleChange(option)}
               className={cn(
-                "flex cursor-pointer items-center gap-2 p-2 pb-3",
-                isActive ? "text-foreground font-medium" : "text-gray-500",
-                index !== options.length - 1 && "border-b border-gray-200",
+                "flex min-h-10 w-full items-center justify-between rounded-md px-3 text-left text-[15px] hover:bg-hover",
+                isActive && "font-medium",
               )}
             >
               {option.label}
-            </div>
+              {isActive && <Check size={16} className="text-link" />}
+            </button>
           );
         })}
       </Popover>
-    </>
+    </div>
   );
 }

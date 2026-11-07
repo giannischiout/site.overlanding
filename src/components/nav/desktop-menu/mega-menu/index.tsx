@@ -1,61 +1,33 @@
 import { cn } from "@/lib/utils";
 import type { ActiveState } from "@/components/nav/types";
-import type { RefObject } from "react";
-import { useEffect, useState } from "react";
-import type { Navigation } from "@/payload-types";
+import type { Navigation } from "@/types/content";
 import { OurCars } from "@/components/nav/desktop-menu/mega-menu/our-cars";
 import { Roadtrips } from "@/components/nav/desktop-menu/mega-menu/roadtrips";
 
 type Props = {
   active: ActiveState;
-  containerRef: RefObject<HTMLDivElement | null>;
   data: Navigation;
+  onNavigate: () => void;
 };
 
-export function MegaMenu({ active, containerRef, data }: Props) {
-  const [showItems, setShowItems] = useState(false);
-
-  useEffect(() => {
-    let timeout: NodeJS.Timeout;
-    if (active) {
-      // show items after the panel opens
-      timeout = setTimeout(() => setShowItems(true), 200);
-    } else {
-      // hide items immediately on close
-      setShowItems(false);
-    }
-    return () => clearTimeout(timeout);
-  }, [active]);
-
-  const renderSubItems = () => {
-    switch (active) {
-      case "vehicles":
-        return <OurCars vehicles={data.vehicles} />;
-      case "roadtrips":
-        return <Roadtrips data={data.trip} />;
-      default:
-        return null;
-    }
-  };
-
+export function MegaMenu({ active, data, onNavigate }: Props) {
   return (
     <div
+      id="nav-menu-panel"
       className={cn(
-        "absolute top-[80px] left-0 w-full flex-col border-t backdrop-blur lg:flex",
-        active
-          ? "visible z-40 h-[calc(100vh-80px)] opacity-100"
-          : "pointer-events-none invisible z-0 h-0 opacity-0",
+        // Sits against the header, which is the positioned parent
+        "absolute top-full left-0 w-full border-y border-border bg-white shadow-[0_16px_32px_rgb(0_0_0/0.08)]",
+        "transition-[opacity,visibility] duration-150 ease-out",
+        active ? "visible opacity-100" : "pointer-events-none invisible opacity-0",
       )}
     >
-      <div ref={containerRef} className={cn("flex bg-white p-4")}>
-        <div
-          className={cn(
-            "w-full transition-opacity duration-300 ease-in-out",
-            showItems ? "opacity-100" : "opacity-0",
-          )}
-        >
-          {renderSubItems()}
-        </div>
+      <div className="page-container py-8">
+        {active === "vehicles" && (
+          <OurCars vehicles={data.vehicles} onNavigate={onNavigate} />
+        )}
+        {active === "roadtrips" && (
+          <Roadtrips data={data.trip} onNavigate={onNavigate} />
+        )}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import type { Category } from "@/payload-types";
+import type { Category } from "@/types/content";
 
 type ICategory = Category & { count: number };
 

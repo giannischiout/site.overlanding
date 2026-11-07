@@ -1,106 +1,114 @@
-import { useRef, useEffect, useState } from "react";
-import { useClickOutside } from "@/hooks/use-click-outside";
-import { cn } from "@/lib/utils";
-import SimpleBar from "simplebar-react";
+import { useEffect, useState, type ReactNode } from "react";
 import { ChevronDown } from "lucide-react";
-import { Hamburger } from "@/components/nav/components/burger";
+import { cn } from "@/lib/utils";
 import { useBoolean } from "@/hooks/use-boolean";
+import { Button } from "@/components/ui/button";
+import { Hamburger } from "@/components/nav/components/burger";
 import { OurCars } from "@/components/nav/desktop-menu/mega-menu/our-cars";
+import { Roadtrips } from "@/components/nav/desktop-menu/mega-menu/roadtrips";
+import type { Navigation } from "@/types/content";
 
-type MobileMenu = {
-  data: any;
+type Props = {
+  data: Navigation;
+  onBookNow: () => void;
 };
 
-export function MobileMenu({ data }: MobileMenu) {
+export function MobileMenu({ data, onBookNow }: Props) {
   const { value: open, onToggle, onFalse: onClose } = useBoolean();
   const [active, setActive] = useState<string | null>(null);
-  const anchorRef = useRef<HTMLDivElement>(null);
-  const ref = useClickOutside<HTMLDivElement>(onClose, anchorRef, open);
 
-  // lock body scroll on open
+  // Stop the page scrolling behind the menu, and close it if the screen grows past mobile
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      setTimeout(() => {
-        document.body.style.overflow = "";
-      }, 4000);
-      return;
-    }
-  }, [open]);
+    if (!open) return undefined;
+    document.body.style.overflow = "hidden";
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    desktop.addEventListener("change", onClose);
+    return () => {
+      document.body.style.overflow = "";
+      desktop.removeEventListener("change", onClose);
+    };
+  }, [open, onClose]);
 
-  const handleActive = (id: string) =>
-    setActive((prev) => (prev === id ? null : id));
+  const toggleSection = (id: string) =>
+    setActive((current) => (current === id ? null : id));
+
   return (
     <>
       <Hamburger onToggle={onToggle} open={open} />
       <div
-        onDragStart={(e) => e.preventDefault()}
-        aria-hidden={!open}
-        ref={ref}
-        style={{ zIndex: 9999 }}
         className={cn(
-          "absolute top-[80px] z-40 h-[calc(100vh-80px)] w-full border-t border-gray-100 bg-white px-4 select-none lg:hidden",
-          "transition-all duration-500 ease-in-out",
+          "fixed inset-x-0 top-[var(--nav-height)] bottom-0 flex flex-col bg-white lg:hidden",
+          "transition-[opacity,visibility] duration-200 ease-out",
           open
-            ? "pointer-events-auto opacity-100"
-            : "pointer-events-none h-0 opacity-0",
+            ? "visible opacity-100"
+            : "pointer-events-none invisible opacity-0",
         )}
       >
-        <SimpleBar autoHide>
-          <ul
-            className={cn(
-              "text-md flex w-full flex-col py-2 transition-opacity delay-400 duration-300 ease-in-out",
-              open
-                ? "pointer-events-auto opacity-100"
-                : "pointer-events-none opacity-0",
-            )}
+        <nav aria-label="Mobile" className="min-h-0 flex-1 overflow-y-auto">
+          <div className="page-container py-2">
+            <MobileSection
+              label="Vehicles"
+              open={active === "vehicles"}
+              onToggle={() => toggleSection("vehicles")}
+            >
+              <OurCars vehicles={data.vehicles} onNavigate={onClose} />
+            </MobileSection>
+            <MobileSection
+              label="Road trips"
+              open={active === "roadtrips"}
+              onToggle={() => toggleSection("roadtrips")}
+            >
+              <Roadtrips data={data.trip} onNavigate={onClose} />
+            </MobileSection>
+          </div>
+        </nav>
+        {/* Stays on screen however far the menu is scrolled */}
+        <div className="border-t border-border p-4">
+          <Button
+            size="lg"
+            className="h-12 w-full text-base"
+            onClick={() => {
+              onClose();
+              onBookNow();
+            }}
           >
-            <MobileNavItem
-              label="Book Now"
-              onClick={() => console.log("click")}
-            />
-
-            <MobileNavItem
-              hasChildren
-              onClick={() => handleActive("vehicles")}
-              label="Our Vehicles"
-            />
-            {active === "vehicles" && <OurCars vehicles={data.vehicles} />}
-            <MobileNavItem
-              onClick={() => handleActive("roadtrips")}
-              label=" Best Roadtrips"
-              hasChildren
-            />
-            {active === "roadtrips" && <div>vehicles</div>}
-          </ul>
-        </SimpleBar>
+            Book now
+          </Button>
+        </div>
       </div>
     </>
   );
 }
 
-const MobileNavItem = ({
+function MobileSection({
   label,
-  onClick,
-  hasChildren,
-  className,
+  open,
+  onToggle,
+  children,
 }: {
   label: string;
-  onClick: () => void;
-  hasChildren?: boolean;
-  className?: string;
-}) => {
+  open: boolean;
+  onToggle: () => void;
+  children: ReactNode;
+}) {
   return (
-    <li
-      className={cn(
-        "flex items-center gap-2 border-b border-gray-100 px-4 py-4",
-        className,
-      )}
-      onClick={onClick}
-    >
-      {label}
-      {hasChildren && <ChevronDown size={18} />}
-    </li>
+    <div className="border-b border-border">
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={open}
+        className="flex h-14 w-full items-center justify-between text-lg font-medium"
+      >
+        {label}
+        <ChevronDown
+          size={20}
+          className={cn(
+            "text-muted-foreground transition-transform duration-150 ease-out",
+            open && "rotate-180",
+          )}
+        />
+      </button>
+      {open && <div className="pb-6">{children}</div>}
+    </div>
   );
-};
+}

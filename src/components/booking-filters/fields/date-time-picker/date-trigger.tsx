@@ -1,27 +1,23 @@
-import { Calendar } from "lucide-react";
-import type { RefObject } from "react";
+import { FieldWrapper } from "@/components/booking-filters/fields/field-wrapper";
 
 type Props = {
+  label: string;
   value: string | null;
-  anchorRef: RefObject<HTMLDivElement | null>;
+  active: boolean;
   onClick: () => void;
-  placeholder?: string;
 };
 
-export function DateTrigger({
-  placeholder = "Add Date",
-  value,
-  anchorRef,
-  onClick,
-}: Props) {
+export function DateTrigger({ label, value, active, onClick }: Props) {
   return (
-    <div
-      ref={anchorRef}
-      onClick={onClick}
-      className="flex cursor-pointer items-center gap-2 font-medium"
-    >
-      <Calendar size={16} className="text-gray-400" />
-      <span className="text-sm font-medium">{value ? value : placeholder}</span>
+    <div className="w-[128px] shrink-0">
+      <FieldWrapper
+        label={label}
+        value={value ?? "Add date"}
+        isPlaceholder={!value}
+        active={active}
+        expanded={active}
+        onClick={onClick}
+      />
     </div>
   );
 }

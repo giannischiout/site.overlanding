@@ -1,5 +1,4 @@
-import { usePayloadQuery } from "@/actions/use-react-query";
-import type { PickupLocation } from "@/payload-types";
+import type { PickupLocation } from "@/types/content";
 import { cn } from "@/lib/utils";
 import { pickupIcons } from "@/_mockup";
 import type { PopoverKey } from "@/store/use-filters-store";
@@ -10,11 +9,11 @@ type Props = {
   key: PopoverKey;
 };
 export const LocationsOptions = ({ value, key }: Props) => {
-  const { data: options } = usePayloadQuery<PickupLocation>({
-    collection: "pickup-locations",
-    params: { limit: 100 },
-  });
-  const { setField, setCurrentScreen, pickup } = useFilterStore();
+  const {
+    setField,
+    setCurrentScreen,
+    locations: options,
+  } = useFilterStore();
 
   const handleChange = (newKey: PopoverKey, option: PickupLocation) => {
     setField(newKey, option);
@@ -22,7 +21,7 @@ export const LocationsOptions = ({ value, key }: Props) => {
   };
   return (
     <ul className="flex flex-col gap-2">
-      {options?.map((option, index) => {
+      {options.map((option, index) => {
         const isActive = option.id === value?.id;
         return (
           <div

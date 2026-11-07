@@ -1,0 +1,10 @@
+[
+  { "id": "kef", "label": "Keflavík International Airport (KEF)", "icon": "airport" },
+  { "id": "rkv", "label": "Reykjavík Domestic Airport (RKV)", "icon": "airport" },
+  { "id": "bus-reykjavik", "label": "Main Bus Stop - Reykjavík", "icon": "busstop" },
+  { "id": "bus-akureyri", "label": "Bus Stop - Akureyri Central", "icon": "busstop" },
+  { "id": "bus-selfoss", "label": "Bus Stop - Selfoss Town Center", "icon": "busstop" },
+  { "id": "reykjavik-downtown", "label": "Reykjavík Downtown", "icon": "area" },
+  { "id": "selfoss", "label": "Selfoss", "icon": "area" },
+  { "id": "hofn", "label": "Höfn", "icon": "area" }
+]

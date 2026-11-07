@@ -5,9 +5,9 @@ type Props = {
 };
 export function LayoutWithBar({ children }: Props) {
   return (
-    <>
+    <div className="page-container">
       {/*<BookingFilters />*/}
       {children}
-    </>
+    </div>
   );
 }

@@ -3,7 +3,7 @@
 import type { IFilters } from "@/types";
 import { SelectField } from "@/components/hook-form/fIelds/select";
 import { MultiToggle } from "@/components/hook-form/fIelds/multi-toggle";
-import { Divider } from "@/sections/home/hero/filters";
+import { Divider } from "@/components/divider";
 import { useMemo, useState } from "react";
 import { BsSortDown } from "react-icons/bs";
 import { Funnel, X } from "lucide-react";

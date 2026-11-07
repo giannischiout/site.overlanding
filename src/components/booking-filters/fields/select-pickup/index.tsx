@@ -1,33 +1,28 @@
 import { Popover } from "@/components/popover";
 import { cn } from "@/lib/utils";
 import { pickupIcons } from "@/_mockup";
+import { Check } from "lucide-react";
 import type { RefObject } from "react";
 import { FieldWrapper } from "@/components/booking-filters/fields/field-wrapper";
-import type { PickupLocation } from "@/payload-types";
-
-type Value = {
-  value: string;
-  label: string;
-  icon: keyof typeof pickupIcons; // "busstop" | "airport" | "area"
-};
+import type { PickupLocation } from "@/types/content";
 
 type Props = {
-  options: Value[];
+  options: PickupLocation[];
   value: PickupLocation | null;
-  onChange: (value: Value) => void;
+  onChange: (value: PickupLocation) => void;
   open: boolean;
   anchorRef: RefObject<HTMLDivElement | null>;
   onClose: () => void;
   onToggle: () => void;
   alignRight?: boolean;
-  label?: string;
+  label: string;
   isDatePickerOpen: boolean;
   top: string;
 };
 
 export function SelectPickup({
   open,
-  label = "Pickup",
+  label,
   top,
   anchorRef,
   onClose,
@@ -38,20 +33,20 @@ export function SelectPickup({
   alignRight,
   isDatePickerOpen,
 }: Props) {
-  const handleChange = (newValue: Value) => {
+  const handleChange = (newValue: PickupLocation) => {
     onChange(newValue);
     onClose();
   };
 
   return (
-    <>
+    <div ref={anchorRef} className="relative min-w-0 flex-1">
       <FieldWrapper
-        isDatePickerOpen={isDatePickerOpen}
-        onToggle={onToggle}
-        isPrimary
-        anchorRef={anchorRef}
         label={label}
         value={value?.label ?? "Select location"}
+        active={open}
+        expanded={open}
+        muted={isDatePickerOpen}
+        onClick={onToggle}
       />
       <Popover
         top={top}
@@ -59,27 +54,27 @@ export function SelectPickup({
         anchorRef={anchorRef}
         open={open}
         onClose={onClose}
+        className="w-[360px]"
       >
-        <div className="min-w-[200px]">
-          {options.map((option, index) => {
-            const isActive = option.value === value?.id;
-            return (
-              <div
-                key={option.value}
-                onClick={() => handleChange(option)}
-                className={cn(
-                  "flex cursor-pointer items-center gap-2 p-2 pb-3",
-                  isActive ? "text-foreground font-semibold" : "text-gray-500",
-                  index !== options.length - 1 && "border-b border-gray-200",
-                )}
-              >
-                {pickupIcons[option.icon]}
-                {option.label}
-              </div>
-            );
-          })}
-        </div>
+        {options.map((option) => {
+          const isActive = option.id === value?.id;
+          return (
+            <button
+              type="button"
+              key={option.id}
+              onClick={() => handleChange(option)}
+              className={cn(
+                "flex min-h-11 w-full items-center gap-3 rounded-md px-3 py-2 text-left text-[15px] hover:bg-hover",
+                isActive && "font-medium",
+              )}
+            >
+              {pickupIcons[option.icon]}
+              <span className="flex-1">{option.label}</span>
+              {isActive && <Check size={16} className="text-link" />}
+            </button>
+          );
+        })}
       </Popover>
-    </>
+    </div>
   );
 }

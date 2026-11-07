@@ -1,0 +1,12 @@
+{
+  "hero": {
+    "title": "Rent a 4x4 or campervan in Iceland",
+    "subtitle": "Pick up at Keflavík Airport, in Reykjavík or around the country.",
+    "backgroundImage": {
+      "url": "/assets/hero-van.jpg",
+      "alt": "White camper van with its roof lights on, reflected in still water at dusk"
+    }
+  },
+  "featuredCategories": ["suv", "campervan", "4x4-rooftop-tent", "caravan"],
+  "featuredPosts": ["black-sand-beaches", "chasing-the-northern-lights", "glacier-country"]
+}
