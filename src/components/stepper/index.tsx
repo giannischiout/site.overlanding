@@ -12,13 +12,13 @@ export function Stepper({
   onChange: (value: number) => void;
 }) {
   return (
-    <div className="flex items-center gap-1 rounded-full border bg-white p-1">
+    <div className="flex items-center gap-1 rounded-control border bg-white p-1">
       <button
         type="button"
         aria-label={`Remove ${label}`}
         disabled={value === 0}
         onClick={() => onChange(value - 1)}
-        className="hover:bg-hover flex size-8 items-center justify-center rounded-full disabled:opacity-30"
+        className="hover:bg-hover flex size-8 items-center justify-center rounded-inner disabled:opacity-30"
       >
         <Minus size={15} />
       </button>
@@ -30,7 +30,7 @@ export function Stepper({
         aria-label={`Add ${label}`}
         disabled={value >= max}
         onClick={() => onChange(value + 1)}
-        className="hover:bg-hover flex size-8 items-center justify-center rounded-full disabled:opacity-30"
+        className="hover:bg-hover flex size-8 items-center justify-center rounded-inner disabled:opacity-30"
       >
         <Plus size={15} />
       </button>

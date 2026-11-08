@@ -71,7 +71,7 @@ export function DesktopMenu({ data }: Props) {
                   )
                 }
                 className={cn(
-                  "flex h-11 items-center gap-1 rounded-full px-4 text-base font-medium transition-colors duration-150 ease-out hover:bg-black/[0.05]",
+                  "flex h-11 items-center gap-1 rounded-control px-4 text-base font-medium transition-colors duration-150 ease-out hover:bg-black/[0.05]",
                   isOpen && "bg-basalt hover:bg-basalt text-white",
                 )}
               >

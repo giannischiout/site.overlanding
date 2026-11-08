@@ -69,7 +69,7 @@ function MenuRow({
       <Link
         href={href}
         onClick={onNavigate}
-        className="group flex items-center gap-4 rounded-xl p-2 transition-colors duration-150 ease-out hover:bg-hover"
+        className="group flex items-center gap-4 rounded-control p-2 transition-colors duration-150 ease-out hover:bg-hover"
       >
         <span className="relative h-16 w-20 shrink-0 overflow-hidden rounded-md bg-hover">
           <Image

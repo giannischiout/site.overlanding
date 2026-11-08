@@ -4,6 +4,7 @@ import "simplebar-react/dist/simplebar.min.css";
 import { satoshi } from "src/app/fonts/satoshi";
 import { Nav } from "@/components/nav";
 import { BookingHydrator } from "@/components/booking-hydrator";
+import { Footer } from "@/components/footer";
 
 export const metadata = {
   description: "Rent 4x4s, campervans and overland vehicles for your trip around Iceland.",
@@ -20,6 +21,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         <BookingHydrator />
         <Nav />
         <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

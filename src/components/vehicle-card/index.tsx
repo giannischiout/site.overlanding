@@ -20,7 +20,7 @@ export function VehicleCard({ vehicle, days, priority }: Props) {
   const lowStock = vehicle.stock <= 2;
 
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-[22px] bg-white shadow-[0_1px_2px_rgb(6_20_16/0.06),0_12px_32px_-20px_rgb(6_20_16/0.35)] ring-1 ring-black/[0.04] transition-[box-shadow,transform] duration-500 ease-[var(--ease-out-expo)] hover:-translate-y-1 hover:shadow-[0_1px_2px_rgb(6_20_16/0.06),0_28px_48px_-24px_rgb(6_20_16/0.45)]">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-panel bg-white shadow-card ring-1 ring-black/[0.04] transition-[box-shadow,transform] duration-500 ease-[var(--ease-out-expo)] hover:-translate-y-1 hover:shadow-card-hover">
       {/* Photo with hover-to-browse: each third of the image shows another shot */}
       <div
         className="bg-sky relative aspect-[4/3] overflow-hidden"
@@ -52,13 +52,13 @@ export function VehicleCard({ vehicle, days, priority }: Props) {
 
         <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
           {vehicle.fRoadApproved && (
-            <span className="text-basalt flex items-center gap-1 rounded-full bg-white/95 px-2.5 py-1 text-xs font-semibold shadow-sm">
+            <span className="text-basalt flex items-center gap-1 rounded-control bg-white/95 px-2.5 py-1 text-xs font-semibold shadow-sm">
               <Mountain size={13} strokeWidth={2.25} className="text-link" />
               F-road approved
             </span>
           )}
           {lowStock && (
-            <span className="rounded-full bg-[#fff1e0] px-2.5 py-1 text-xs font-semibold text-[#9a4b00] shadow-sm">
+            <span className="rounded-control bg-warn-soft px-2.5 py-1 text-xs font-semibold text-warn shadow-sm">
               Only {vehicle.stock} left
             </span>
           )}
@@ -87,14 +87,14 @@ export function VehicleCard({ vehicle, days, priority }: Props) {
               {/* The link covers the whole card */}
               <Link
                 href={`/book/vehicles/${vehicle.id}`}
-                className="after:absolute after:inset-0 after:rounded-[22px] focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-[var(--ring)]"
+                className="after:absolute after:inset-0 after:rounded-panel focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-[var(--ring)]"
               >
                 {vehicle.brand.name} {vehicle.model}
               </Link>
             </h3>
           </div>
           <span className="flex shrink-0 items-center gap-1 text-sm font-semibold">
-            <Star size={14} className="fill-[#f5b400] text-[#f5b400]" />
+            <Star size={14} className="fill-star text-star" />
             {vehicle.rating.toFixed(1)}
             <span className="text-muted-foreground font-normal">
               ({vehicle.reviews})
@@ -130,7 +130,7 @@ export function VehicleCard({ vehicle, days, priority }: Props) {
                 : "Unlimited km included"}
             </p>
           </div>
-          <span className="bg-basalt group-hover:bg-aurora group-hover:text-basalt rounded-full px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-300">
+          <span className="bg-primary-light text-link group-hover:bg-aurora group-hover:text-basalt rounded-control px-4 py-2.5 text-sm font-bold transition-colors duration-300">
             Select
           </span>
         </div>

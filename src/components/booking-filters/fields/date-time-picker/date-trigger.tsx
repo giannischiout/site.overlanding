@@ -18,7 +18,7 @@ export function DateTrigger({
   onClick,
 }: Props) {
   return (
-    <div className="w-[88px] shrink-0 xl:w-auto">
+    <div className="w-[104px] shrink-0 xl:w-auto">
       <FieldWrapper
         label={label}
         shortLabel={shortLabel}

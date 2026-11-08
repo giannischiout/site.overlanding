@@ -26,9 +26,9 @@ export function BookingBar() {
         <div className="page-container animate-in fade-in slide-in-from-bottom-6 py-2.5 duration-700 ease-[var(--ease-out-expo)] min-[961px]:py-3">
           <div
             className={cn(
-              "relative mx-auto w-full rounded-2xl bg-white p-1 ring-1 ring-black/[0.08] transition-shadow duration-300 min-[961px]:max-w-[1040px] min-[961px]:pl-3",
+              "relative mx-auto w-full rounded-panel bg-white p-1 ring-1 ring-black/[0.08] transition-shadow duration-300 min-[961px]:max-w-[1040px] min-[961px]:pl-3",
               isDatePickerOpen
-                ? "shadow-[0_0_0_3px_var(--aurora),0_18px_40px_-18px_rgb(6_20_16/0.35)]"
+                ? "shadow-[0_24px_48px_-20px_rgb(6_20_16/0.45)]"
                 : "shadow-[0_10px_30px_-18px_rgb(6_20_16/0.35)]",
             )}
           >

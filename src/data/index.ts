@@ -3,7 +3,7 @@ import categories from "./categories.json";
 import features from "./features.json";
 import home from "./home.json";
 import navigation from "./navigation.json";
-import posts from "./posts.json";
+import postsJson from "./posts.json";
 import vehicles from "./vehicles.json";
 import type {
   Brand,
@@ -20,6 +20,9 @@ import type {
 import type { IFilters } from "@/types";
 
 /** Looks up an item by id, so a typo in the JSON fails loudly instead of rendering a gap. */
+// JSON gives route points as number[][]; every waypoint is a [lon, lat] pair
+const posts = postsJson as Post[];
+
 function byId<T extends { id: string }>(items: T[], id: string): T {
   const item = items.find((candidate) => candidate.id === id);
   if (!item) throw new Error(`No item with id "${id}" in src/data`);

@@ -1,9 +1,11 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useRef, useState, type MouseEvent } from "react";
-import { Sparkles } from "lucide-react";
+import dayjs from "dayjs";
+import { Leaf, Snowflake, Sparkles, Sprout, Sun } from "lucide-react";
 import { FilterPanel } from "@/components/booking-filters";
 import { cn } from "@/lib/utils";
+import { SEASON_BACKDROPS, daylightHours, seasonOf, type Season } from "@/lib/season";
 import { useFilterStore } from "@/store/use-filters-store";
 import type { Home } from "@/types/content";
 
@@ -55,11 +57,35 @@ export function Hero({ data }: { data: Home["hero"] }) {
   const isDatePickerOpen = useFilterStore(
     (state) => state.openPopover === "dateRange",
   );
+  const tripStart = useFilterStore((state) => state.range.from);
   const { slotRef, lift } = useLift(isDatePickerOpen);
   const [auroraOn, setAuroraOn] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  // The backdrop follows the season of the trip, or today's season until dates are picked
+  const [today, setToday] = useState<Date | null>(null);
+  useEffect(() => setToday(new Date()), []);
+  const seasonDate = tripStart ?? today;
+  const pickedSeason: Season = seasonDate ? seasonOf(seasonDate) : "winter";
+
+  // Hold the photo while the calendar covers the hero, then change it once the
+  // calendar closes, so the switch happens where people can see it
+  const isPickingDates = useFilterStore(
+    (state) => state.openPopover === "dateRange" || state.currentScreen !== "callToAction",
+  );
+  const [season, setSeason] = useState<Season>(pickedSeason);
+  useEffect(() => {
+    if (!isPickingDates) setSeason(pickedSeason);
+  }, [pickedSeason, isPickingDates]);
+  const isWinter = season === "winter";
+
+  // Northern lights only make sense on the winter backdrop
+  useEffect(() => {
+    if (!isWinter) setAuroraOn(false);
+  }, [isWinter]);
+
   const toggleAurora = () => {
+    if (!isWinter) return;
     setAuroraOn((on) => {
       const next = !on;
       const video = videoRef.current;
@@ -93,23 +119,47 @@ export function Hero({ data }: { data: Home["hero"] }) {
 
       <div
         onClick={onPanelClick}
-        className="bg-basalt relative flex min-h-[clamp(600px,84svh,900px)] cursor-pointer flex-col items-center rounded-[20px] text-white"
+        className={cn(
+          "bg-basalt relative flex min-h-[clamp(600px,84svh,900px)] flex-col items-center rounded-panel text-white",
+          isWinter && "cursor-pointer",
+        )}
       >
         {/* The photo clips on its own layer so the booking menus can open past the panel */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 overflow-hidden rounded-[20px]"
+          className="pointer-events-none absolute inset-0 overflow-hidden rounded-panel"
         >
+          {/* One photo per season, crossfading when the trip dates move into another season */}
+          {(Object.keys(SEASON_BACKDROPS) as Season[]).map((key) => {
+            const backdrop = SEASON_BACKDROPS[key];
+            return (
+              <Image
+                key={key}
+                alt={backdrop.alt}
+                fill
+                priority={key === season}
+                sizes="100vw"
+                src={backdrop.url}
+                style={{ objectPosition: backdrop.position }}
+                className={cn(
+                  "object-cover transition-[opacity,transform] duration-[1400ms] ease-[var(--ease-out-expo)]",
+                  key === season && !auroraOn
+                    ? "scale-100 opacity-100"
+                    : "scale-[1.03] opacity-0",
+                )}
+              />
+            );
+          })}
+          {/* Winter night: shown when the aurora is switched on */}
           <div
             className={cn(
-              "absolute inset-0 transition-transform duration-[2400ms] ease-[var(--ease-out-expo)]",
-              auroraOn && "scale-[1.04]",
+              "absolute inset-0 transition-[opacity,transform] duration-[1400ms] ease-[var(--ease-out-expo)]",
+              auroraOn ? "scale-[1.04] opacity-100" : "opacity-0",
             )}
           >
             <Image
               alt={backgroundImage.alt}
               fill
-              priority
               sizes="100vw"
               src={backgroundImage.url}
               className="object-cover object-[50%_75%]"
@@ -164,6 +214,15 @@ export function Hero({ data }: { data: Home["hero"] }) {
             isDatePickerOpen && "min-[961px]:opacity-0",
           )}
         >
+          {seasonDate && (
+            <SeasonBadge
+              // A new key replays the entrance animation each time the season changes
+              key={season}
+              season={season}
+              date={tripStart && seasonOf(tripStart) === season ? tripStart : (today ?? seasonDate)}
+              fromTrip={!!tripStart && seasonOf(tripStart) === season}
+            />
+          )}
           <h1 className="max-w-[18ch] text-[clamp(2.5rem,5.4vw,4.75rem)] leading-[1] font-bold tracking-[-0.02em] text-balance [text-shadow:0_2px_24px_rgb(0_0_0/0.3)]">
             {data.title}
           </h1>
@@ -181,10 +240,10 @@ export function Hero({ data }: { data: Home["hero"] }) {
           <div
             style={{ transform: lift ? `translateY(${-lift}px)` : undefined }}
             className={cn(
-              "text-foreground relative rounded-2xl bg-white p-1.5 shadow-[0_24px_60px_-16px_rgb(0_0_0/0.55)] ring-1 ring-black/5 min-[961px]:rounded-full min-[961px]:pl-3",
+              "text-foreground relative rounded-panel bg-white p-1.5 shadow-float ring-1 ring-black/5 min-[961px]:rounded-panel min-[961px]:pl-2",
               "transition-[transform,box-shadow] duration-500 ease-[var(--ease-out-expo)]",
               isDatePickerOpen
-                ? "z-[60] shadow-[0_0_0_3px_var(--aurora),0_24px_60px_-16px_rgb(0_0_0/0.55)]"
+                ? "z-[60] shadow-float"
                 : "z-10",
             )}
           >
@@ -192,30 +251,98 @@ export function Hero({ data }: { data: Home["hero"] }) {
           </div>
         </div>
 
-        <button
-          type="button"
-          onClick={toggleAurora}
-          aria-pressed={auroraOn}
-          className={cn(
-            "bg-basalt/70 relative mt-auto mb-5 flex items-center gap-2 self-start rounded-full py-2 pr-4 pl-2 text-sm text-white/90 ring-1 ring-white/10 backdrop-blur-md transition-shadow duration-700 md:mb-6 md:ml-6",
-            auroraOn
-              ? "shadow-[0_0_48px_rgb(61_220_151/0.6)]"
-              : "shadow-[0_0_32px_rgb(61_220_151/0.3)]",
-          )}
-        >
-          <span className="bg-aurora/20 text-aurora flex size-7 items-center justify-center rounded-full">
-            <Sparkles size={15} strokeWidth={2} />
-          </span>
-          <span>
-            Aurora tonight:{" "}
-            <strong className="text-aurora font-semibold">{AURORA.level}</strong>
-            <span className="text-white/60"> · Kp {AURORA.kp}</span>
-          </span>
-          <span className="sr-only">
-            {auroraOn ? "Pause the aurora animation" : "Play the aurora animation"}
-          </span>
-        </button>
+        {isWinter ? (
+          <button
+            type="button"
+            onClick={toggleAurora}
+            aria-pressed={auroraOn}
+            className={cn(
+              "bg-basalt/70 relative mt-auto mb-5 flex items-center gap-2 self-start rounded-control py-2 pr-4 pl-2 text-sm text-white/90 ring-1 ring-white/10 backdrop-blur-md transition-shadow duration-700 md:mb-6 md:ml-6",
+              auroraOn
+                ? "shadow-[0_0_48px_rgb(61_220_151/0.6)]"
+                : "shadow-[0_0_32px_rgb(61_220_151/0.3)]",
+            )}
+          >
+            <span className="bg-aurora/20 text-aurora flex size-7 items-center justify-center rounded-full">
+              <Sparkles size={15} strokeWidth={2} />
+            </span>
+            <span>
+              {tripStart ? `Aurora in ${dayjs(tripStart).format("MMMM")}: ` : "Aurora tonight: "}
+              <strong className="text-aurora font-semibold">
+                {tripStart ? "Good odds" : AURORA.level}
+              </strong>
+              {!tripStart && <span className="text-white/60"> · Kp {AURORA.kp}</span>}
+            </span>
+            <span className="sr-only">
+              {auroraOn ? "Show the daytime photo" : "Show the night sky with the aurora"}
+            </span>
+          </button>
+        ) : (
+          seasonDate && <SeasonChip date={seasonDate} season={season} />
+        )}
       </div>
     </section>
+  );
+}
+
+const SEASON_LOOK: Record<Season, { icon: typeof Sun; tint: string }> = {
+  winter: { icon: Snowflake, tint: "bg-[#bfe3ff]/25 text-[#d8efff]" },
+  summer: { icon: Sun, tint: "bg-sun/25 text-sun" },
+  shoulder: { icon: Leaf, tint: "bg-[#ffb36b]/25 text-[#ffc58f]" },
+};
+
+/** Names the season the photo shows, and pops in again whenever it changes */
+function SeasonBadge({
+  season,
+  date,
+  fromTrip,
+}: {
+  season: Season;
+  date: Date;
+  fromTrip: boolean;
+}) {
+  const month = date.getMonth();
+  const spring = month === 3 || month === 4;
+  const name = season === "summer" ? "Summer" : season === "winter" ? "Winter" : spring ? "Spring" : "Autumn";
+  const look = SEASON_LOOK[season];
+  const Icon = season === "shoulder" && spring ? Sprout : look.icon;
+
+  return (
+    <span
+      aria-live="polite"
+      className="animate-in fade-in zoom-in-75 slide-in-from-top-2 flex items-center gap-2 rounded-control bg-black/25 py-1.5 pr-3.5 pl-1.5 text-sm font-semibold text-white ring-1 ring-white/20 backdrop-blur-md duration-700 ease-[var(--ease-out-expo)]"
+    >
+      <span className={cn("flex size-6 items-center justify-center rounded-full", look.tint)}>
+        <Icon size={14} strokeWidth={2.25} className="animate-in spin-in-[-90deg] duration-1000" />
+      </span>
+      {name} in Iceland
+      <span className="font-normal text-white/70">
+        · {fromTrip ? `your trip in ${dayjs(date).format("MMMM")}` : "right now"}
+      </span>
+    </span>
+  );
+}
+
+/** What the season means for the trip, in place of the aurora reading outside winter */
+function SeasonChip({ date, season }: { date: Date; season: Season }) {
+  const month = date.getMonth();
+  const spring = month === 3 || month === 4;
+  const label =
+    season === "summer" ? "Midnight sun" : spring ? "Spring thaw" : "Autumn colours";
+  const Icon = season === "summer" ? Sun : spring ? Sprout : Leaf;
+
+  return (
+    <p className="bg-basalt/55 relative mt-auto mb-5 flex items-center gap-2 self-start rounded-control py-2 pr-4 pl-2 text-sm text-white/90 ring-1 ring-white/15 backdrop-blur-md md:mb-6 md:ml-6">
+      <span className="flex size-7 items-center justify-center rounded-full bg-sun/20 text-sun">
+        <Icon size={15} strokeWidth={2} />
+      </span>
+      <span>
+        <strong className="font-semibold">{label}</strong>
+        <span className="text-white/70">
+          {" "}
+          · about {daylightHours(date)}h of daylight in {dayjs(date).format("MMMM")}
+        </span>
+      </span>
+    </p>
   );
 }

@@ -42,7 +42,7 @@ export function CheckoutView({ vehicles }: { vehicles: Vehicle[] }) {
       <div className="mx-auto flex min-h-[50vh] max-w-md flex-col items-center justify-center gap-4 text-center">
         <h1 className="text-3xl font-bold">Nothing to check out yet</h1>
         <p className="text-muted-foreground">Pick a vehicle and your dates first, then come back here.</p>
-        <Link href="/book/vehicles" className="bg-basalt rounded-full px-6 py-3 font-semibold text-white">
+        <Link href="/book/vehicles" className="btn-primary px-6 py-3">
           Browse vehicles
         </Link>
       </div>
@@ -90,7 +90,7 @@ export function CheckoutView({ vehicles }: { vehicles: Vehicle[] }) {
             </p>
           </header>
 
-          <section className="grid gap-5 rounded-[22px] bg-white p-6 ring-1 ring-black/[0.05] sm:grid-cols-2 md:p-8">
+          <section className="grid gap-5 rounded-panel bg-white p-6 ring-1 ring-black/[0.05] sm:grid-cols-2 md:p-8">
             <Field label="First name" error={errors.firstName?.message}>
               <input {...register("firstName", { required: "Enter a first name" })} autoComplete="given-name" className={input(!!errors.firstName)} />
             </Field>
@@ -143,9 +143,9 @@ export function CheckoutView({ vehicles }: { vehicles: Vehicle[] }) {
             </Field>
           </section>
 
-          <section className="flex flex-col gap-4 rounded-[22px] bg-white p-6 ring-1 ring-black/[0.05] md:p-8">
+          <section className="flex flex-col gap-4 rounded-panel bg-white p-6 ring-1 ring-black/[0.05] md:p-8">
             <h2 className="text-xl font-bold">Payment</h2>
-            <div className="bg-sky flex gap-3 rounded-2xl p-4">
+            <div className="bg-sky flex gap-3 rounded-panel p-4">
               <Lock size={20} className="text-link mt-0.5 shrink-0" />
               <p className="text-[15px] leading-relaxed">
                 <strong>Reserve now, pay later.</strong> Nothing is charged today. We email a secure payment
@@ -168,7 +168,7 @@ export function CheckoutView({ vehicles }: { vehicles: Vehicle[] }) {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="bg-basalt hover:bg-basalt-2 h-14 rounded-full text-base font-bold text-white transition-colors disabled:opacity-60 lg:hidden"
+            className="btn-primary h-14 text-base lg:hidden"
           >
             {isSubmitting ? "Reserving…" : `Reserve for ${formatPrice(total)}`}
           </button>
@@ -178,9 +178,9 @@ export function CheckoutView({ vehicles }: { vehicles: Vehicle[] }) {
         </form>
 
         <aside>
-          <div className="sticky top-[calc(var(--nav-height)+24px)] flex flex-col gap-5 rounded-[22px] bg-white p-6 shadow-[0_1px_2px_rgb(6_20_16/0.06),0_24px_48px_-28px_rgb(6_20_16/0.45)] ring-1 ring-black/[0.04]">
+          <div className="sticky top-[calc(var(--nav-height)+24px)] flex flex-col gap-5 rounded-panel bg-white p-6 shadow-panel ring-1 ring-black/[0.04]">
             <div className="flex gap-4">
-              <span className="relative h-20 w-28 shrink-0 overflow-hidden rounded-xl">
+              <span className="relative h-20 w-28 shrink-0 overflow-hidden rounded-control">
                 <Image src={vehicle.image.url} alt="" fill sizes="112px" className="object-cover" />
               </span>
               <div className="min-w-0">
@@ -218,7 +218,7 @@ export function CheckoutView({ vehicles }: { vehicles: Vehicle[] }) {
               type="button"
               disabled={isSubmitting}
               onClick={handleSubmit(onSubmit)}
-              className="bg-basalt hover:bg-basalt-2 hidden h-14 rounded-full text-base font-bold text-white transition-colors disabled:opacity-60 lg:block"
+              className="btn-primary hidden h-14 text-base lg:block"
             >
               {isSubmitting ? "Reserving…" : "Reserve now"}
             </button>
@@ -232,7 +232,7 @@ export function CheckoutView({ vehicles }: { vehicles: Vehicle[] }) {
 
 const input = (invalid: boolean) =>
   cn(
-    "h-12 w-full rounded-xl border bg-white px-4 text-[15px] transition-[border-color,box-shadow] outline-none focus:border-[var(--link)] focus:shadow-[0_0_0_3px_var(--primary-light)]",
+    "h-12 w-full rounded-control border bg-white px-4 text-[15px] transition-[border-color,box-shadow] outline-none focus:border-[var(--link)] focus:shadow-[0_0_0_3px_var(--primary-light)]",
     invalid && "border-destructive",
   );
 

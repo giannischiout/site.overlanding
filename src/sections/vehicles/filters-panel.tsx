@@ -136,7 +136,7 @@ function Segmented<T extends string | number>({
   onChange: (value: T) => void;
 }) {
   return (
-    <div className="bg-sky flex rounded-full p-1">
+    <div className="bg-sky flex rounded-control p-1">
       {options.map((option) => (
         <button
           key={option.value}
@@ -144,7 +144,7 @@ function Segmented<T extends string | number>({
           aria-pressed={value === option.value}
           onClick={() => onChange(option.value)}
           className={cn(
-            "h-9 flex-1 rounded-full px-2 text-sm font-medium transition-[background-color,color,box-shadow] duration-200",
+            "h-9 flex-1 rounded-inner px-2 text-sm font-medium transition-[background-color,color,box-shadow] duration-200",
             value === option.value
               ? "text-foreground bg-white shadow-[0_1px_3px_rgb(6_20_16/0.15)]"
               : "text-muted-foreground hover:text-foreground",
@@ -212,7 +212,7 @@ function Chip({
       aria-pressed={active}
       onClick={onClick}
       className={cn(
-        "flex h-9 items-center gap-1.5 rounded-full border px-3.5 text-sm font-medium transition-colors duration-150",
+        "flex h-9 items-center gap-1.5 rounded-control border px-3.5 text-sm font-medium transition-colors duration-150",
         active
           ? "border-[var(--link)] bg-primary-light text-link"
           : "hover:border-foreground/30 bg-white",

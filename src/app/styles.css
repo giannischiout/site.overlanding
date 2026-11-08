@@ -120,6 +120,20 @@ svg {
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  /* Soft squares, one radius per role: panels hold content, controls are things you press.
+     rounded-full is kept for things that are actually round (dots, icon discs, switches). */
+  --radius-panel: 16px;
+  --radius-control: 10px;
+  --radius-inner: 7px;
+  /* Elevation: resting card, lifted card on hover, sticky panels, floating menus */
+  --shadow-card: 0 1px 2px rgb(6 20 16 / 0.06), 0 12px 32px -20px rgb(6 20 16 / 0.35);
+  --shadow-card-hover: 0 1px 2px rgb(6 20 16 / 0.06), 0 28px 48px -24px rgb(6 20 16 / 0.45);
+  --shadow-panel: 0 1px 2px rgb(6 20 16 / 0.06), 0 24px 48px -28px rgb(6 20 16 / 0.45);
+  --shadow-float: 0 18px 48px -12px rgb(6 20 16 / 0.28);
+  --color-star: #f5b400;
+  --color-sun: #ffd76a;
+  --color-warn: #9a4b00;
+  --color-warn-soft: #fff1e0;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -332,4 +346,32 @@ svg {
   animation:
     aurora-drift var(--aurora-speed, 9s) ease-in-out infinite,
     aurora-breathe calc(var(--aurora-speed, 9s) * 0.7) ease-in-out infinite;
+}
+
+/* The two button styles. Primary is aurora green, the same as "Book now", and means
+   "move the booking forward". Secondary is everything else. */
+@utility btn-primary {
+  border-radius: var(--radius-control);
+  background-color: var(--aurora);
+  color: var(--basalt);
+  font-weight: 700;
+  transition: background-color 150ms ease-out;
+  &:hover {
+    background-color: var(--primary-dark);
+  }
+  &:disabled {
+    opacity: 0.6;
+  }
+}
+
+@utility btn-secondary {
+  border-radius: var(--radius-control);
+  border: 1px solid var(--border);
+  background-color: #fff;
+  color: var(--foreground);
+  font-weight: 600;
+  transition: background-color 150ms ease-out;
+  &:hover {
+    background-color: var(--hover);
+  }
 }

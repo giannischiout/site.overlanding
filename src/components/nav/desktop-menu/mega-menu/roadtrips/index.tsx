@@ -13,7 +13,7 @@ export function Roadtrips({ data, onNavigate }: Props) {
       {data.posts.map((post) => (
         <li key={post.id}>
           <Link
-            href="/#road-trips"
+            href={`/book/vehicles?category=${post.category}`}
             onClick={onNavigate}
             className="group flex gap-4 rounded-lg lg:flex-col lg:gap-3"
           >
@@ -31,7 +31,7 @@ export function Roadtrips({ data, onNavigate }: Props) {
                 {post.title}
               </span>
               <span className="text-muted-foreground text-sm">
-                {post.read} minute read
+                {post.days} {post.days === 1 ? "day" : "days"} · {post.distance} km
               </span>
             </span>
           </Link>

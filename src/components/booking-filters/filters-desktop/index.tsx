@@ -97,8 +97,8 @@ export function FiltersDesktop({ top = "110%" }: { top: string }) {
       onKeyDown={keepFocusInside}
       className="desktop-filters items-stretch gap-2"
     >
-      <div className="grid min-w-0 flex-1 gap-1 xl:flex xl:items-center xl:gap-0">
-        <div className="flex min-w-0 gap-0">
+      <div className="flex min-w-0 flex-1 items-center">
+        <div className="flex min-w-0 flex-1 gap-0">
           <SelectPickup
             top={top}
             label="Pickup location"
@@ -113,7 +113,7 @@ export function FiltersDesktop({ top = "110%" }: { top: string }) {
             value={pickup}
             onChange={(val) => setField(POPOVERS.pickup, val)}
           />
-          <span aria-hidden className="bg-border mx-1 hidden h-8 w-px shrink-0 self-center xl:block" />
+          <span aria-hidden className="bg-border mx-1 h-8 w-px shrink-0 self-center" />
           <DateTrigger
             label="Pickup date"
             shortLabel="Date"
@@ -135,13 +135,13 @@ export function FiltersDesktop({ top = "110%" }: { top: string }) {
           />
         </div>
         {/* The route between the two legs of the trip */}
-        <div aria-hidden className="relative hidden w-20 shrink-0 items-center justify-center xl:flex">
+        <div aria-hidden className="relative flex w-10 shrink-0 items-center justify-center xl:w-20">
           <span className="absolute inset-x-2 top-1/2 h-0.5 -translate-y-1/2 bg-[radial-gradient(circle,var(--link)_1px,transparent_1.5px)] bg-[length:7px_2px] bg-repeat-x opacity-60" />
           <span className="bg-primary-light text-link relative flex size-8 items-center justify-center rounded-full ring-4 ring-white">
             <CarFront size={15} strokeWidth={2} />
           </span>
         </div>
-        <div className="flex min-w-0 gap-0">
+        <div className="flex min-w-0 flex-1 gap-0">
           <SelectPickup
             top={top}
             label="Dropoff location"
@@ -157,7 +157,7 @@ export function FiltersDesktop({ top = "110%" }: { top: string }) {
             value={dropoff}
             onChange={(val) => setField(POPOVERS.dropoff, val)}
           />
-          <span aria-hidden className="bg-border mx-1 hidden h-8 w-px shrink-0 self-center xl:block" />
+          <span aria-hidden className="bg-border mx-1 h-8 w-px shrink-0 self-center" />
           <DateTrigger
             label="Dropoff date"
             shortLabel="Date"

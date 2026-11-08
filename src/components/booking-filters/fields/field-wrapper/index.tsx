@@ -34,9 +34,9 @@ export const FieldWrapper = ({
       onClick={onClick}
       aria-expanded={expanded}
       className={cn(
-        "flex h-14 w-full min-w-0 flex-col justify-center gap-0.5 rounded-xl px-3.5 min-[961px]:rounded-full min-[961px]:px-3.5 text-left transition-[background-color,opacity] duration-150 ease-out",
+        "flex h-14 w-full min-w-0 flex-col justify-center gap-0.5 rounded-control px-3.5 text-left transition-[background-color,opacity] duration-150 ease-out",
         "hover:bg-hover",
-        active && "bg-primary-light hover:bg-primary-light shadow-[inset_0_0_0_1px_var(--aurora)]",
+        active && "bg-sky hover:bg-sky",
         muted && "opacity-40",
         className,
       )}

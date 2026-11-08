@@ -52,7 +52,7 @@ export function Popover({
       ref={ref}
       style={above ? { bottom: `calc(100% + ${MENU_GAP}px)` } : { top }}
       className={cn(
-        "absolute z-40 min-w-[320px] overflow-hidden rounded-2xl bg-white p-2 shadow-[0_18px_48px_-12px_rgb(6_20_16/0.28)] ring-1 ring-black/5 select-none",
+        "absolute z-40 min-w-[320px] overflow-hidden rounded-panel bg-white p-2 shadow-float ring-1 ring-black/5 select-none",
         alignRight ? "right-0 origin-top-right" : "left-0 origin-top-left",
         above && "origin-bottom",
         // Opens with a short settle: rises, sharpens and scales in on an expo ease

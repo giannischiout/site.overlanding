@@ -78,7 +78,16 @@ export type Post = {
   title: string;
   short_description: string;
   read: number;
+  /** Suggested length of the trip */
+  days: number;
+  /** Round trip from Reykjavík, in km */
+  distance: number;
+  season: string;
+  /** Vehicle type we suggest for this route */
+  category: string;
   featuredImage: Media;
+  /** Waypoints as [lon, lat], drawn on the road trip map */
+  route: [number, number][];
 };
 
 export type PickupLocation = {

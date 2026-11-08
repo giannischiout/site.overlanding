@@ -9,7 +9,7 @@ export const SearchButton = ({ onSubmit }: Props) => {
       type="button"
       onClick={onSubmit}
       aria-label="Search vehicles"
-      className="group bg-primary text-primary-foreground hover:bg-primary-dark flex size-12 shrink-0 items-center justify-center self-center rounded-full shadow-[0_8px_20px_-8px_rgb(34_184_120/0.8)] transition-[background-color,transform] duration-200 ease-out active:scale-95"
+      className="group bg-primary text-primary-foreground hover:bg-primary-dark flex size-12 shrink-0 items-center justify-center self-center rounded-control shadow-[0_6px_16px_-8px_rgb(34_184_120/0.8)] transition-[background-color,transform] duration-200 ease-out active:scale-95"
     >
       <Search
         size={19}

@@ -41,7 +41,7 @@ export function Navbar({ data }: Props) {
       <div className="wide-container flex h-[var(--nav-height)] items-center gap-10 px-3 md:px-6">
         <Link
           href="/"
-          className="flex shrink-0 items-center gap-3 rounded-2xl"
+          className="flex shrink-0 items-center gap-3 rounded-panel"
         >
           <Logo />
           <span className="flex flex-col leading-none">
@@ -83,7 +83,7 @@ function BookNowButton({ onClick }: { onClick: () => void }) {
     <button
       type="button"
       onClick={onClick}
-      className="group bg-aurora text-basalt hover:bg-primary-dark flex h-11 items-center gap-2.5 rounded-full px-5 text-[15px] font-bold shadow-[inset_0_1px_0_rgb(255_255_255/0.45),0_8px_18px_-10px_rgb(34_184_120/0.95)] transition-[background-color,transform] duration-200 ease-out active:scale-[0.97]"
+      className="group bg-aurora text-basalt hover:bg-primary-dark flex h-11 items-center gap-2.5 rounded-control px-5 text-[15px] font-bold shadow-[inset_0_1px_0_rgb(255_255_255/0.45),0_8px_18px_-10px_rgb(34_184_120/0.95)] transition-[background-color,transform] duration-200 ease-out active:scale-[0.97]"
     >
       <CalendarDays
         size={17}

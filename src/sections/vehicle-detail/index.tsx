@@ -85,7 +85,7 @@ export function VehicleDetailView({ vehicle, similar }: { vehicle: Vehicle; simi
 
       {/* Gallery */}
       <div className="mt-4 grid gap-3 md:grid-cols-[1fr_220px] lg:grid-cols-[1fr_280px]">
-        <div className="bg-sky relative aspect-[16/10] overflow-hidden rounded-[22px] shadow-[0_18px_40px_-28px_rgb(6_20_16/0.6)]">
+        <div className="bg-sky relative aspect-[16/10] overflow-hidden rounded-panel shadow-[0_18px_40px_-28px_rgb(6_20_16/0.6)]">
           {vehicle.images.map((image, index) => (
             <Image
               key={image.url + index}
@@ -100,7 +100,7 @@ export function VehicleDetailView({ vehicle, similar }: { vehicle: Vehicle; simi
               )}
             />
           ))}
-          <span className="bg-basalt/70 absolute right-4 bottom-4 rounded-full px-3 py-1 text-sm font-semibold text-white backdrop-blur">
+          <span className="bg-basalt/70 absolute right-4 bottom-4 rounded-control px-3 py-1 text-sm font-semibold text-white backdrop-blur">
             {photo + 1} / {vehicle.images.length}
           </span>
         </div>
@@ -113,7 +113,7 @@ export function VehicleDetailView({ vehicle, similar }: { vehicle: Vehicle; simi
                 aria-label={`Show photo ${index + 1}`}
                 aria-pressed={photo === index}
                 className={cn(
-                  "relative block aspect-[4/3] w-full overflow-hidden rounded-2xl transition-[box-shadow,opacity] duration-200 md:aspect-auto md:h-full",
+                  "relative block aspect-[4/3] w-full overflow-hidden rounded-panel transition-[box-shadow,opacity] duration-200 md:aspect-auto md:h-full",
                   photo === index
                     ? "shadow-[0_0_0_3px_var(--background),0_0_0_5px_var(--link)]"
                     : "opacity-75 hover:opacity-100",
@@ -138,14 +138,14 @@ export function VehicleDetailView({ vehicle, similar }: { vehicle: Vehicle; simi
             </h1>
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[15px]">
               <span className="flex items-center gap-1.5 font-semibold">
-                <Star size={16} className="fill-[#f5b400] text-[#f5b400]" />
+                <Star size={16} className="fill-star text-star" />
                 {vehicle.rating.toFixed(1)}
                 <span className="text-muted-foreground font-normal">
                   · {vehicle.reviews} reviews
                 </span>
               </span>
               {vehicle.fRoadApproved && (
-                <span className="bg-primary-light text-link flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-semibold">
+                <span className="bg-primary-light text-link flex items-center gap-1.5 rounded-control px-3 py-1 text-sm font-semibold">
                   <Mountain size={14} /> F-road approved
                 </span>
               )}
@@ -205,14 +205,14 @@ export function VehicleDetailView({ vehicle, similar }: { vehicle: Vehicle; simi
                     aria-checked={selected}
                     onClick={() => setProtection(protection.id)}
                     className={cn(
-                      "relative flex flex-col gap-3 rounded-[20px] bg-white p-5 text-left ring-1 transition-[box-shadow] duration-200",
+                      "relative flex flex-col gap-3 rounded-panel bg-white p-5 text-left ring-1 transition-[box-shadow] duration-200",
                       selected
                         ? "shadow-[0_14px_30px_-20px_rgb(6_20_16/0.5)] ring-2 ring-[var(--link)]"
                         : "ring-black/[0.08] hover:ring-black/20",
                     )}
                   >
                     {protection.recommended && (
-                      <span className="bg-aurora text-basalt absolute -top-2.5 right-4 rounded-full px-2.5 py-0.5 text-xs font-bold">
+                      <span className="bg-aurora text-basalt absolute -top-2.5 right-4 rounded-control px-2.5 py-0.5 text-xs font-bold">
                         Most chosen
                       </span>
                     )}
@@ -256,7 +256,7 @@ export function VehicleDetailView({ vehicle, similar }: { vehicle: Vehicle; simi
           {/* Extras */}
           <section aria-labelledby="extras" className="flex flex-col gap-5">
             <h2 id="extras" className="text-2xl font-bold tracking-[-0.02em]">Add extras</h2>
-            <ul className="divide-y overflow-hidden rounded-[20px] bg-white ring-1 ring-black/[0.06]">
+            <ul className="divide-y overflow-hidden rounded-panel bg-white ring-1 ring-black/[0.06]">
               {extrasForVehicle.map((extra) => (
                 <li key={extra.id} className="flex items-center justify-between gap-4 px-5 py-4">
                   <div className="min-w-0">
@@ -276,7 +276,7 @@ export function VehicleDetailView({ vehicle, similar }: { vehicle: Vehicle; simi
             </ul>
           </section>
 
-          <section aria-labelledby="included" className="bg-sky flex flex-col gap-5 rounded-[22px] p-6 md:p-8">
+          <section aria-labelledby="included" className="bg-sky flex flex-col gap-5 rounded-panel p-6 md:p-8">
             <h2 id="included" className="text-2xl font-bold tracking-[-0.02em]">Always included</h2>
             <ul className="grid gap-3 sm:grid-cols-2">
               {INCLUDED.map((item) => (
@@ -291,13 +291,13 @@ export function VehicleDetailView({ vehicle, similar }: { vehicle: Vehicle; simi
 
         {/* Price summary */}
         <aside className="lg:row-span-1">
-          <div className="sticky top-[calc(var(--nav-height)+104px)] flex flex-col gap-5 rounded-[22px] bg-white p-6 shadow-[0_1px_2px_rgb(6_20_16/0.06),0_24px_48px_-28px_rgb(6_20_16/0.45)] ring-1 ring-black/[0.04]">
+          <div className="sticky top-[calc(var(--nav-height)+104px)] flex flex-col gap-5 rounded-panel bg-white p-6 shadow-panel ring-1 ring-black/[0.04]">
             <p className="text-3xl font-bold tracking-[-0.02em]">
               {formatPrice(vehicle.basePricePerDay)}
               <span className="text-muted-foreground text-base font-medium"> / day</span>
             </p>
 
-            <button type="button" onClick={openDates} className="hover:bg-hover -mx-2 rounded-2xl p-2 text-left transition-colors">
+            <button type="button" onClick={openDates} className="hover:bg-hover -mx-2 rounded-panel p-2 text-left transition-colors">
               <TripSummary
                 from={range.from}
                 to={range.to}
@@ -322,7 +322,7 @@ export function VehicleDetailView({ vehicle, similar }: { vehicle: Vehicle; simi
                 </div>
               </dl>
             ) : (
-              <p className="bg-primary-light flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm">
+              <p className="bg-primary-light flex items-center gap-2 rounded-control px-3 py-2.5 text-sm">
                 <CalendarDays size={16} className="text-link shrink-0" />
                 Add your dates to see the full price.
               </p>
@@ -331,7 +331,7 @@ export function VehicleDetailView({ vehicle, similar }: { vehicle: Vehicle; simi
             <button
               type="button"
               onClick={onContinue}
-              className="bg-basalt hover:bg-basalt-2 h-14 rounded-full text-base font-bold text-white transition-colors"
+              className="btn-primary h-14 text-base"
             >
               {days ? "Continue to booking" : "Choose dates"}
             </button>
@@ -362,8 +362,8 @@ export function VehicleDetailView({ vehicle, similar }: { vehicle: Vehicle; simi
 
 function SpecTile({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
   return (
-    <li className="flex items-center gap-3 rounded-2xl bg-white p-4 ring-1 ring-black/[0.05]">
-      <span className="bg-sky text-foreground/80 flex size-10 shrink-0 items-center justify-center rounded-xl">
+    <li className="flex items-center gap-3 rounded-panel bg-white p-4 ring-1 ring-black/[0.05]">
+      <span className="bg-sky text-foreground/80 flex size-10 shrink-0 items-center justify-center rounded-control">
         {icon}
       </span>
       <span className="flex flex-col">

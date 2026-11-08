@@ -1,20 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import { cn } from "@/lib/utils";
-import type { Category } from "@/types/content";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { formatPrice } from "@/lib/pricing";
+import type { ICategory } from "@/types";
 
-// Two staggered rows on a 12-column grid: wide, medium, narrow, then the mirror
-const LAYOUT = [
-  "lg:col-span-5",
-  "lg:col-span-4",
-  "lg:col-span-3",
-  "lg:col-span-3",
-  "lg:col-span-4",
-  "lg:col-span-5",
-];
-
-export function CategoriesSection({ categories }: { categories: Category[] }) {
+export function CategoriesSection({ categories }: { categories: ICategory[] }) {
   return (
     <section
       id="vehicles"
@@ -43,10 +33,10 @@ export function CategoriesSection({ categories }: { categories: Category[] }) {
         </Link>
       </header>
 
-      <ul className="grid auto-rows-[minmax(280px,auto)] grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-12 lg:auto-rows-[340px] lg:gap-5">
-        {categories.map((category, index) => (
-          <li key={category.id} className={cn("min-w-0", LAYOUT[index % LAYOUT.length])}>
-            <CategoryCard category={category} featured={index === 0 || index === 5} />
+      <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {categories.map((category) => (
+          <li key={category.id}>
+            <CategoryCard category={category} />
           </li>
         ))}
       </ul>
@@ -54,70 +44,44 @@ export function CategoriesSection({ categories }: { categories: Category[] }) {
   );
 }
 
-function CategoryCard({
-  category,
-  featured,
-}: {
-  category: Category;
-  featured: boolean;
-}) {
-  const background = category.card_image ?? category.landscape_image;
-  // The vehicle itself rides along as a thumbnail when the backdrop is a landscape
-  const showVehicle =
-    !category.card_image && category.image.url !== background.url;
-
+/** Same card language as the vehicle results: white, rounded, photo on top */
+function CategoryCard({ category }: { category: ICategory }) {
   return (
     <Link
       href={`/book/vehicles?category=${category.id}`}
-      className="group bg-basalt relative flex h-full min-h-[280px] flex-col justify-end overflow-hidden rounded-[22px] text-white shadow-[0_18px_40px_-24px_rgb(6_20_16/0.6)] focus-visible:outline-offset-4"
+      className="group flex h-full flex-col overflow-hidden rounded-panel bg-white shadow-card ring-1 ring-black/[0.04] transition-[box-shadow,transform] duration-500 ease-[var(--ease-out-expo)] hover:-translate-y-1 hover:shadow-card-hover focus-visible:outline-offset-4"
     >
-      <Image
-        alt={background.alt}
-        fill
-        sizes={
-          featured
-            ? "(min-width: 1024px) 40vw, 100vw"
-            : "(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
-        }
-        src={background.url}
-        className="object-cover transition-transform duration-[1100ms] ease-[var(--ease-out-expo)] group-hover:scale-[1.05]"
-      />
-      <div className="from-basalt via-basalt/45 absolute inset-0 bg-gradient-to-t via-45% to-transparent to-75%" />
-      {/* Aurora wash that rises on hover */}
-      <div className="absolute inset-0 bg-[radial-gradient(120%_70%_at_0%_100%,rgb(61_220_151/0.35),transparent_60%)] opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100" />
-
-      <span className="text-basalt group-hover:bg-aurora absolute top-4 right-4 flex size-11 items-center justify-center rounded-full bg-white transition-[background-color,transform] duration-300 ease-[var(--ease-out-expo)] group-hover:scale-105">
-        <ArrowUpRight
-          size={20}
-          strokeWidth={2}
-          className="transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:translate-x-px group-hover:-translate-y-px"
+      <div className="bg-sky relative aspect-[16/10] overflow-hidden">
+        <Image
+          alt={category.image.alt}
+          fill
+          sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
+          src={category.image.url}
+          className="object-cover transition-transform duration-[1100ms] ease-[var(--ease-out-expo)] group-hover:scale-[1.04]"
         />
-      </span>
+        <span className="text-foreground absolute top-3 left-3 rounded-control bg-white/95 px-3 py-1 text-xs font-semibold shadow-sm">
+          {category.count} {category.count === 1 ? "vehicle" : "vehicles"}
+        </span>
+      </div>
 
-      <div className="relative flex items-end gap-4 p-5 md:p-6">
-        {showVehicle && (
-          <span className="relative hidden size-16 shrink-0 overflow-hidden rounded-xl bg-white ring-2 ring-white/25 sm:block">
-            <Image
-              alt=""
-              fill
-              sizes="64px"
-              src={category.image.url}
-              className="object-cover"
+      <div className="flex flex-1 flex-col gap-2 p-5 md:p-6">
+        <h3 className="text-2xl font-bold tracking-[-0.02em]">{category.name}</h3>
+        <p className="text-muted-foreground leading-snug text-pretty">
+          {category.description}
+        </p>
+        <div className="mt-auto flex items-center justify-between gap-3 pt-4">
+          <p className="text-[15px]">
+            <span className="text-muted-foreground">From </span>
+            <strong className="tabular text-lg">{formatPrice(category.fromPrice)}</strong>
+            <span className="text-muted-foreground"> / day</span>
+          </p>
+          <span className="bg-sky text-foreground group-hover:bg-aurora flex size-10 items-center justify-center rounded-full transition-colors duration-300">
+            <ArrowRight
+              size={18}
+              strokeWidth={2.25}
+              className="transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:translate-x-0.5"
             />
           </span>
-        )}
-        <div className="flex min-w-0 flex-col gap-1.5">
-          <h3
-            className={cn(
-              "font-bold tracking-[-0.025em]",
-              featured ? "text-3xl md:text-4xl" : "text-2xl",
-            )}
-          >
-            {category.name}
-          </h3>
-          <p className="max-w-[38ch] leading-snug text-pretty text-white/75">
-            {category.description}
-          </p>
         </div>
       </div>
     </Link>

@@ -116,7 +116,7 @@ export function VehiclesView({ vehicles, filters, initialCategory }: Props) {
       <div className="mt-8 grid gap-8 lg:grid-cols-[280px_1fr] lg:gap-10">
         {/* Desktop filters */}
         <aside className="hidden lg:block">
-          <div className="sticky top-[calc(var(--nav-height)+104px)] max-h-[calc(100vh-var(--nav-height)-128px)] overflow-y-auto rounded-[22px] bg-white p-6 shadow-[0_1px_2px_rgb(6_20_16/0.06),0_12px_32px_-24px_rgb(6_20_16/0.35)] ring-1 ring-black/[0.04] [scrollbar-width:thin]">
+          <div className="sticky top-[calc(var(--nav-height)+104px)] max-h-[calc(100vh-var(--nav-height)-128px)] overflow-y-auto rounded-panel bg-white p-6 shadow-card ring-1 ring-black/[0.04] [scrollbar-width:thin]">
             <div className="mb-5 flex items-center justify-between">
               <h2 className="text-lg font-bold">Filters</h2>
               {active > 0 && (
@@ -140,7 +140,7 @@ export function VehiclesView({ vehicles, filters, initialCategory }: Props) {
               <button
                 type="button"
                 onClick={() => setMobileOpen(true)}
-                className="flex h-10 items-center gap-2 rounded-full border bg-white px-4 text-sm font-semibold lg:hidden"
+                className="flex h-10 items-center gap-2 rounded-control border bg-white px-4 text-sm font-semibold lg:hidden"
               >
                 <SlidersHorizontal size={16} />
                 Filters
@@ -158,7 +158,7 @@ export function VehiclesView({ vehicles, filters, initialCategory }: Props) {
             <button
               type="button"
               onClick={openDates}
-              className="bg-primary-light mt-4 flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-left transition-colors hover:bg-[#d6f2e4]"
+              className="bg-primary-light mt-4 flex w-full items-center gap-3 rounded-panel px-4 py-3 text-left transition-colors hover:bg-[#d6f2e4]"
             >
               <CalendarDays size={20} className="text-link shrink-0" />
               <span className="text-[15px]">
@@ -180,18 +180,18 @@ export function VehiclesView({ vehicles, filters, initialCategory }: Props) {
               ))}
             </ul>
           ) : (
-            <div className="mt-6 flex flex-col items-center gap-3 rounded-[22px] bg-white px-6 py-16 text-center ring-1 ring-black/[0.04]">
+            <div className="mt-6 flex flex-col items-center gap-3 rounded-panel bg-white px-6 py-16 text-center ring-1 ring-black/[0.04]">
               <p className="text-xl font-bold">No vehicles match these filters</p>
               <p className="text-muted-foreground max-w-[42ch]">
                 Try a wider price range or fewer features
                 {category ? ", or look across every vehicle type." : "."}
               </p>
               <div className="mt-2 flex gap-2">
-                <button type="button" onClick={clear} className="bg-basalt rounded-full px-5 py-2.5 text-sm font-semibold text-white">
+                <button type="button" onClick={clear} className="btn-primary px-5 py-2.5 text-sm">
                   Clear filters
                 </button>
                 {category && (
-                  <button type="button" onClick={() => selectCategory(null)} className="rounded-full border bg-white px-5 py-2.5 text-sm font-semibold">
+                  <button type="button" onClick={() => selectCategory(null)} className="btn-secondary px-5 py-2.5 text-sm">
                     Show all vehicles
                   </button>
                 )}
@@ -203,7 +203,7 @@ export function VehiclesView({ vehicles, filters, initialCategory }: Props) {
 
       {/* Mobile filters */}
       <Dialog open={mobileOpen} onOpenChange={setMobileOpen}>
-        <DialogContent className="flex max-h-[92svh] flex-col gap-0 overflow-hidden rounded-[22px] p-0 sm:max-w-md">
+        <DialogContent className="flex max-h-[92svh] flex-col gap-0 overflow-hidden rounded-panel p-0 sm:max-w-md">
           <div className="flex items-center justify-between border-b px-5 py-4">
             <DialogTitle className="text-lg font-bold">Filters</DialogTitle>
           </div>
@@ -211,10 +211,10 @@ export function VehiclesView({ vehicles, filters, initialCategory }: Props) {
             <FiltersPanel state={state} bounds={bounds} features={filters.features} onChange={update} />
           </div>
           <div className="flex gap-2 border-t p-4">
-            <button type="button" onClick={clear} className="h-12 rounded-full border px-5 font-semibold">
+            <button type="button" onClick={clear} className="btn-secondary h-12 px-5">
               Clear
             </button>
-            <button type="button" onClick={() => setMobileOpen(false)} className="bg-basalt h-12 flex-1 rounded-full font-semibold text-white">
+            <button type="button" onClick={() => setMobileOpen(false)} className="btn-primary h-12 flex-1">
               Show {results.length} {results.length === 1 ? "vehicle" : "vehicles"}
             </button>
           </div>
@@ -244,7 +244,7 @@ function CategoryTab({
         aria-pressed={active}
         onClick={onClick}
         className={cn(
-          "flex h-16 items-center gap-3 rounded-2xl py-2 pr-5 pl-2 text-left ring-1 transition-[background-color,box-shadow,color] duration-200",
+          "flex h-16 items-center gap-3 rounded-panel py-2 pr-5 pl-2 text-left ring-1 transition-[background-color,box-shadow,color] duration-200",
           !image && "pl-5",
           active
             ? "bg-basalt text-white ring-transparent shadow-[0_10px_24px_-14px_rgb(6_20_16/0.7)]"
@@ -252,7 +252,7 @@ function CategoryTab({
         )}
       >
         {image && (
-          <span className="relative size-12 shrink-0 overflow-hidden rounded-xl">
+          <span className="relative size-12 shrink-0 overflow-hidden rounded-control">
             <Image src={image} alt="" fill sizes="48px" className="object-cover" />
           </span>
         )}
@@ -269,7 +269,7 @@ function CategoryTab({
 
 function SortSelect({ value, onChange }: { value: SortKey; onChange: (value: SortKey) => void }) {
   return (
-    <label className="relative flex h-10 items-center rounded-full border bg-white pr-9 pl-4 text-sm font-semibold">
+    <label className="relative flex h-10 items-center rounded-control border bg-white pr-9 pl-4 text-sm font-semibold">
       <span className="text-muted-foreground mr-1 font-medium">Sort:</span>
       <select
         value={value}
@@ -326,7 +326,7 @@ function ActiveChips({
           key={chip.label}
           type="button"
           onClick={chip.remove}
-          className="bg-primary-light text-link flex h-8 items-center gap-1.5 rounded-full pr-2.5 pl-3 text-sm font-semibold"
+          className="bg-primary-light text-link flex h-8 items-center gap-1.5 rounded-control pr-2.5 pl-3 text-sm font-semibold"
         >
           {chip.label}
           <X size={14} strokeWidth={2.5} />

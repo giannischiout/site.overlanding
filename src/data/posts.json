@@ -1,23 +1,302 @@
 [
   {
-    "id": "black-sand-beaches",
-    "title": "Driving the south coast to the black sand beaches",
-    "short_description": "Follow the Ring Road east from Reykjavík to Reynisfjara, with stops for basalt columns and the sea stacks off Vík.",
+    "id": "south-coast",
+    "title": "The South Coast",
+    "short_description": "Seljalandsfoss, Skógafoss and the black sand and sea stacks of Reynisfjara, all an easy drive from Reykjavík on paved road.",
     "read": 6,
-    "featuredImage": { "url": "/assets/post-overlanding-iceland.jpg", "alt": "Waves on a black sand beach with sea stacks offshore" }
+    "days": 3,
+    "distance": 380,
+    "season": "All year",
+    "category": "campervan",
+    "featuredImage": {
+      "url": "/assets/trips/south-coast.jpg",
+      "alt": "Basalt sea stacks off a black sand beach below tall cliffs"
+    },
+    "route": [
+      [
+        -21.94,
+        64.146
+      ],
+      [
+        -21.19,
+        64
+      ],
+      [
+        -20.4,
+        63.835
+      ],
+      [
+        -19.989,
+        63.616
+      ],
+      [
+        -19.511,
+        63.532
+      ],
+      [
+        -19.006,
+        63.419
+      ]
+    ]
   },
   {
-    "id": "chasing-the-northern-lights",
-    "title": "Chasing the Northern Lights by car",
-    "short_description": "How to read the forecast, find dark skies away from town, and stay warm while you wait for the aurora.",
+    "id": "golden-circle",
+    "title": "The Golden Circle",
+    "short_description": "Þingvellir, the Geysir hot springs and Gullfoss in one loop. The perfect first day off the plane.",
     "read": 4,
-    "featuredImage": { "url": "/assets/iceland-aurora.jpg", "alt": "Green aurora over a frozen shoreline" }
+    "days": 1,
+    "distance": 230,
+    "season": "All year",
+    "category": "economy",
+    "featuredImage": {
+      "url": "/assets/trips/golden-circle.jpg",
+      "alt": "Gullfoss waterfall pouring into a green canyon with a rainbow in the spray"
+    },
+    "route": [
+      [
+        -21.94,
+        64.146
+      ],
+      [
+        -21.13,
+        64.255
+      ],
+      [
+        -20.3,
+        64.31
+      ],
+      [
+        -20.121,
+        64.327
+      ],
+      [
+        -20.52,
+        64.15
+      ],
+      [
+        -20.997,
+        63.933
+      ],
+      [
+        -21.19,
+        64
+      ],
+      [
+        -21.94,
+        64.146
+      ]
+    ]
   },
   {
     "id": "glacier-country",
-    "title": "A road trip through glacier country",
-    "short_description": "Plan a few days around Vatnajökull, from ice-cave tours to the lagoon at Jökulsárlón.",
+    "title": "Glacier country",
+    "short_description": "Icebergs drifting through Jökulsárlón, Diamond Beach and the ice caves under Vatnajökull in winter.",
     "read": 5,
-    "featuredImage": { "url": "/assets/iceland-glacier-2h.jpg", "alt": "Blue-white glacier face meeting dark ground" }
+    "days": 4,
+    "distance": 760,
+    "season": "Best Oct to Mar",
+    "category": "suv",
+    "featuredImage": {
+      "url": "/assets/trips/glacier-lagoon.jpg",
+      "alt": "Blue icebergs floating in a glacier lagoon"
+    },
+    "route": [
+      [
+        -21.94,
+        64.146
+      ],
+      [
+        -21.19,
+        64
+      ],
+      [
+        -20.4,
+        63.835
+      ],
+      [
+        -19.989,
+        63.616
+      ],
+      [
+        -19.511,
+        63.532
+      ],
+      [
+        -19.006,
+        63.419
+      ],
+      [
+        -18.06,
+        63.788
+      ],
+      [
+        -17.35,
+        63.95
+      ],
+      [
+        -16.966,
+        64.016
+      ],
+      [
+        -16.179,
+        64.048
+      ],
+      [
+        -15.95,
+        64.12
+      ]
+    ]
+  },
+  {
+    "id": "snaefellsnes",
+    "title": "Snæfellsnes peninsula",
+    "short_description": "Iceland in miniature: Kirkjufell, lava fields, fishing villages and a glacier-topped volcano, two hours from the city.",
+    "read": 5,
+    "days": 2,
+    "distance": 420,
+    "season": "All year",
+    "category": "rooftop-tent",
+    "featuredImage": {
+      "url": "/assets/trips/snaefellsnes.jpg",
+      "alt": "Kirkjufell mountain behind a waterfall on a green summer day"
+    },
+    "route": [
+      [
+        -21.94,
+        64.146
+      ],
+      [
+        -21.7,
+        64.35
+      ],
+      [
+        -21.92,
+        64.539
+      ],
+      [
+        -22.7,
+        64.8
+      ],
+      [
+        -23.62,
+        64.767
+      ],
+      [
+        -23.89,
+        64.915
+      ],
+      [
+        -23.3,
+        64.94
+      ],
+      [
+        -22.73,
+        65.075
+      ]
+    ]
+  },
+  {
+    "id": "highlands",
+    "title": "Landmannalaugar & the Highlands",
+    "short_description": "Rhyolite mountains in every colour, hot rivers to bathe in and F-roads that need a proper 4x4.",
+    "read": 7,
+    "days": 3,
+    "distance": 450,
+    "season": "Late Jun to early Sep",
+    "category": "4x4-campervan",
+    "featuredImage": {
+      "url": "/assets/trips/highlands.jpg",
+      "alt": "Striped orange, green and grey rhyolite mountains with patches of snow"
+    },
+    "route": [
+      [
+        -21.94,
+        64.146
+      ],
+      [
+        -21.19,
+        64
+      ],
+      [
+        -20.4,
+        63.835
+      ],
+      [
+        -19.95,
+        64.02
+      ],
+      [
+        -19.06,
+        63.983
+      ]
+    ]
+  },
+  {
+    "id": "westfjords",
+    "title": "The Westfjords",
+    "short_description": "Quiet fjord roads, the Látrabjarg bird cliffs and Dynjandi waterfall, far from the tour buses.",
+    "read": 6,
+    "days": 5,
+    "distance": 950,
+    "season": "Best Jun to Sep",
+    "category": "motorhome",
+    "featuredImage": {
+      "url": "/assets/trips/westfjords.jpg",
+      "alt": "Grassy sea cliffs dropping into calm water"
+    },
+    "route": [
+      [
+        -21.94,
+        64.146
+      ],
+      [
+        -21.7,
+        64.35
+      ],
+      [
+        -21.92,
+        64.539
+      ],
+      [
+        -21.77,
+        65.11
+      ],
+      [
+        -22.4,
+        65.5
+      ],
+      [
+        -23.99,
+        65.596
+      ],
+      [
+        -24.53,
+        65.5
+      ],
+      [
+        -23.2,
+        65.73
+      ],
+      [
+        -23.13,
+        66.075
+      ],
+      [
+        -22.4,
+        65.95
+      ],
+      [
+        -21.68,
+        65.705
+      ],
+      [
+        -21.4,
+        65.25
+      ],
+      [
+        -21.92,
+        64.539
+      ]
+    ]
   }
 ]
