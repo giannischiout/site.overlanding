@@ -32,7 +32,7 @@ export const MenuItem = ({
       className={cn(
         "transition-color flex cursor-pointer rounded-full bg-white px-4 py-1 text-[1.1rem] text-nowrap text-gray-500 duration-500 ease-in-out",
         active === id
-          ? "bg-primary/80 text-white transition"
+          ? "bg-primary text-primary-foreground transition"
           : "hover:bg-primary/10",
       )}
     >

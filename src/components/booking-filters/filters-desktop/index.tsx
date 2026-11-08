@@ -1,5 +1,6 @@
 import { useEffect, useRef, type KeyboardEvent } from "react";
 import dayjs from "dayjs";
+import { CarFront } from "lucide-react";
 import { SelectPickup } from "@/components/booking-filters/fields/select-pickup";
 import { timeOptions } from "@/_mockup";
 import { DateTrigger } from "@/components/booking-filters/fields/date-time-picker/date-trigger";
@@ -94,11 +95,13 @@ export function FiltersDesktop({ top = "110%" }: { top: string }) {
       onKeyDown={keepFocusInside}
       className="desktop-filters items-stretch gap-2"
     >
-      <div className="grid min-w-0 flex-1 gap-1 xl:grid-cols-2 xl:gap-2">
-        <div className="flex min-w-0 gap-1">
+      <div className="grid min-w-0 flex-1 gap-1 xl:flex xl:items-center xl:gap-0">
+        <div className="flex min-w-0 gap-0">
           <SelectPickup
             top={top}
             label="Pickup location"
+            shortLabel="Pickup"
+            accent
             isDatePickerOpen={isDatePickerOpen}
             open={openPopover === POPOVERS.pickup}
             onClose={() => onClose(POPOVERS.pickup)}
@@ -108,14 +111,17 @@ export function FiltersDesktop({ top = "110%" }: { top: string }) {
             value={pickup}
             onChange={(val) => setField(POPOVERS.pickup, val)}
           />
+          <span aria-hidden className="bg-border mx-1 hidden h-8 w-px shrink-0 self-center xl:block" />
           <DateTrigger
             label="Pickup date"
+            shortLabel="Date"
             value={formatDate(range.from)}
             active={isDatePickerOpen}
             onClick={() => onToggle(POPOVERS.dateRange)}
           />
           <TimeTrigger
             label="Pickup time"
+            shortLabel="Time"
             top={top}
             open={openPopover === POPOVERS.pickupTime}
             options={timeOptions}
@@ -126,10 +132,19 @@ export function FiltersDesktop({ top = "110%" }: { top: string }) {
             onChange={(val) => setField(POPOVERS.pickupTime, val)}
           />
         </div>
-        <div className="flex min-w-0 gap-1">
+        {/* The route between the two legs of the trip */}
+        <div aria-hidden className="relative hidden w-20 shrink-0 items-center justify-center xl:flex">
+          <span className="absolute inset-x-2 top-1/2 h-0.5 -translate-y-1/2 bg-[radial-gradient(circle,var(--link)_1px,transparent_1.5px)] bg-[length:7px_2px] bg-repeat-x opacity-60" />
+          <span className="bg-primary-light text-link relative flex size-8 items-center justify-center rounded-full ring-4 ring-white">
+            <CarFront size={15} strokeWidth={2} />
+          </span>
+        </div>
+        <div className="flex min-w-0 gap-0">
           <SelectPickup
             top={top}
             label="Dropoff location"
+            shortLabel="Return"
+            accent
             alignRight
             isDatePickerOpen={isDatePickerOpen}
             anchorRef={dropoffRef}
@@ -140,14 +155,17 @@ export function FiltersDesktop({ top = "110%" }: { top: string }) {
             value={dropoff}
             onChange={(val) => setField(POPOVERS.dropoff, val)}
           />
+          <span aria-hidden className="bg-border mx-1 hidden h-8 w-px shrink-0 self-center xl:block" />
           <DateTrigger
             label="Dropoff date"
+            shortLabel="Date"
             value={formatDate(range.to)}
             active={isDatePickerOpen}
             onClick={() => onToggle(POPOVERS.dateRange)}
           />
           <TimeTrigger
             label="Dropoff time"
+            shortLabel="Time"
             top={top}
             alignRight
             open={openPopover === POPOVERS.dropoffTime}

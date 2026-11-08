@@ -110,7 +110,7 @@ export function VehicleFilters({ filters }: Props) {
       {activeFilters && (
         <div
           onClick={clearFilters}
-          className="text-primary bg-primary mt-2 inline-flex h-[30px] cursor-pointer items-center gap-1 rounded-md px-2 text-sm text-white"
+          className="bg-primary text-primary-foreground mt-2 inline-flex h-[30px] cursor-pointer items-center gap-1 rounded-md px-2 text-sm font-medium"
         >
           <span className="text-nowrap">Clear all</span>
           <X size={14} />

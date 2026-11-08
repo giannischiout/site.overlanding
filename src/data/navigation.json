@@ -1,6 +1,19 @@
 {
-  "brand": "Iceland Experiences",
-  "categories": ["suv", "campervan", "4x4-rooftop-tent", "caravan"],
-  "bestSellingVehicles": ["ironpeak-expedition", "trailhaven-voyager", "summit-cruiser-4x4"],
-  "tripPosts": ["black-sand-beaches", "chasing-the-northern-lights", "glacier-country"]
+  "brand": "Aurora Campers",
+  "categories": [
+    "suv",
+    "campervan",
+    "4x4-rooftop-tent",
+    "caravan"
+  ],
+  "bestSellingVehicles": [
+    "ironpeak-expedition",
+    "trailhaven-voyager",
+    "summit-cruiser-4x4"
+  ],
+  "tripPosts": [
+    "black-sand-beaches",
+    "chasing-the-northern-lights",
+    "glacier-country"
+  ]
 }

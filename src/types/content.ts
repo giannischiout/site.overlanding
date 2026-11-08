@@ -9,6 +9,8 @@ export type Category = {
   description: string;
   image: Media;
   landscape_image: Media;
+  /** Optional art-directed image for the home page card, e.g. made in Higgsfield */
+  card_image?: Media;
 };
 
 export type Brand = {
@@ -55,6 +57,8 @@ export type Home = {
     title: string;
     subtitle: string;
     backgroundImage: Media;
+    /** Optional short loop (e.g. made in Higgsfield) that plays when the photo is clicked */
+    backgroundVideo?: { url: string };
   };
   featuredCategories: Category[];
   featuredPosts: Post[];

@@ -71,16 +71,16 @@ export function DesktopMenu({ data }: Props) {
                   )
                 }
                 className={cn(
-                  "flex h-11 items-center gap-1 rounded-md px-3 text-[15px] font-medium transition-colors duration-150 ease-out hover:bg-hover",
-                  isOpen && "bg-hover",
+                  "flex h-11 items-center gap-1 rounded-full px-4 text-base font-medium transition-colors duration-150 ease-out hover:bg-black/[0.05]",
+                  isOpen && "bg-basalt hover:bg-basalt text-white",
                 )}
               >
                 {menu.label}
                 <ChevronDown
                   size={16}
                   className={cn(
-                    "text-muted-foreground transition-transform duration-150 ease-out",
-                    isOpen && "rotate-180",
+                    "text-muted-foreground transition-transform duration-300 ease-[var(--ease-out-expo)]",
+                    isOpen && "text-aurora rotate-180",
                   )}
                 />
               </button>

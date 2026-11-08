@@ -16,13 +16,20 @@ type Props = {
   onToggle: () => void;
   alignRight?: boolean;
   label: string;
+  shortLabel?: string;
+  accent?: boolean;
   isDatePickerOpen: boolean;
   top: string;
 };
 
+const shortName = (label: string) =>
+  label.replace(" International", "").replace(" Domestic", "");
+
 export function SelectPickup({
   open,
   label,
+  shortLabel,
+  accent,
   top,
   anchorRef,
   onClose,
@@ -39,10 +46,13 @@ export function SelectPickup({
   };
 
   return (
-    <div ref={anchorRef} className="relative min-w-0 flex-1">
+    <div ref={anchorRef} className="relative min-w-0 flex-1 xl:w-[200px] xl:flex-none">
       <FieldWrapper
         label={label}
-        value={value?.label ?? "Select location"}
+        shortLabel={shortLabel}
+        accent={accent}
+        // The bar shows the short name; the menu lists the full one
+        value={value ? shortName(value.label) : "Select location"}
         active={open}
         expanded={open}
         muted={isDatePickerOpen}

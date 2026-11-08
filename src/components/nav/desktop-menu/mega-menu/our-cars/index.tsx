@@ -65,7 +65,7 @@ function MenuRow({
       <Link
         href="/#vehicles"
         onClick={onNavigate}
-        className="flex items-center gap-4 rounded-lg p-2 transition-colors duration-150 ease-out hover:bg-hover"
+        className="group flex items-center gap-4 rounded-xl p-2 transition-colors duration-150 ease-out hover:bg-hover"
       >
         <span className="relative h-16 w-20 shrink-0 overflow-hidden rounded-md bg-hover">
           <Image
@@ -73,7 +73,7 @@ function MenuRow({
             alt=""
             fill
             sizes="80px"
-            className="object-cover"
+            className="object-cover transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:scale-105"
           />
         </span>
         <span className="flex min-w-0 flex-col gap-0.5">

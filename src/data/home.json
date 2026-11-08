@@ -1,12 +1,16 @@
 {
   "hero": {
-    "title": "Rent a 4x4 or campervan in Iceland",
+    "title": "Iceland is best seen from the driver’s seat",
     "subtitle": "Pick up at Keflavík Airport, in Reykjavík or around the country.",
     "backgroundImage": {
-      "url": "/assets/hero-van.jpg",
-      "alt": "White camper van with its roof lights on, reflected in still water at dusk"
+      "url": "/assets/hero/aurora-defender.jpg",
+      "alt": "A person stands on the roof of a 4x4 under the northern lights, reflected in a frozen pool"
     }
   },
   "featuredCategories": ["suv", "campervan", "4x4-rooftop-tent", "caravan"],
-  "featuredPosts": ["black-sand-beaches", "chasing-the-northern-lights", "glacier-country"]
+  "featuredPosts": [
+    "black-sand-beaches",
+    "chasing-the-northern-lights",
+    "glacier-country"
+  ]
 }

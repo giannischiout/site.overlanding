@@ -16,9 +16,11 @@ export function MegaMenu({ active, data, onNavigate }: Props) {
       id="nav-menu-panel"
       className={cn(
         // Sits against the header, which is the positioned parent
-        "absolute top-full left-0 w-full border-y border-border bg-white shadow-[0_16px_32px_rgb(0_0_0/0.08)]",
-        "transition-[opacity,visibility] duration-150 ease-out",
-        active ? "visible opacity-100" : "pointer-events-none invisible opacity-0",
+        "absolute top-full left-0 w-full border-y border-border bg-white shadow-[0_24px_48px_-24px_rgb(6_20_16/0.3)]",
+        "transition-[opacity,visibility,transform] ease-[var(--ease-out-expo)]",
+        active
+          ? "visible translate-y-0 opacity-100 duration-400"
+          : "pointer-events-none invisible -translate-y-1 opacity-0 duration-150",
       )}
     >
       <div className="page-container py-8">

@@ -23,7 +23,7 @@ const HIGHLIGHTS = [
 
 export function Highlights() {
   return (
-    <section className="bg-sky grid overflow-hidden rounded-xl lg:grid-cols-[2fr_3fr]">
+    <section className="bg-sky grid overflow-hidden rounded-[22px] lg:grid-cols-[2fr_3fr]">
       <div className="relative min-h-[320px]">
         <Image
           alt="Small silver 4x4 parked on a wet road beside bright green hills"

@@ -11,6 +11,8 @@ type TimeOption = {
 
 type Props = {
   label: string;
+  shortLabel?: string;
+  accent?: boolean;
   anchorRef: RefObject<HTMLDivElement | null>;
   value: TimeOption;
   options: TimeOption[];
@@ -24,6 +26,8 @@ type Props = {
 
 export function TimeTrigger({
   label,
+  shortLabel,
+  accent,
   top,
   anchorRef,
   alignRight = false,
@@ -39,13 +43,17 @@ export function TimeTrigger({
     onClose();
   };
   return (
-    <div ref={anchorRef} className="relative w-[112px] shrink-0">
+    <div ref={anchorRef} className="relative w-[72px] shrink-0 xl:w-auto">
       <FieldWrapper
         label={label}
+        shortLabel={shortLabel}
+        accent={accent}
         value={value.label}
         active={open}
         expanded={open}
         onClick={onToggle}
+        className="min-[961px]:pl-2 min-[961px]:pr-3"
+        valueClassName="text-[16px] font-semibold tabular-nums"
       />
       <Popover
         top={top}

@@ -6,7 +6,7 @@ import { Nav } from "@/components/nav";
 
 export const metadata = {
   description: "Rent 4x4s, campervans and overland vehicles for your trip around Iceland.",
-  title: "Iceland Experiences",
+  title: "Aurora Campers",
   icons: [
     {
       rel: "icon",

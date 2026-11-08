@@ -13,11 +13,11 @@ export function CallToActionScreen() {
         currentScreen === "callToAction" ? "flex" : "hidden",
       )}
     >
-      <span className="bg-primary/10 flex size-10 shrink-0 items-center justify-center rounded-md">
-        <Calendar size={20} className="text-link" />
+      <span className="bg-aurora text-primary-foreground flex size-11 shrink-0 items-center justify-center rounded-xl">
+        <Calendar size={20} strokeWidth={2} />
       </span>
       <span className="flex min-w-0 flex-1 flex-col">
-        <span className="text-base font-medium">Book your vehicle</span>
+        <span className="text-base font-bold">Book your vehicle</span>
         <span className="text-muted-foreground text-sm">
           Add your dates and pickup location
         </span>
