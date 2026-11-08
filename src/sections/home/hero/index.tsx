@@ -164,7 +164,7 @@ export function Hero({ data }: { data: Home["hero"] }) {
             isDatePickerOpen && "min-[961px]:opacity-0",
           )}
         >
-          <h1 className="max-w-[18ch] text-[clamp(2.5rem,5.4vw,4.75rem)] leading-[1] font-black tracking-[-0.03em] text-balance [text-shadow:0_2px_24px_rgb(0_0_0/0.3)]">
+          <h1 className="max-w-[18ch] text-[clamp(2.5rem,5.4vw,4.75rem)] leading-[1] font-bold tracking-[-0.02em] text-balance [text-shadow:0_2px_24px_rgb(0_0_0/0.3)]">
             {data.title}
           </h1>
           <p className="max-w-[46ch] text-lg leading-relaxed text-pretty text-white/85 md:text-[1.375rem]">

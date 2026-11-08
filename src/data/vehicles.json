@@ -1,62 +1,170 @@
 [
   {
-    "id": "summit-cruiser-4x4",
-    "model": "Summit Cruiser 4x4",
-    "description": "Rugged off-road vehicle designed for overlanding and adventure trips.",
-    "brand": "summit-ridge-outfitters",
-    "category": "suv",
-    "image": { "url": "/assets/offroadmatte.png", "alt": "Matte black Summit Cruiser with a roof rack" },
-    "basePricePerDay": 150,
-    "stock": 3,
-    "sleeps": 2,
-    "seats": 5
+    "id": "renault-kangoo-camper", "model": "Kangoo Camper", "brand": "renault", "category": "campervan", "year": 2024,
+    "description": "Our smallest camper: a double bed in the back, a pull-out kitchen under it and a night heater that keeps the cold out. Cheap to run and easy to park in Reykjavík.",
+    "basePricePerDay": 69, "stock": 6, "seats": 2, "sleeps": 2, "luggage": 2, "transmission": "manual", "drive": "2wd", "fuel": "diesel", "fRoadApproved": false, "rating": 4.7, "reviews": 412,
+    "features": ["heater", "kitchen", "bedding", "carplay"],
+    "photos": [["1784870519359-ba501e34f3cd", "White compact camper on an open road"], ["1731603242271-0e58777c3cd8", "Bed and storage in the back of a small camper"], ["1692279952787-0cd28a1560fc", "Bed in the back of a van looking out over a field"]]
   },
   {
-    "id": "ironpeak-expedition",
-    "model": "IronPeak Expedition",
-    "description": "Heavy-duty expedition vehicle with optional rooftop tents and full off-road kit.",
-    "brand": "ironpeak-overland",
-    "category": "4x4-rooftop-tent",
-    "image": { "url": "/assets/trail-pro.png", "alt": "Silver IronPeak Expedition with its rooftop tent set up" },
-    "basePricePerDay": 200,
-    "stock": 2,
-    "sleeps": 2,
-    "seats": 4
+    "id": "vw-caddy-california", "model": "Caddy California", "brand": "volkswagen", "category": "campervan", "year": 2024,
+    "description": "Automatic, quiet on the highway and fitted with a fold-flat bed, a fridge and a two-burner stove. A favourite with couples doing the Ring Road in a week.",
+    "basePricePerDay": 95, "stock": 5, "seats": 2, "sleeps": 2, "luggage": 2, "transmission": "automatic", "drive": "2wd", "fuel": "diesel", "fRoadApproved": false, "rating": 4.8, "reviews": 356,
+    "features": ["heater", "kitchen", "fridge", "bedding", "carplay", "wifi"],
+    "photos": [["1687349086294-3f9d3b8eb2cf", "White camper van parked beside a lake"], ["1692279952778-00ce5c3ce02c", "Inside a camper with a bed and table"], ["1789043551317-048afedffa8e", "Two friends laughing at the table inside a camper"]]
   },
   {
-    "id": "trailhaven-voyager",
-    "model": "TrailHaven Voyager",
-    "description": "Comfort-oriented 4x4 with modular interior and optional family tent setup.",
-    "brand": "trailhaven",
-    "category": "campervan",
-    "image": { "url": "/assets/trailhunter.png", "alt": "White TrailHaven Voyager camper van" },
-    "basePricePerDay": 180,
-    "stock": 4,
-    "sleeps": 4,
-    "seats": 4
+    "id": "vw-t2-classic", "model": "T2 Classic", "brand": "volkswagen", "category": "campervan", "year": 1978,
+    "description": "A restored bay-window bus with a modern engine, heater and fridge fitted inside. Slower than the rest of the fleet and far more photographed.",
+    "basePricePerDay": 119, "stock": 2, "seats": 4, "sleeps": 2, "luggage": 2, "transmission": "manual", "drive": "2wd", "fuel": "petrol", "fRoadApproved": false, "rating": 4.9, "reviews": 128,
+    "features": ["heater", "kitchen", "fridge", "bedding"],
+    "photos": [["1513350949-6bd4ab6ff7f8", "Teal classic VW bus parked by the water"], ["1513970220822-8753e8ca1d5d", "Classic VW bus on a coastal road"], ["1515876305430-f06edab8282a", "Classic van under a tree at sunset"]]
   },
   {
-    "id": "venturex-offroad",
-    "model": "VentureX Offroad",
-    "description": "Innovative overland vehicle with built-in storage and rooftop tent compatibility.",
-    "brand": "venturex-gear-co",
-    "category": "campervan",
-    "image": { "url": "/assets/overlandVan001.png", "alt": "Orange VentureX Offroad van in a forest" },
-    "basePricePerDay": 175,
-    "stock": 5,
-    "sleeps": 3,
-    "seats": 5
+    "id": "vw-california-ocean", "model": "California Ocean", "brand": "volkswagen", "category": "campervan", "year": 2025,
+    "description": "Pop-top roof with a second double bed, so four can sleep inside. Full kitchen, fridge, awning and a heater on a timer.",
+    "basePricePerDay": 159, "stock": 4, "seats": 4, "sleeps": 4, "luggage": 3, "transmission": "automatic", "drive": "2wd", "fuel": "diesel", "fRoadApproved": false, "rating": 4.9, "reviews": 287,
+    "features": ["heater", "kitchen", "fridge", "bedding", "awning", "carplay", "wifi"],
+    "photos": [["1767318980757-c0bd64bde9a2", "White pop-top camper parked in a forest at night"], ["1760151517765-aa703ae4b9d0", "Camper with its awning out at a campsite"], ["1773123441753-e87f821ec76d", "Warm camper interior with sunlight coming in"]]
   },
   {
-    "id": "ridgeway-explorer",
-    "model": "Ridgeway Explorer",
-    "description": "Reliable overlanding vehicle for serious explorers with optional tent setups.",
-    "brand": "ridgeway-expeditions",
-    "category": "overland-truck",
-    "image": { "url": "/assets/overlanding.jpg", "alt": "Black Ridgeway Explorer parked in a forest" },
-    "basePricePerDay": 190,
-    "stock": 2,
-    "sleeps": 2,
-    "seats": 5
+    "id": "mitsubishi-delica-4x4", "model": "Delica 4x4 Camper", "brand": "mitsubishi", "category": "4x4-campervan", "year": 2022,
+    "description": "Japan's cult off-roader, converted with a bed, kitchen and roof rack. Small enough for narrow tracks, tough enough for every F-road we allow.",
+    "basePricePerDay": 179, "stock": 3, "seats": 4, "sleeps": 2, "luggage": 2, "transmission": "automatic", "drive": "4x4", "fuel": "diesel", "fRoadApproved": true, "rating": 4.8, "reviews": 164,
+    "features": ["heater", "kitchen", "bedding", "winter-tyres", "wifi"],
+    "photos": [["1678884210771-bd9f07cc61e9", "Olive green 4x4 van with a roof rack"], ["1649851706700-56d3751fa9b1", "4x4 van on a dirt road with a bike on the back"], ["1692279952778-00ce5c3ce02c", "Camper interior with a bed and table"]]
+  },
+  {
+    "id": "mercedes-sprinter-4x4", "model": "Sprinter 4x4 Highland", "brand": "mercedes-benz", "category": "4x4-campervan", "year": 2024,
+    "description": "Permanent bed, galley kitchen, compressor fridge and solar on the roof. Lifted, on all-terrain tyres and approved for Highland F-roads.",
+    "basePricePerDay": 239, "stock": 3, "seats": 3, "sleeps": 2, "luggage": 4, "transmission": "automatic", "drive": "4x4", "fuel": "diesel", "fRoadApproved": true, "rating": 4.9, "reviews": 201,
+    "features": ["heater", "kitchen", "fridge", "bedding", "solar", "winter-tyres", "wifi", "carplay"],
+    "photos": [["1712700117644-e175eaa15da3", "Lifted silver Sprinter 4x4 in a forest"], ["1712700117682-84071032dd36", "Rear doors open showing the bed and storage"], ["1692279952787-0cd28a1560fc", "Bed with a view out of the back doors"]]
+  },
+  {
+    "id": "ford-transit-trail", "model": "Transit Trail 4x4", "brand": "ford", "category": "4x4-campervan", "year": 2024,
+    "description": "Three seatbelts, a transverse bed and a big garage for bikes or luggage. All-wheel drive with locking differential for gravel and fords.",
+    "basePricePerDay": 219, "stock": 4, "seats": 3, "sleeps": 3, "luggage": 4, "transmission": "automatic", "drive": "4x4", "fuel": "diesel", "fRoadApproved": true, "rating": 4.7, "reviews": 98,
+    "features": ["heater", "kitchen", "fridge", "bedding", "winter-tyres", "awning"],
+    "photos": [["1629793456617-071a44de9f1e", "White off-road camper van on dry ground"], ["1627031779583-3f50d1260e5a", "White 4x4 camper van on a brown field"], ["1731603242271-0e58777c3cd8", "Bed and storage in the back of the van"]]
+  },
+  {
+    "id": "man-expedition-truck", "model": "TGE Expedition Truck", "brand": "man", "category": "4x4-campervan", "year": 2023,
+    "description": "A self-contained expedition truck with toilet, hot shower, 200 litres of water and solar. Go deep into the Highlands and stay out for days.",
+    "basePricePerDay": 349, "stock": 1, "seats": 2, "sleeps": 2, "luggage": 5, "transmission": "automatic", "drive": "4x4", "fuel": "diesel", "fRoadApproved": true, "rating": 5.0, "reviews": 37,
+    "features": ["heater", "kitchen", "fridge", "bedding", "toilet", "solar", "winter-tyres", "wifi"],
+    "photos": [["1791140134146-db0c1de196bc", "White expedition camper truck"], ["1783522271591-e29b05ff38ce", "Two expedition trucks parked in open country"], ["1773123441753-e87f821ec76d", "Inside the truck's living space"]]
+  },
+  {
+    "id": "dacia-duster-tent", "model": "Duster + Rooftop Tent", "brand": "dacia", "category": "rooftop-tent", "year": 2024,
+    "description": "The budget way to camp in a 4x4. A hard-shell tent pops up in a minute, with a mattress, bedding and a camping kitchen in the boot.",
+    "basePricePerDay": 109, "stock": 8, "seats": 5, "sleeps": 2, "luggage": 3, "transmission": "manual", "drive": "4x4", "fuel": "diesel", "fRoadApproved": true, "rating": 4.6, "reviews": 523,
+    "features": ["kitchen", "bedding", "carplay"],
+    "photos": [["1753005769942-67f2106e1fb9", "Small 4x4 with a rooftop tent pitched outdoors"], ["1753005770099-10c8eef16162", "Rooftop tent open on a grassy field"], ["1757286916917-ea71f0fc9a4d", "Setting up a rooftop tent in a forest"]]
+  },
+  {
+    "id": "jeep-wrangler-tent", "model": "Wrangler + Rooftop Tent", "brand": "jeep", "category": "rooftop-tent", "year": 2023,
+    "description": "Proper off-road hardware with a four-season tent on top. Comes with studded tyres in winter and a diesel heater for the tent.",
+    "basePricePerDay": 169, "stock": 3, "seats": 4, "sleeps": 2, "luggage": 2, "transmission": "automatic", "drive": "4x4", "fuel": "petrol", "fRoadApproved": true, "rating": 4.7, "reviews": 143,
+    "features": ["heater", "kitchen", "bedding", "winter-tyres"],
+    "photos": [["1716049159271-e8699441c045", "Jeep with a rooftop tent parked in the snow"], ["1767936192877-d9e57dd5fa33", "Rooftop tent glowing under a starry sky"], ["1757286916917-ea71f0fc9a4d", "Rooftop tent being set up"]]
+  },
+  {
+    "id": "toyota-hilux-tent", "model": "Hilux + Rooftop Tent", "brand": "toyota", "category": "rooftop-tent", "year": 2024,
+    "description": "Double-cab pickup with a tent on the canopy and the whole camp kit in the load bed: fridge, stove, table and chairs.",
+    "basePricePerDay": 189, "stock": 4, "seats": 5, "sleeps": 2, "luggage": 4, "transmission": "automatic", "drive": "4x4", "fuel": "diesel", "fRoadApproved": true, "rating": 4.8, "reviews": 189,
+    "features": ["heater", "kitchen", "fridge", "bedding", "winter-tyres", "wifi"],
+    "photos": [["1776725120960-32c1e0194cc7", "Pickup with rooftop tent by the ocean at sunset"], ["1776734213614-99005407ebfa", "White pickup with rooftop tent overlooking the sea"], ["1767936192877-d9e57dd5fa33", "Camp lit up under the stars"]]
+  },
+  {
+    "id": "land-cruiser-tent", "model": "Land Cruiser + Rooftop Tent", "brand": "toyota", "category": "rooftop-tent", "year": 2023,
+    "description": "The most capable rig in this group. Three-person tent with annex, dual-battery fridge and recovery gear for the Highlands.",
+    "basePricePerDay": 219, "stock": 2, "seats": 5, "sleeps": 3, "luggage": 4, "transmission": "automatic", "drive": "4x4", "fuel": "diesel", "fRoadApproved": true, "rating": 4.9, "reviews": 76,
+    "features": ["heater", "kitchen", "fridge", "bedding", "awning", "winter-tyres", "wifi"],
+    "photos": [["1519443933981-c665c4a62ad4", "4x4 with its rooftop tent open in a meadow"], ["1761846785913-ed89b86f6001", "4x4 with rooftop tent and camping gear laid out"], ["1663679931361-19938f30c979", "Rooftop tent and ladder at camp"]]
+  },
+  {
+    "id": "fiat-ducato-compact", "model": "Ducato Compact Motorhome", "brand": "fiat", "category": "motorhome", "year": 2023,
+    "description": "A motorhome you can still park: wet room with toilet and shower, fixed rear bed and a dinette that turns into a third berth.",
+    "basePricePerDay": 209, "stock": 3, "seats": 3, "sleeps": 3, "luggage": 4, "transmission": "manual", "drive": "2wd", "fuel": "diesel", "fRoadApproved": false, "rating": 4.6, "reviews": 112,
+    "features": ["heater", "kitchen", "fridge", "bedding", "toilet", "solar"],
+    "photos": [["1626439613007-dffa9b69f7e0", "White and blue motorhome on green grass"], ["1596470693312-9a3686a0af0f", "Motorhome on the road"], ["1789043551317-048afedffa8e", "Friends at the dinette table"]]
+  },
+  {
+    "id": "family-motorhome-4", "model": "Family Motorhome 4", "brand": "fiat", "category": "motorhome", "year": 2024,
+    "description": "Over-cab bed for the kids, a double at the back, full bathroom and a kitchen with oven. Automatic and quiet.",
+    "basePricePerDay": 259, "stock": 4, "seats": 4, "sleeps": 4, "luggage": 5, "transmission": "automatic", "drive": "2wd", "fuel": "diesel", "fRoadApproved": false, "rating": 4.8, "reviews": 231,
+    "features": ["heater", "kitchen", "fridge", "bedding", "toilet", "awning", "wifi"],
+    "photos": [["1513311068348-19c8fbdc0bb6", "Class C motorhome at dusk"], ["1765873360299-f49fb1f9c5c4", "White motorhome on an open road"], ["1692279952778-00ce5c3ce02c", "Bed and table inside the motorhome"]]
+  },
+  {
+    "id": "ford-transit-panorama", "model": "Transit Panorama", "brand": "ford", "category": "motorhome", "year": 2024,
+    "description": "Big panoramic windows over the lounge, two fixed beds and a separate shower. Built for long stays and bad weather days.",
+    "basePricePerDay": 279, "stock": 2, "seats": 4, "sleeps": 4, "luggage": 5, "transmission": "automatic", "drive": "2wd", "fuel": "diesel", "fRoadApproved": false, "rating": 4.7, "reviews": 84,
+    "features": ["heater", "kitchen", "fridge", "bedding", "toilet", "solar", "wifi", "carplay"],
+    "photos": [["1658257654756-cc6ba6490ea9", "White motorhome on a coastal road"], ["1515172128886-07c606bb4eb3", "Motorhomes parked by the sea"], ["1511533910568-be3ffdc229bb", "Motorhome on the road at night"]]
+  },
+  {
+    "id": "grand-family-6", "model": "Grand Family 6", "brand": "fiat", "category": "motorhome", "year": 2024,
+    "description": "Six seatbelts, six berths, a big fridge and a garage for bags. The easiest way to bring the whole family.",
+    "basePricePerDay": 319, "stock": 2, "seats": 6, "sleeps": 6, "luggage": 7, "transmission": "automatic", "drive": "2wd", "fuel": "diesel", "fRoadApproved": false, "rating": 4.8, "reviews": 66,
+    "features": ["heater", "kitchen", "fridge", "bedding", "toilet", "awning", "solar", "wifi"],
+    "photos": [["1781211901352-390b93468b01", "Large motorhome at a campground at twilight"], ["1515172128886-07c606bb4eb3", "Motorhomes parked by the sea"], ["1789043551317-048afedffa8e", "Family table inside the motorhome"]]
+  },
+  {
+    "id": "dacia-duster", "model": "Duster 4x4", "brand": "dacia", "category": "suv", "year": 2025,
+    "description": "Iceland's most rented 4x4 for a reason: light, frugal and allowed on F-roads. Five seats and room for three big bags.",
+    "basePricePerDay": 79, "stock": 12, "seats": 5, "sleeps": 0, "luggage": 3, "transmission": "manual", "drive": "4x4", "fuel": "diesel", "fRoadApproved": true, "rating": 4.6, "reviews": 868,
+    "features": ["carplay", "winter-tyres"],
+    "photos": [["1615365707327-000a04665f1f", "Dark SUV on a road below snowy mountains"], ["1549588628-34abaf47106c", "Empty road through green grass under grey sky"], ["1683668608403-bdac56a8abaa", "Winding mountain road"]]
+  },
+  {
+    "id": "nissan-qashqai", "model": "Qashqai 4x4", "brand": "nissan", "category": "suv", "year": 2024,
+    "description": "Automatic, all-wheel drive and comfortable on long days. Ideal for winter trips on the Ring Road.",
+    "basePricePerDay": 99, "stock": 6, "seats": 5, "sleeps": 0, "luggage": 3, "transmission": "automatic", "drive": "4x4", "fuel": "hybrid", "fRoadApproved": false, "rating": 4.7, "reviews": 304,
+    "features": ["carplay", "winter-tyres", "wifi"],
+    "photos": [["1525264626954-d57032a1ab1a", "White SUV parked on a snowy road"], ["1484968309888-8d6b403bc1ec", "Snow-covered road leading to mountains"], ["1503104538136-7491acef4d5d", "Straight road towards a cliff at sunset"]]
+  },
+  {
+    "id": "land-cruiser-150", "model": "Land Cruiser 150", "brand": "toyota", "category": "suv", "year": 2023,
+    "description": "The Highland standard. Seven seats, low-range gearbox and the ground clearance for river crossings on the Kjölur and Sprengisandur routes.",
+    "basePricePerDay": 189, "stock": 5, "seats": 7, "sleeps": 0, "luggage": 4, "transmission": "automatic", "drive": "4x4", "fuel": "diesel", "fRoadApproved": true, "rating": 4.9, "reviews": 377,
+    "features": ["carplay", "winter-tyres", "wifi"],
+    "photos": [["1490902931801-d6f80ca94fe4", "White 4x4 crossing a shallow river"], ["1491446559770-3fc03a481cdf", "White 4x4 on a rocky track"], ["1484404289410-44b4ebf4026d", "White SUV on a road through fields"]]
+  },
+  {
+    "id": "land-rover-defender", "model": "Defender 110", "brand": "land-rover", "category": "suv", "year": 2025,
+    "description": "Air suspension, a 90 cm wading depth and a cabin that stays quiet on gravel. The most comfortable way to reach the Highlands.",
+    "basePricePerDay": 259, "stock": 3, "seats": 5, "sleeps": 0, "luggage": 4, "transmission": "automatic", "drive": "4x4", "fuel": "hybrid", "fRoadApproved": true, "rating": 4.9, "reviews": 142,
+    "features": ["carplay", "winter-tyres", "wifi"],
+    "photos": [["1741905358565-5ae6835ac172", "Black Land Rover Defender parked"], ["1741905358598-5fb74450df9b", "Front of a grey Defender"], ["1502489597346-dad15683d4c2", "White Land Rover on snow"]]
+  },
+  {
+    "id": "vw-polo", "model": "Polo", "brand": "volkswagen", "category": "economy", "year": 2025,
+    "description": "Comfortable, efficient and simple. Four adults and two suitcases for city breaks and the Golden Circle.",
+    "basePricePerDay": 45, "stock": 10, "seats": 5, "sleeps": 0, "luggage": 2, "transmission": "manual", "drive": "2wd", "fuel": "petrol", "fRoadApproved": false, "rating": 4.5, "reviews": 611,
+    "features": ["carplay", "winter-tyres"],
+    "photos": [["1792071586889-185c0e5c05a0", "White Volkswagen Polo on the road"], ["1785682455621-59d5e85009f0", "Rear of a white hatchback"], ["1549588628-34abaf47106c", "Empty road through green grass"]]
+  },
+  {
+    "id": "suzuki-swift-4x4", "model": "Swift 4x4", "brand": "suzuki", "category": "economy", "year": 2024,
+    "description": "A small car with all-wheel drive. Cheap to run and surprisingly sure-footed on snowy roads in winter.",
+    "basePricePerDay": 52, "stock": 8, "seats": 5, "sleeps": 0, "luggage": 2, "transmission": "manual", "drive": "4x4", "fuel": "hybrid", "fRoadApproved": false, "rating": 4.6, "reviews": 289,
+    "features": ["carplay", "winter-tyres"],
+    "photos": [["1692970056104-6487775297e8", "Small white car on a gravel road"], ["1778685932809-0160a2c506f8", "Blue compact car under an overcast sky"], ["1484233693062-745ef10139bb", "Small car on a mountain road under a rainbow"]]
+  },
+  {
+    "id": "toyota-yaris-hybrid", "model": "Yaris Hybrid", "brand": "toyota", "category": "economy", "year": 2025,
+    "description": "Automatic and very light on fuel, so the Ring Road costs less at the pump. Our most popular small car.",
+    "basePricePerDay": 55, "stock": 10, "seats": 5, "sleeps": 0, "luggage": 2, "transmission": "automatic", "drive": "2wd", "fuel": "hybrid", "fRoadApproved": false, "rating": 4.7, "reviews": 742,
+    "features": ["carplay", "winter-tyres"],
+    "photos": [["1454057093394-cf67bae1d3cf", "Blue hatchback on an open road"], ["1484233693062-745ef10139bb", "Small car on a mountain road under a rainbow"], ["1503104538136-7491acef4d5d", "Straight road towards a cliff"]]
+  },
+  {
+    "id": "kia-rio", "model": "Rio", "brand": "kia", "category": "economy", "year": 2024,
+    "description": "The lowest price in the fleet. Manual, frugal and with enough boot space for two travellers.",
+    "basePricePerDay": 39, "stock": 9, "seats": 5, "sleeps": 0, "luggage": 2, "transmission": "manual", "drive": "2wd", "fuel": "petrol", "fRoadApproved": false, "rating": 4.4, "reviews": 455,
+    "features": ["winter-tyres"],
+    "photos": [["1596832323822-b6b383a0967b", "Red hatchback parked by a building"], ["1727610906021-eb641ec1f86f", "Red car on a green hillside"], ["1549588628-34abaf47106c", "Empty road through green grass"]]
   }
 ]

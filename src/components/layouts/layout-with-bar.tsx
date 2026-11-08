@@ -1,13 +1,14 @@
 import type { ReactNode } from "react";
+import { BookingBar } from "@/components/booking-filters/booking-bar";
 
 type Props = {
   children: ReactNode;
 };
 export function LayoutWithBar({ children }: Props) {
   return (
-    <div className="page-container">
-      {/*<BookingFilters />*/}
-      {children}
-    </div>
+    <>
+      <BookingBar />
+      <div className="page-container">{children}</div>
+    </>
   );
 }

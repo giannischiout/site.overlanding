@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import type { PopoverKey } from "@/store/use-filters-store";
 import { useFilterStore } from "@/store/use-filters-store";
 import dayjs from "dayjs";
+import { useSearchVehicles } from "@/components/booking-filters/use-search-vehicles";
 
 const formatDate = (date?: Date | null) =>
   date ? dayjs(date).format("MMM D") : "Add date";
@@ -20,6 +21,7 @@ export function FiltersScreen() {
     range,
     onOpen,
   } = useFilterStore();
+  const onSearch = useSearchVehicles();
 
   const handleChange = (key: PopoverKey) => {
     setCurrentScreen("summary");
@@ -61,7 +63,9 @@ export function FiltersScreen() {
       </div>
 
       <div className="border-t p-4">
-        <Button className="h-12 w-full text-base">Search vehicles</Button>
+        <Button onClick={onSearch} className="h-12 w-full text-base">
+          Search vehicles
+        </Button>
       </div>
     </PortalDialog>
   );

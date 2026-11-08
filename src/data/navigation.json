@@ -1,15 +1,17 @@
 {
   "brand": "Aurora Campers",
   "categories": [
-    "suv",
     "campervan",
-    "4x4-rooftop-tent",
-    "caravan"
+    "4x4-campervan",
+    "rooftop-tent",
+    "motorhome",
+    "suv",
+    "economy"
   ],
   "bestSellingVehicles": [
-    "ironpeak-expedition",
-    "trailhaven-voyager",
-    "summit-cruiser-4x4"
+    "vw-california-ocean",
+    "mercedes-sprinter-4x4",
+    "dacia-duster"
   ],
   "tripPosts": [
     "black-sand-beaches",

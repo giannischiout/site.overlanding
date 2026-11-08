@@ -9,7 +9,7 @@ export function FeaturedPosts({ posts }: { posts: Post[] }) {
       id="road-trips"
       className="flex scroll-mt-[var(--nav-height)] flex-col gap-8 py-16 md:py-20"
     >
-      <h2 className="text-4xl font-black tracking-[-0.02em] md:text-5xl">
+      <h2 className="text-4xl font-bold tracking-[-0.02em] md:text-5xl">
         Road trip ideas
       </h2>
 

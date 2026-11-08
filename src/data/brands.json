@@ -1,27 +1,16 @@
 [
-  {
-    "id": "summit-ridge-outfitters",
-    "name": "Summit Ridge Outfitters",
-    "description": "Premium outdoor gear designed for high-altitude adventures."
-  },
-  {
-    "id": "ironpeak-overland",
-    "name": "IronPeak Overland",
-    "description": "Durable vehicles and accessories built for the toughest terrain."
-  },
-  {
-    "id": "trailhaven",
-    "name": "TrailHaven",
-    "description": "Comfort-focused overland equipment for extended journeys."
-  },
-  {
-    "id": "venturex-gear-co",
-    "name": "VentureX Gear Co.",
-    "description": "Innovative camping gear with a focus on modularity and efficiency."
-  },
-  {
-    "id": "ridgeway-expeditions",
-    "name": "Ridgeway Expeditions",
-    "description": "Trusted brand for serious explorers and weekend adventurers alike."
-  }
+  { "id": "volkswagen", "name": "Volkswagen", "description": "" },
+  { "id": "renault", "name": "Renault", "description": "" },
+  { "id": "mercedes-benz", "name": "Mercedes-Benz", "description": "" },
+  { "id": "ford", "name": "Ford", "description": "" },
+  { "id": "mitsubishi", "name": "Mitsubishi", "description": "" },
+  { "id": "man", "name": "MAN", "description": "" },
+  { "id": "dacia", "name": "Dacia", "description": "" },
+  { "id": "toyota", "name": "Toyota", "description": "" },
+  { "id": "jeep", "name": "Jeep", "description": "" },
+  { "id": "fiat", "name": "Fiat", "description": "" },
+  { "id": "land-rover", "name": "Land Rover", "description": "" },
+  { "id": "nissan", "name": "Nissan", "description": "" },
+  { "id": "suzuki", "name": "Suzuki", "description": "" },
+  { "id": "kia", "name": "Kia", "description": "" }
 ]

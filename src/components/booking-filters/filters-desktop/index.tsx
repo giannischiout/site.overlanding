@@ -10,6 +10,7 @@ import { Popover } from "@/components/popover";
 import { DayPicker } from "@/components/day-picker";
 import { Button } from "@/components/ui/button";
 import { POPOVERS, useFilterStore } from "@/store/use-filters-store";
+import { useSearchVehicles } from "@/components/booking-filters/use-search-vehicles";
 
 const formatDate = (date: Date | null | undefined) =>
   date ? dayjs(date).format("MMM D") : null;
@@ -44,6 +45,7 @@ export function FiltersDesktop({ top = "110%" }: { top: string }) {
   } = useFilterStore();
 
   const isDatePickerOpen = openPopover === POPOVERS.dateRange;
+  const onSearch = useSearchVehicles();
 
   // Esc closes whichever menu is open
   useEffect(() => {
@@ -178,7 +180,7 @@ export function FiltersDesktop({ top = "110%" }: { top: string }) {
           />
         </div>
       </div>
-      <SearchButton onSubmit={() => {}} />
+      <SearchButton onSubmit={onSearch} />
 
       {/* Date popover: positioned against the whole bar */}
       <Popover

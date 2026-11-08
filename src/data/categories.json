@@ -1,37 +1,80 @@
 [
   {
-    "id": "suv",
-    "name": "SUV",
-    "description": "Roomy and high off the ground, for gravel roads and winter driving.",
-    "image": { "url": "/assets/offroadmatte.png", "alt": "Matte black SUV with a roof rack" },
-    "landscape_image": { "url": "/assets/landscape-4x4.jpg", "alt": "4x4 driving through flying mud on a forest track" }
-  },
-  {
     "id": "campervan",
-    "name": "Campervan",
-    "description": "Compact van with built-in living space for road trips and camping.",
-    "image": { "url": "/assets/trailhunter.png", "alt": "White off-road camper van" },
-    "landscape_image": { "url": "/assets/landscape-camper.jpg", "alt": "Pine trees and snowy peaks under low cloud" }
+    "name": "Campervans",
+    "description": "Bed, kitchen and heater in a van that drives like a car. Made for the Ring Road.",
+    "image": {
+      "url": "/assets/fleet/1784870519359-ba501e34f3cd.jpg",
+      "alt": "White camper van on an open road under a cloudy sky"
+    },
+    "landscape_image": {
+      "url": "/assets/fleet/1784870519359-ba501e34f3cd.jpg",
+      "alt": "White camper van on an open road under a cloudy sky"
+    }
   },
   {
-    "id": "4x4-rooftop-tent",
-    "name": "4x4 with Rooftop Tent",
-    "description": "A 4x4 with a tent on the roof, so you can sleep wherever camping is allowed.",
-    "image": { "url": "/assets/trail-pro.png", "alt": "Silver pickup with a rooftop tent set up" },
-    "landscape_image": { "url": "/assets/overlanding.jpg", "alt": "Black overland truck parked in a forest" }
+    "id": "4x4-campervan",
+    "name": "4x4 Campervans",
+    "description": "Raised, all-wheel-drive campers approved for the F-roads into the Highlands.",
+    "image": {
+      "url": "/assets/fleet/1712700117644-e175eaa15da3.jpg",
+      "alt": "Lifted silver 4x4 camper van parked in a forest"
+    },
+    "landscape_image": {
+      "url": "/assets/fleet/1712700117644-e175eaa15da3.jpg",
+      "alt": "Lifted silver 4x4 camper van parked in a forest"
+    }
   },
   {
-    "id": "caravan",
-    "name": "Caravan",
-    "description": "Towable, with room to sleep, cook and relax. A good fit for families.",
-    "image": { "url": "/assets/landscape-caravan.jpg", "alt": "Blue pop-top camper among pine trees" },
-    "landscape_image": { "url": "/assets/landscape-caravan.jpg", "alt": "Blue pop-top camper among pine trees" }
+    "id": "rooftop-tent",
+    "name": "Rooftop Tent 4x4s",
+    "description": "A 4x4 with a tent on the roof. Pitch it in two minutes at any campsite.",
+    "image": {
+      "url": "/assets/fleet/1776725120960-32c1e0194cc7.jpg",
+      "alt": "Pickup with a rooftop tent open by the ocean at sunset"
+    },
+    "landscape_image": {
+      "url": "/assets/fleet/1776725120960-32c1e0194cc7.jpg",
+      "alt": "Pickup with a rooftop tent open by the ocean at sunset"
+    }
   },
   {
-    "id": "overland-truck",
-    "name": "Overland Truck",
-    "description": "Heavy-duty trucks designed for long-distance expeditions with camping gear.",
-    "image": { "url": "/assets/overlanding.jpg", "alt": "Black overland truck parked in a forest" },
-    "landscape_image": { "url": "/assets/overlandVan001.png", "alt": "Orange lifted overland van in a forest" }
+    "id": "motorhome",
+    "name": "Motorhomes",
+    "description": "Toilet, shower and a proper bed for up to six. The comfortable way round.",
+    "image": {
+      "url": "/assets/fleet/1513311068348-19c8fbdc0bb6.jpg",
+      "alt": "White motorhome parked at dusk"
+    },
+    "landscape_image": {
+      "url": "/assets/fleet/1513311068348-19c8fbdc0bb6.jpg",
+      "alt": "White motorhome parked at dusk"
+    }
+  },
+  {
+    "id": "suv",
+    "name": "4x4 SUVs",
+    "description": "High clearance and real four-wheel drive for gravel, snow and river crossings.",
+    "image": {
+      "url": "/assets/fleet/1490902931801-d6f80ca94fe4.jpg",
+      "alt": "White 4x4 crossing a shallow river"
+    },
+    "landscape_image": {
+      "url": "/assets/fleet/1490902931801-d6f80ca94fe4.jpg",
+      "alt": "White 4x4 crossing a shallow river"
+    }
+  },
+  {
+    "id": "economy",
+    "name": "Economy Cars",
+    "description": "Small, frugal and easy to park. Plenty for Reykjavík and the Golden Circle.",
+    "image": {
+      "url": "/assets/fleet/1484233693062-745ef10139bb.jpg",
+      "alt": "Small white car on a mountain road under a rainbow"
+    },
+    "landscape_image": {
+      "url": "/assets/fleet/1484233693062-745ef10139bb.jpg",
+      "alt": "Small white car on a mountain road under a rainbow"
+    }
   }
 ]

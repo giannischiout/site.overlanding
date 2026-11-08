@@ -25,17 +25,52 @@ export type Feature = {
   description: string;
 };
 
+export type Transmission = "manual" | "automatic";
+export type Drive = "2wd" | "4x4";
+export type Fuel = "diesel" | "petrol" | "hybrid";
+
 export type Vehicle = {
   id: string;
   model: string;
   description: string;
+  /** First photo of the gallery, used wherever one image is enough */
   image: Media;
+  images: Media[];
   brand: Brand;
   category: Category;
+  year: number;
   basePricePerDay: number;
   stock: number;
   sleeps: number;
   seats: number;
+  luggage: number;
+  transmission: Transmission;
+  drive: Drive;
+  fuel: Fuel;
+  /** Allowed on Iceland's mountain F-roads */
+  fRoadApproved: boolean;
+  rating: number;
+  reviews: number;
+  features: Feature[];
+};
+
+export type Protection = {
+  id: string;
+  name: string;
+  pricePerDay: number;
+  excess: number;
+  covers: string[];
+  recommended?: boolean;
+};
+
+export type Extra = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  per: "day" | "trip";
+  /** Shown only for vehicles you can sleep in */
+  campingOnly?: boolean;
 };
 
 export type Post = {

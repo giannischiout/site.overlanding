@@ -1,27 +1,12 @@
 [
-  {
-    "id": "waterproof",
-    "name": "Waterproof",
-    "description": "Keeps you dry even during heavy rainfall and wet conditions."
-  },
-  {
-    "id": "uv-protection",
-    "name": "UV Protection",
-    "description": "Blocks harmful UV rays, keeping the interior cool and safe."
-  },
-  {
-    "id": "quick-setup",
-    "name": "Quick Setup",
-    "description": "Can be assembled in under 5 minutes without special tools."
-  },
-  {
-    "id": "lightweight",
-    "name": "Lightweight",
-    "description": "Easy to transport and mount, perfect for solo travelers."
-  },
-  {
-    "id": "all-season",
-    "name": "All-Season",
-    "description": "Durable design suitable for winter, summer, and rainy seasons."
-  }
+  { "id": "heater", "name": "Night heater", "description": "Diesel heater that runs with the engine off." },
+  { "id": "kitchen", "name": "Kitchen kit", "description": "Gas stove, pots, cutlery and crockery." },
+  { "id": "fridge", "name": "Fridge", "description": "Built-in cool box or compressor fridge." },
+  { "id": "bedding", "name": "Bedding included", "description": "Duvets, pillows and sheets for every sleeper." },
+  { "id": "toilet", "name": "Toilet & shower", "description": "Onboard toilet and hot shower." },
+  { "id": "wifi", "name": "Portable Wi-Fi", "description": "Unlimited 4G router for the whole trip." },
+  { "id": "carplay", "name": "Apple CarPlay", "description": "Phone mirroring for maps and music." },
+  { "id": "winter-tyres", "name": "Studded winter tyres", "description": "Fitted from October to April." },
+  { "id": "awning", "name": "Awning", "description": "Pull-out shade and rain cover." },
+  { "id": "solar", "name": "Solar panel", "description": "Keeps the leisure battery topped up off grid." }
 ]

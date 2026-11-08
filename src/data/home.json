@@ -7,7 +7,14 @@
       "alt": "A person stands on the roof of a 4x4 under the northern lights, reflected in a frozen pool"
     }
   },
-  "featuredCategories": ["suv", "campervan", "4x4-rooftop-tent", "caravan"],
+  "featuredCategories": [
+    "campervan",
+    "4x4-campervan",
+    "rooftop-tent",
+    "motorhome",
+    "suv",
+    "economy"
+  ],
   "featuredPosts": [
     "black-sand-beaches",
     "chasing-the-northern-lights",

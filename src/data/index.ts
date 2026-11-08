@@ -5,7 +5,18 @@ import home from "./home.json";
 import navigation from "./navigation.json";
 import posts from "./posts.json";
 import vehicles from "./vehicles.json";
-import type { Brand, Category, Home, Navigation, Post, Vehicle } from "@/types/content";
+import type {
+  Brand,
+  Category,
+  Drive,
+  Feature,
+  Fuel,
+  Home,
+  Navigation,
+  Post,
+  Transmission,
+  Vehicle,
+} from "@/types/content";
 import type { IFilters } from "@/types";
 
 /** Looks up an item by id, so a typo in the JSON fails loudly instead of rendering a gap. */
@@ -15,11 +26,23 @@ function byId<T extends { id: string }>(items: T[], id: string): T {
   return item;
 }
 
-const allVehicles: Vehicle[] = vehicles.map((vehicle) => ({
-  ...vehicle,
-  brand: byId<Brand>(brands, vehicle.brand),
-  category: byId<Category>(categories, vehicle.category),
-}));
+const allVehicles: Vehicle[] = vehicles.map(({ photos, ...vehicle }) => {
+  const images = photos.map(([file, alt]) => ({
+    url: `/assets/fleet/${file}.jpg`,
+    alt,
+  }));
+  return {
+    ...vehicle,
+    transmission: vehicle.transmission as Transmission,
+    drive: vehicle.drive as Drive,
+    fuel: vehicle.fuel as Fuel,
+    image: images[0],
+    images,
+    brand: byId<Brand>(brands, vehicle.brand),
+    category: byId<Category>(categories, vehicle.category),
+    features: vehicle.features.map((id) => byId<Feature>(features, id)),
+  };
+});
 
 export function getHome(): Home {
   return {
@@ -48,12 +71,25 @@ export function getNavigation(): Navigation {
   };
 }
 
+export function getVehicles(): Vehicle[] {
+  return allVehicles;
+}
+
+export function getVehicle(id: string): Vehicle | undefined {
+  return allVehicles.find((vehicle) => vehicle.id === id);
+}
+
 export function getFilters(): IFilters {
   return {
-    categories: categories.map((category) => ({
-      ...category,
-      count: allVehicles.filter((v) => v.category.id === category.id).length,
-    })),
+    categories: navigation.categories.map((id) => {
+      const category = byId<Category>(categories, id);
+      const inCategory = allVehicles.filter((v) => v.category.id === id);
+      return {
+        ...category,
+        count: inCategory.length,
+        fromPrice: Math.min(...inCategory.map((v) => v.basePricePerDay)),
+      };
+    }),
     brands,
     features,
   };

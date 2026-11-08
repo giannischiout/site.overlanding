@@ -4,12 +4,14 @@ import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Category } from "@/types/content";
 
-// A bento rather than a row of equal tiles: the first type leads, the rest fill around it
+// Two staggered rows on a 12-column grid: wide, medium, narrow, then the mirror
 const LAYOUT = [
-  "sm:col-span-2 lg:col-span-1 lg:row-span-2",
-  "",
-  "",
-  "sm:col-span-2 lg:col-span-2",
+  "lg:col-span-5",
+  "lg:col-span-4",
+  "lg:col-span-3",
+  "lg:col-span-3",
+  "lg:col-span-4",
+  "lg:col-span-5",
 ];
 
 export function CategoriesSection({ categories }: { categories: Category[] }) {
@@ -20,7 +22,7 @@ export function CategoriesSection({ categories }: { categories: Category[] }) {
     >
       <header className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
         <div className="flex max-w-2xl flex-col gap-3">
-          <h2 className="text-4xl font-black tracking-[-0.03em] text-balance md:text-[3.5rem] md:leading-[1.02]">
+          <h2 className="text-4xl font-bold tracking-[-0.02em] text-balance md:text-[3.5rem] md:leading-[1.02]">
             Choose your vehicle
           </h2>
           <p className="text-muted-foreground max-w-[58ch] text-lg leading-relaxed">
@@ -41,10 +43,10 @@ export function CategoriesSection({ categories }: { categories: Category[] }) {
         </Link>
       </header>
 
-      <ul className="grid auto-rows-[minmax(280px,auto)] grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-[1.35fr_1fr_1fr] lg:grid-rows-[300px_300px] lg:gap-5">
+      <ul className="grid auto-rows-[minmax(280px,auto)] grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-12 lg:auto-rows-[340px] lg:gap-5">
         {categories.map((category, index) => (
-          <li key={category.id} className={cn("min-w-0", LAYOUT[index % 4])}>
-            <CategoryCard category={category} featured={index === 0} />
+          <li key={category.id} className={cn("min-w-0", LAYOUT[index % LAYOUT.length])}>
+            <CategoryCard category={category} featured={index === 0 || index === 5} />
           </li>
         ))}
       </ul>
@@ -107,7 +109,7 @@ function CategoryCard({
         <div className="flex min-w-0 flex-col gap-1.5">
           <h3
             className={cn(
-              "font-black tracking-[-0.025em]",
+              "font-bold tracking-[-0.025em]",
               featured ? "text-3xl md:text-4xl" : "text-2xl",
             )}
           >

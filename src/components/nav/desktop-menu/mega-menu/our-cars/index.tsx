@@ -21,6 +21,7 @@ export function OurCars({ vehicles, onNavigate }: Props) {
           {categories.map((category) => (
             <MenuRow
               key={category.id}
+              href={`/book/vehicles?category=${category.id}`}
               image={category.image}
               title={category.name}
               subtitle={category.description}
@@ -37,8 +38,9 @@ export function OurCars({ vehicles, onNavigate }: Props) {
           {bestSellingVehicles.map((vehicle) => (
             <MenuRow
               key={vehicle.id}
+              href={`/book/vehicles/${vehicle.id}`}
               image={vehicle.image}
-              title={vehicle.model}
+              title={`${vehicle.brand.name} ${vehicle.model}`}
               subtitle={`Seats ${vehicle.seats}, sleeps ${vehicle.sleeps}`}
               onNavigate={onNavigate}
             />
@@ -50,11 +52,13 @@ export function OurCars({ vehicles, onNavigate }: Props) {
 }
 
 function MenuRow({
+  href,
   image,
   title,
   subtitle,
   onNavigate,
 }: {
+  href: string;
   image: Media;
   title: string;
   subtitle: string;
@@ -63,7 +67,7 @@ function MenuRow({
   return (
     <li>
       <Link
-        href="/#vehicles"
+        href={href}
         onClick={onNavigate}
         className="group flex items-center gap-4 rounded-xl p-2 transition-colors duration-150 ease-out hover:bg-hover"
       >
