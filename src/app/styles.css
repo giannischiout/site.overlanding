@@ -49,6 +49,13 @@
   --backdrop: rgb(6 14 12 / 0.55);
   --hover: #edf3f0;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Road trip map only: warm paper, sage linework. Kept to the map so the site stays cool-toned. */
+  --map-paper: #f5f0e6;
+  --map-land: #fcfaf5;
+  --map-sage: #9fb4a3;
+  --map-ice: #edf2f0;
+  --map-water: #dbe6e2;
+  --map-road: #ddd4c4;
 }
 
 @media (min-width: 768px) {
@@ -374,4 +381,15 @@ svg {
   &:hover {
     background-color: var(--hover);
   }
+}
+
+/* Selected destination on the road trip map: a slow, quiet breath */
+@keyframes map-halo {
+  0%, 100% { transform: scale(1); opacity: 0.14; }
+  50% { transform: scale(1.35); opacity: 0.05; }
+}
+.map-halo {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: map-halo 2.8s ease-in-out infinite;
 }

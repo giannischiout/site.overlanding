@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, CalendarDays, Route, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { DEPOT, ICELAND_PATH, MAP_VIEWBOX, project } from "@/lib/iceland-map";
+import { DEPOT, MAP_VIEWBOX, ROUTES } from "@/lib/iceland-map";
 import type { ICategory } from "@/types";
 import type { Post } from "@/types/content";
 
@@ -14,16 +14,20 @@ const daysLabel = (days: number) => `${days} ${days === 1 ? "day" : "days"}`;
 
 /**
  * Road trip ideas. Opens with the map rather than a heading block: the routes are the point.
- * Hovering a card or a list row lights up its route, and hovering a route lights up its card.
+ * One route is always selected; hovering or focusing a row, card or route selects it.
+ * `backdrop` is the static land, terrain and road layers, rendered on the server.
  */
-export function FeaturedPosts({ posts, categories }: { posts: Post[]; categories: ICategory[] }) {
-  const [active, setActive] = useState<string | null>(null);
-  const hover = (id: string) => ({
-    onMouseEnter: () => setActive(id),
-    onMouseLeave: () => setActive(null),
-    onFocus: () => setActive(id),
-    onBlur: () => setActive(null),
-  });
+export function FeaturedPosts({
+  posts,
+  categories,
+  backdrop,
+}: {
+  posts: Post[];
+  categories: ICategory[];
+  backdrop: ReactNode;
+}) {
+  const [selected, setSelected] = useState(posts[0]?.id);
+  const select = (id: string) => ({ onMouseEnter: () => setSelected(id), onFocus: () => setSelected(id) });
 
   return (
     <section
@@ -31,7 +35,7 @@ export function FeaturedPosts({ posts, categories }: { posts: Post[]; categories
       aria-labelledby="road-trips-title"
       className="flex scroll-mt-[var(--nav-height)] flex-col gap-8 py-16 md:gap-10 md:py-24"
     >
-      <div className="bg-sky rounded-panel grid overflow-hidden lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)]">
+      <div className="rounded-panel grid overflow-hidden bg-[var(--map-paper)] lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)]">
         <div className="flex flex-col gap-4 p-6 md:p-10 lg:justify-center">
           <h2 id="road-trips-title" className="text-4xl font-bold tracking-[-0.02em] text-balance md:text-5xl">
             Where to drive first
@@ -40,38 +44,44 @@ export function FeaturedPosts({ posts, categories }: { posts: Post[]; categories
             Six routes we send friends on, with how long to give them and what to drive. All of
             them start at our depot by Keflavík airport.
           </p>
-          <ol className="mt-2 hidden flex-col gap-1 lg:flex">
-            {posts.map((post, index) => (
-              <li key={post.id}>
-                <Link
-                  href={tripHref(post)}
-                  {...hover(post.id)}
-                  className={cn(
-                    "rounded-control flex items-center gap-3 px-2 py-1.5 text-[15px] transition-colors",
-                    active === post.id ? "bg-white" : "hover:bg-white/60",
-                  )}
-                >
-                  <Marker number={index + 1} active={active === post.id} />
-                  <span className="font-semibold">{post.title}</span>
-                  <span className="text-muted-foreground ml-auto text-sm whitespace-nowrap">
-                    {daysLabel(post.days)}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ol>
+          <ul className="mt-2 hidden flex-col gap-0.5 lg:flex">
+            {posts.map((post) => {
+              const isSelected = selected === post.id;
+              return (
+                <li key={post.id}>
+                  <Link
+                    href={tripHref(post)}
+                    {...select(post.id)}
+                    aria-current={isSelected || undefined}
+                    className={cn(
+                      "rounded-control flex items-center gap-3 px-2.5 py-2 text-[15px] transition-colors duration-200",
+                      isSelected ? "bg-white/80" : "hover:bg-white/50",
+                    )}
+                  >
+                    <span
+                      className={cn(
+                        "size-2 shrink-0 rounded-full transition-[background-color,box-shadow] duration-200",
+                        isSelected ? "bg-link shadow-[0_0_0_4px_rgb(13_122_82/0.15)]" : "bg-[var(--map-sage)]",
+                      )}
+                    />
+                    <span className={cn("font-semibold", !isSelected && "text-foreground/80")}>{post.title}</span>
+                    <span className="text-muted-foreground ml-auto text-sm whitespace-nowrap">{daysLabel(post.days)}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
         </div>
 
-        <TripMap posts={posts} active={active} onActive={setActive} />
+        <TripMap posts={posts} selected={selected} onSelect={setSelected} backdrop={backdrop} />
       </div>
 
       <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {posts.map((post, index) => (
-          <li key={post.id} {...hover(post.id)}>
+        {posts.map((post) => (
+          <li key={post.id} {...select(post.id)}>
             <TripCard
               post={post}
-              number={index + 1}
-              active={active === post.id}
+              selected={selected === post.id}
               category={categories.find((c) => c.id === post.category)}
             />
           </li>
@@ -81,87 +91,74 @@ export function FeaturedPosts({ posts, categories }: { posts: Post[]; categories
   );
 }
 
-function Marker({ number, active }: { number: number; active: boolean }) {
-  return (
-    <span
-      className={cn(
-        "rounded-inner flex size-6 shrink-0 items-center justify-center text-xs font-bold transition-colors",
-        active ? "bg-basalt text-aurora" : "bg-link text-white",
-      )}
-    >
-      {number}
-    </span>
-  );
-}
-
 function TripMap({
   posts,
-  active,
-  onActive,
+  selected,
+  onSelect,
+  backdrop,
 }: {
   posts: Post[];
-  active: string | null;
-  onActive: (id: string | null) => void;
+  selected?: string;
+  onSelect: (id: string) => void;
+  backdrop: ReactNode;
 }) {
+  // The selected route is drawn last so it sits on top of the others
+  const ordered = [...posts].sort((a, b) => Number(a.id === selected) - Number(b.id === selected));
+
   return (
     <div className="px-4 pb-6 md:px-8 lg:py-8">
       <svg viewBox={MAP_VIEWBOX} className="h-auto w-full" role="img" aria-labelledby="trip-map-title">
         <title id="trip-map-title">Map of Iceland with the six road trip routes</title>
-        <path
-          d={ICELAND_PATH}
-          fill="#fff"
-          stroke="color-mix(in oklab, var(--link) 35%, white)"
-          strokeWidth={2.5}
-          strokeLinejoin="round"
-        />
+        {backdrop}
 
-        {posts.map((post, index) => {
-          const points = post.route.map(project);
-          const line = points.map((p) => p.join(",")).join(" ");
-          // Number sits on the far half of the route, away from the crowded Reykjavík area
-          const [mx, my] = points[Math.ceil((points.length - 1) * 0.66)];
-          const isActive = active === post.id;
-          const dimmed = active !== null && !isActive;
-          const colour = isActive ? "var(--basalt)" : "var(--link)";
+        {ordered.map((post) => {
+          const route = ROUTES[post.id];
+          if (!route) return null;
+          const isSelected = post.id === selected;
+          const [dx, dy] = route.destination;
           return (
             <a
               key={post.id}
               href={tripHref(post)}
               aria-label={`${post.title}: see vehicles`}
-              onMouseEnter={() => onActive(post.id)}
-              onMouseLeave={() => onActive(null)}
-              style={{ opacity: dimmed ? 0.22 : 1, transition: "opacity 250ms ease-out" }}
+              onMouseEnter={() => onSelect(post.id)}
+              onFocus={() => onSelect(post.id)}
             >
               {/* A wide invisible stroke makes the thin route easy to hover */}
-              <polyline points={line} fill="none" stroke="transparent" strokeWidth={28} />
-              <polyline
-                points={line}
+              <path d={route.d} fill="none" stroke="transparent" strokeWidth={22} />
+              <path
+                d={route.d}
                 fill="none"
-                stroke={colour}
-                strokeWidth={isActive ? 7 : 5}
+                stroke={isSelected ? "var(--link)" : "var(--map-sage)"}
+                strokeOpacity={isSelected ? 1 : 0.75}
+                strokeWidth={isSelected ? 3.6 : 2}
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                style={{ transition: "stroke 250ms ease-out, stroke-width 250ms ease-out" }}
+                style={{ transition: "stroke 300ms ease-out, stroke-width 300ms ease-out" }}
               />
-              <g transform={`translate(${mx} ${my})`}>
-                <rect x={-17} y={-17} width={34} height={34} rx={8} fill={colour} stroke="#fff" strokeWidth={3} />
-                <text
-                  textAnchor="middle"
-                  dominantBaseline="central"
-                  fontSize={18}
-                  fontWeight={700}
-                  fill={isActive ? "var(--aurora)" : "#fff"}
-                >
-                  {index + 1}
-                </text>
-              </g>
+
+              {isSelected &&
+                route.stops.map(([x, y]) =>
+                  x === dx && y === dy ? null : (
+                    <circle key={`${x},${y}`} cx={x} cy={y} r={3.6} fill="#fff" stroke="var(--link)" strokeWidth={1.8} />
+                  ),
+                )}
+
+              {isSelected ? (
+                <g transform={`translate(${dx} ${dy})`}>
+                  <circle r={16} fill="var(--link)" opacity={0.12} className="map-halo" />
+                  <circle r={7} fill="var(--link)" stroke="#fff" strokeWidth={2.5} />
+                </g>
+              ) : (
+                <circle cx={dx} cy={dy} r={3.4} fill="var(--map-land)" stroke="var(--map-sage)" strokeWidth={1.6} />
+              )}
             </a>
           );
         })}
 
         <g transform={`translate(${DEPOT[0]} ${DEPOT[1]})`}>
-          <circle r={11} fill="var(--aurora)" stroke="var(--basalt)" strokeWidth={4} />
-          <text y={38} fontSize={20} fontWeight={700} fill="var(--basalt)" textAnchor="middle">
+          <circle r={5} fill="var(--basalt)" stroke="#fff" strokeWidth={2} />
+          <text x={-10} y={4} fontSize={14} fontWeight={600} fill="var(--muted-foreground)" textAnchor="end">
             Our depot
           </text>
         </g>
@@ -170,23 +167,13 @@ function TripMap({
   );
 }
 
-function TripCard({
-  post,
-  number,
-  active,
-  category,
-}: {
-  post: Post;
-  number: number;
-  active: boolean;
-  category?: ICategory;
-}) {
+function TripCard({ post, selected, category }: { post: Post; selected: boolean; category?: ICategory }) {
   return (
     <Link
       href={tripHref(post)}
       className={cn(
         "group rounded-panel shadow-card hover:shadow-card-hover flex h-full flex-col overflow-hidden bg-white ring-1 transition-[box-shadow,transform] duration-500 ease-[var(--ease-out-expo)] hover:-translate-y-1",
-        active ? "ring-link/40" : "ring-black/[0.04]",
+        selected ? "ring-link/30" : "ring-black/[0.04]",
       )}
     >
       <div className="bg-sky relative aspect-[3/2] overflow-hidden">
@@ -204,12 +191,7 @@ function TripCard({
       </div>
 
       <div className="flex flex-1 flex-col gap-3 p-5 md:p-6">
-        <h3 className="flex items-start gap-2.5 text-xl font-bold tracking-[-0.01em]">
-          <span className="mt-0.5">
-            <Marker number={number} active={active} />
-          </span>
-          {post.title}
-        </h3>
+        <h3 className="text-xl font-bold tracking-[-0.01em]">{post.title}</h3>
         <p className="text-muted-foreground leading-snug text-pretty">{post.short_description}</p>
         <ul className="text-muted-foreground flex flex-wrap gap-x-4 gap-y-1 text-sm">
           <li className="flex items-center gap-1.5">
