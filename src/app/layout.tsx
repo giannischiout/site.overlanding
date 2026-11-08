@@ -7,12 +7,7 @@ import { Nav } from "@/components/nav";
 export const metadata = {
   description: "Rent 4x4s, campervans and overland vehicles for your trip around Iceland.",
   title: "Aurora Campers",
-  icons: [
-    {
-      rel: "icon",
-      url: `/favicon.ico`,
-    },
-  ],
+  // Icons come from favicon.ico, icon.svg and apple-icon.png in this folder
 };
 
 export default function RootLayout(props: { children: React.ReactNode }) {

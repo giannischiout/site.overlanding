@@ -35,7 +35,8 @@ export function Navbar({ data }: Props) {
           : "bg-background",
       )}
     >
-      <div className="page-container flex h-[var(--nav-height)] items-center gap-10">
+      {/* Same width as the hero; the inset lines the logo up with the hero's inner edge */}
+      <div className="wide-container flex h-[var(--nav-height)] items-center gap-10 px-3 md:px-6">
         <Link
           href="/"
           className="flex shrink-0 items-center gap-3 rounded-2xl"

@@ -78,7 +78,8 @@ export function Hero({ data }: { data: Home["hero"] }) {
   };
 
   return (
-    <section className="page-container pt-3 md:pt-4">
+    // Wider than the page container and shorter than the screen, so the next section peeks in
+    <section className="wide-container pt-3">
       {/* Backdrop for the date picker. Clicking it closes the calendar, which treats it as an outside click. */}
       <div
         aria-hidden
@@ -92,12 +93,12 @@ export function Hero({ data }: { data: Home["hero"] }) {
 
       <div
         onClick={onPanelClick}
-        className="bg-basalt relative flex min-h-[clamp(620px,calc(100svh-var(--nav-height)-20px),980px)] cursor-pointer flex-col items-center rounded-[28px] text-white"
+        className="bg-basalt relative flex min-h-[clamp(600px,84svh,900px)] cursor-pointer flex-col items-center rounded-[20px] text-white"
       >
         {/* The photo clips on its own layer so the booking menus can open past the panel */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 overflow-hidden rounded-[28px]"
+          className="pointer-events-none absolute inset-0 overflow-hidden rounded-[20px]"
         >
           <div
             className={cn(
@@ -109,7 +110,7 @@ export function Hero({ data }: { data: Home["hero"] }) {
               alt={backgroundImage.alt}
               fill
               priority
-              sizes="(min-width: 1416px) 1320px, 100vw"
+              sizes="100vw"
               src={backgroundImage.url}
               className="object-cover object-[50%_75%]"
             />
@@ -159,7 +160,7 @@ export function Hero({ data }: { data: Home["hero"] }) {
 
         <div
           className={cn(
-            "relative flex flex-col items-center gap-4 px-6 pt-12 text-center transition-opacity duration-300 md:pt-[clamp(56px,9vh,104px)]",
+            "relative flex flex-col items-center gap-4 px-6 pt-10 text-center transition-opacity duration-300 md:pt-[clamp(48px,8vh,96px)]",
             isDatePickerOpen && "min-[961px]:opacity-0",
           )}
         >
