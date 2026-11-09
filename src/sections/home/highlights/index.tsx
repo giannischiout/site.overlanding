@@ -1,15 +1,16 @@
 import Link from "next/link";
 import { paths } from "@/lib/paths";
-import { CancelTimeline } from "@/sections/home/highlights/cancel-timeline";
-import { ExcessCompare } from "@/sections/home/highlights/excess-compare";
+import { sampleBooking } from "@/lib/sample-booking";
 import { HowItWorks } from "@/sections/home/highlights/how-it-works";
-import { ProofCard } from "@/sections/home/highlights/proof-card";
 import { ReviewPanel } from "@/sections/home/highlights/review-panel";
 import { SampleQuote } from "@/sections/home/highlights/sample-quote";
 import { StatsStrip } from "@/sections/home/highlights/stats-strip";
+import { WhatIf } from "@/sections/home/highlights/what-if";
 
 /** Why rent with us: each claim is shown, not described */
 export function Highlights() {
+  const booking = sampleBooking();
+
   return (
     <section aria-labelledby="why-us" className="flex flex-col gap-10 py-16 md:gap-12 md:py-24">
       <header className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
@@ -26,26 +27,17 @@ export function Highlights() {
 
       <StatsStrip />
 
-      <ul className="grid gap-5 lg:grid-cols-3">
-        <ProofCard
-          title="The price you see is the price you pay"
-          text="Kilometres, VAT, airport pickup and basic cover are in every quote. Nothing extra at the desk."
-        >
-          <SampleQuote />
-        </ProofCard>
-        <ProofCard
-          title="Cover for what Iceland throws at a car"
-          text="Gravel, sand and ash, tyres and windscreen are all in one plan, with nothing to pay if something happens."
-        >
-          <ExcessCompare />
-        </ProofCard>
-        <ProofCard
-          title="Free to cancel until a week before"
-          text="Plans change with the weather. Move or cancel without a fee up to 7 days before pickup."
-        >
-          <CancelTimeline />
-        </ProofCard>
-      </ul>
+      {booking && (
+        <WhatIf
+          deskReceipt={<SampleQuote />}
+          booking={{
+            name: `${booking.vehicle.brand.name} ${booking.vehicle.model}`,
+            days: booking.days,
+            dailyRate: booking.vehicle.basePricePerDay,
+            total: booking.total,
+          }}
+        />
+      )}
 
       <div className="grid gap-5 lg:grid-cols-[5fr_7fr]">
         <ReviewPanel />

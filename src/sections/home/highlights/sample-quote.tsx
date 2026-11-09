@@ -1,33 +1,21 @@
-import { getVehicle } from "@/data";
-import { formatPrice, quote } from "@/lib/pricing";
+import { formatPrice } from "@/lib/pricing";
+import { sampleBooking } from "@/lib/sample-booking";
+import { Payoff } from "@/sections/home/highlights/what-if/payoff";
 
 const INCLUDED = ["Unlimited kilometres", "Airport pickup", "VAT"];
 
-/**
- * A real quote for a week in our best-selling camper with zero-excess cover.
- * Computed with the checkout's pricing code, so it can never drift from the real numbers.
- */
+/** The sample booking as a receipt: every line, then the total and what's left to pay at the desk */
 export function SampleQuote() {
-  const vehicle = getVehicle("vw-california-ocean");
-  if (!vehicle) return null;
-  const { lines, total } = quote({
-    vehicle,
-    days: 7,
-    protectionId: "premium",
-    extras: {},
-    oneWay: false,
-  });
+  const booking = sampleBooking();
+  if (!booking) return null;
 
   return (
-    <div className="rounded-control bg-sky tabular p-4 text-sm">
-      <p className="text-muted-foreground mb-3 text-xs font-semibold">
-        Sample quote · a week with zero excess
-      </p>
-      <ul className="flex flex-col gap-1.5">
-        {lines.map((line) => (
+    <div className="tabular flex flex-col gap-5 text-[15px] md:text-base">
+      <ul className="flex flex-col gap-2.5">
+        {booking.lines.map((line) => (
           <li key={line.label} className="flex justify-between gap-3">
             <span>{line.label}</span>
-            <span>{formatPrice(line.amount)}</span>
+            <span className="font-semibold">{formatPrice(line.amount)}</span>
           </li>
         ))}
         {INCLUDED.map((label) => (
@@ -37,11 +25,11 @@ export function SampleQuote() {
           </li>
         ))}
       </ul>
-      <p className="mt-3 flex justify-between border-t border-dashed border-black/15 pt-3 font-bold">
-        <span>Total</span>
-        <span>{formatPrice(total)}</span>
-      </p>
-      <p className="text-muted-foreground mt-1 text-xs">Extra to pay at the desk: €0</p>
+      <div className="flex items-baseline justify-between gap-4 border-t border-dashed border-black/20 pt-5">
+        <span className="font-semibold">Total for the week</span>
+        <span className="text-3xl font-bold tracking-[-0.02em]">{formatPrice(booking.total)}</span>
+      </div>
+      <Payoff label="At the desk" detail="When you collect the keys" message="Nothing extra to pay" delay={200} />
     </div>
   );
 }

@@ -398,3 +398,83 @@ svg {
   transform-origin: center;
   animation: map-halo 2.8s ease-in-out infinite;
 }
+
+/* What-if panel: damage bars fill from the left when a scenario is picked */
+@keyframes bar-grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+.bar-grow {
+  transform-origin: left;
+  animation: bar-grow 0.7s var(--ease-out-expo) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bar-grow {
+    animation: none;
+  }
+}
+
+/*
+ * What-if payoff, in three quiet beats that hang off --delay:
+ * 1. the strip unmasks upward, 2. "€0" rises out of its own line,
+ * 3. the message settles and its check draws.
+ * Held at the first frame until the strip is on screen (data-play).
+ */
+@keyframes payoff-unmask {
+  from {
+    clip-path: inset(100% 0 0 0 round var(--radius-control));
+    transform: translateY(12px);
+  }
+  to {
+    clip-path: inset(0 0 0 0 round var(--radius-control));
+    transform: none;
+  }
+}
+@keyframes payoff-rise {
+  from {
+    transform: translateY(105%);
+  }
+}
+@keyframes payoff-settle {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+@keyframes check-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.payoff {
+  animation: payoff-unmask 0.9s var(--ease-out-expo) var(--delay, 0ms) both;
+}
+.payoff-rise {
+  animation: payoff-rise 0.8s var(--ease-out-expo) calc(var(--delay, 0ms) + 250ms) both;
+}
+.payoff-message {
+  animation: payoff-settle 0.6s var(--ease-out-expo) calc(var(--delay, 0ms) + 450ms) both;
+}
+.payoff-check path {
+  stroke-dasharray: 1;
+  animation: check-draw 0.5s var(--ease-out-expo) calc(var(--delay, 0ms) + 600ms) both;
+}
+.payoff-scope:not([data-play="true"]) * {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .payoff,
+  .payoff-rise,
+  .payoff-message,
+  .payoff-check path {
+    animation: none;
+  }
+}
+/* Damage bars wait until their list is on screen */
+[data-play="false"] .bar-grow {
+  animation-play-state: paused;
+}
