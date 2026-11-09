@@ -15,11 +15,15 @@ export function ProtectionPicker() {
           Choose your protection
         </h2>
         <p className="text-muted-foreground mt-1">
-          Gravel, sand and wind are part of driving in Iceland. Excess is the most you pay if
-          something happens.
+          Gravel, sand and wind are part of driving in Iceland. Excess is the
+          most you pay if something happens.
         </p>
       </div>
-      <div role="radiogroup" aria-label="Protection" className="grid gap-3 md:grid-cols-3">
+      <div
+        role="radiogroup"
+        aria-label="Protection"
+        className="grid gap-3 md:grid-cols-3"
+      >
         {PROTECTIONS.map((protection) => {
           const selected = protectionId === protection.id;
           return (
@@ -54,7 +58,9 @@ export function ProtectionPicker() {
                       : "border-[var(--border)]",
                   )}
                 >
-                  {selected && <span className="size-2 rounded-full bg-white" />}
+                  {selected && (
+                    <span className="size-2 rounded-full bg-white" />
+                  )}
                 </span>
               </span>
               <span className="text-2xl font-bold">
@@ -62,11 +68,16 @@ export function ProtectionPicker() {
                   ? `+${formatPrice(protection.pricePerDay)}`
                   : "Included"}
                 {protection.pricePerDay > 0 && (
-                  <span className="text-muted-foreground text-sm font-medium"> / day</span>
+                  <span className="text-muted-foreground text-sm font-medium">
+                    {" "}
+                    / day
+                  </span>
                 )}
               </span>
               <span className="text-sm font-semibold">
-                {protection.excess ? `${formatPrice(protection.excess)} excess` : "No excess"}
+                {protection.excess
+                  ? `${formatPrice(protection.excess)} excess`
+                  : "No excess"}
               </span>
               <ul className="text-muted-foreground flex flex-col gap-1.5 border-t pt-3 text-sm">
                 {protection.covers.map((item) => (

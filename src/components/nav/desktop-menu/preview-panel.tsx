@@ -30,7 +30,14 @@ type Props = {
  * A menu panel on basalt: a list of options on the left and a photo of
  * whichever one is hovered or focused, so people see what they're picking.
  */
-export function PreviewPanel({ heading, items, aside, facts, footerLink, onNavigate }: Props) {
+export function PreviewPanel({
+  heading,
+  items,
+  aside,
+  facts,
+  footerLink,
+  onNavigate,
+}: Props) {
   const [previewId, setPreviewId] = useState(items[0]?.id);
   const preview = items.find((item) => item.id === previewId) ?? items[0];
 
@@ -72,11 +79,15 @@ export function PreviewPanel({ heading, items, aside, facts, footerLink, onNavig
                         strokeWidth={2.25}
                         className={cn(
                           "transition-[opacity,transform] duration-300 ease-[var(--ease-out-expo)]",
-                          active ? "translate-x-0 opacity-100" : "-translate-x-1 opacity-0",
+                          active
+                            ? "translate-x-0 opacity-100"
+                            : "-translate-x-1 opacity-0",
                         )}
                       />
                     </span>
-                    <span className="tabular shrink-0 text-sm text-white/55">{item.meta}</span>
+                    <span className="tabular shrink-0 text-sm text-white/55">
+                      {item.meta}
+                    </span>
                   </Link>
                 </li>
               );

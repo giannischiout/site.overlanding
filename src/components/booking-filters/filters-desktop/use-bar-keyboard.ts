@@ -24,7 +24,9 @@ export function useBarKeyboard(barRef: RefObject<HTMLDivElement | null>) {
   useEffect(() => {
     if (!isDatePickerOpen) return undefined;
     returnFocusRef.current =
-      document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
     const timer = window.setTimeout(() => {
       barRef.current
         ?.querySelector<HTMLElement>("[data-date-popover] button")

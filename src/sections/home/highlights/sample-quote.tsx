@@ -1,6 +1,6 @@
 import { formatPrice } from "@/lib/pricing";
 import { sampleBooking } from "@/lib/sample-booking";
-import { Payoff } from "@/sections/home/highlights/what-if/payoff";
+import { Payoff } from "@/components/payoff";
 
 const INCLUDED = ["Unlimited kilometres", "Airport pickup", "VAT"];
 

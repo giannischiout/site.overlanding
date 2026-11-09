@@ -12,14 +12,17 @@ type Props = {
   categories: ICategory[];
   /** The static land, terrain and road layers, rendered on the server */
   backdrop: ReactNode;
+  /** "h1" when this section is the whole page (the road trips index) */
+  headingLevel?: "h1" | "h2";
 };
 
 /**
  * Road trip ideas. Opens with the map rather than a heading block: the routes are the point.
  * One route is always selected; hovering or focusing a row, card or route selects it.
  */
-export function FeaturedPosts({ posts, categories, backdrop }: Props) {
+export function FeaturedPosts({ posts, categories, backdrop, headingLevel = "h2" }: Props) {
   const [selected, setSelected] = useState(posts[0]?.id);
+  const Heading = headingLevel;
 
   return (
     <section
@@ -29,12 +32,12 @@ export function FeaturedPosts({ posts, categories, backdrop }: Props) {
     >
       <div className="rounded-panel grid overflow-hidden bg-[var(--map-paper)] lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)]">
         <div className="flex flex-col gap-4 p-6 md:p-10 lg:justify-center">
-          <h2
+          <Heading
             id="road-trips-title"
             className="text-4xl font-bold tracking-[-0.02em] text-balance md:text-5xl"
           >
             Where to drive first
-          </h2>
+          </Heading>
           <p className="text-muted-foreground text-lg leading-relaxed text-pretty">
             Six routes we send friends on, with how long to give them and what to drive. All of
             them start at our depot by Keflavík airport.

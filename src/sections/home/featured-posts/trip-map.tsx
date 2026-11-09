@@ -36,8 +36,8 @@ export function TripMap({ posts, selected, onSelect, backdrop }: Props) {
           return (
             <a
               key={post.id}
-              href={paths.vehicles(post.category)}
-              aria-label={`${post.title}: see vehicles`}
+              href={paths.roadTrip(post.id)}
+              aria-label={`${post.title}: see the route`}
               onMouseEnter={() => onSelect(post.id)}
               onFocus={() => onSelect(post.id)}
             >

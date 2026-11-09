@@ -1,5 +1,5 @@
 import type { ArrivalScenario } from "@/data/scenarios";
-import { Payoff } from "./payoff";
+import { Payoff } from "@/components/payoff";
 
 type Props = { scenario: ArrivalScenario };
 

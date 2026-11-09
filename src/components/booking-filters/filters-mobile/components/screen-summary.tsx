@@ -34,10 +34,7 @@ export function SummaryScreen() {
     onClose,
   } = useFilterStore();
 
-  const handleChange = <K extends FieldKey>(
-    key: K,
-    value: FiltersState[K],
-  ) => {
+  const handleChange = <K extends FieldKey>(key: K, value: FiltersState[K]) => {
     setField(key, value);
     setCurrentScreen("filters");
     onClose(key);
@@ -72,7 +69,9 @@ export function SummaryScreen() {
         return (
           <ListOptions
             options={timeOptions}
-            activeValue={(key === "pickupTime" ? pickupTime : dropoffTime).value}
+            activeValue={
+              (key === "pickupTime" ? pickupTime : dropoffTime).value
+            }
             onSelect={(opt) => handleChange(key, opt)}
           />
         );

@@ -29,7 +29,7 @@ export function DateTrigger({
         expanded={active}
         onClick={onClick}
         className="min-[961px]:pr-2.5"
-        valueClassName="text-[16px] font-semibold tracking-[-0.01em]"
+        valueClassName="text-[16px] font-normal tracking-[-0.01em]"
       />
     </div>
   );

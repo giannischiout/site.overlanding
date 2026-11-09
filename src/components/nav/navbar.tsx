@@ -14,7 +14,7 @@ type Props = {
 };
 
 export function Navbar({ data }: Props) {
-  const onBookNow = useBookNow();
+  const { bookNow: onBookNow, isPending: bookNowPending } = useBookNow();
   const [scrolled, setScrolled] = useState(false);
   const [activeMenu, setActiveMenu] = useState<MenuId | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -50,7 +50,7 @@ export function Navbar({ data }: Props) {
           onActiveChange={setActiveMenu}
         />
         <div className="ml-auto hidden lg:block">
-          <BookNowButton onClick={onBookNow} />
+          <BookNowButton onClick={onBookNow} pending={bookNowPending} />
         </div>
         <MobileMenu
           data={data}

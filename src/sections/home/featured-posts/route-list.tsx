@@ -19,7 +19,7 @@ export function RouteList({ posts, selected, onSelect }: Props) {
         return (
           <li key={post.id}>
             <Link
-              href={paths.vehicles(post.category)}
+              href={paths.roadTrip(post.id)}
               onMouseEnter={() => onSelect(post.id)}
               onFocus={() => onSelect(post.id)}
               aria-current={isSelected || undefined}

@@ -7,7 +7,7 @@ import { cancellationFee } from "@/lib/cover";
 import { formatPrice } from "@/lib/pricing";
 import { pluralize } from "@/lib/text";
 import { cn } from "@/lib/utils";
-import { Payoff } from "./payoff";
+import { Payoff } from "@/components/payoff";
 
 export type BookingSummary = { name: string; days: number; dailyRate: number; total: number };
 

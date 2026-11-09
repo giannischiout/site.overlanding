@@ -11,13 +11,23 @@ const LEGS = {
     location: "pickup",
     time: "pickupTime",
     date: "from",
-    labels: { location: "Pickup location", short: "Pickup", date: "Pickup date", time: "Pickup time" },
+    labels: {
+      location: "Pickup location",
+      short: "Pickup",
+      date: "Pickup date",
+      time: "Pickup time",
+    },
   },
   dropoff: {
     location: "dropoff",
     time: "dropoffTime",
     date: "to",
-    labels: { location: "Dropoff location", short: "Return", date: "Dropoff date", time: "Dropoff time" },
+    labels: {
+      location: "Dropoff location",
+      short: "Return",
+      date: "Dropoff date",
+      time: "Dropoff time",
+    },
   },
 } as const;
 
@@ -60,7 +70,10 @@ export function TripLeg({ leg, top }: Props) {
         value={locationValue}
         onChange={(value) => setField(location, value)}
       />
-      <span aria-hidden className="bg-border mx-1 h-8 w-px shrink-0 self-center" />
+      <span
+        aria-hidden
+        className="bg-border mx-1 h-8 w-px shrink-0 self-center"
+      />
       <DateTrigger
         label={labels.date}
         shortLabel="Date"

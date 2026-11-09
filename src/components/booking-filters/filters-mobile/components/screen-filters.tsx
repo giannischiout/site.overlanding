@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import type { PopoverKey } from "@/store/use-filters-store";
 import { useFilterStore } from "@/store/use-filters-store";
 import dayjs from "dayjs";
+import { Spinner } from "@/components/spinner";
 import { useSearchVehicles } from "@/components/booking-filters/use-search-vehicles";
 
 const formatDate = (date?: Date | null) =>
@@ -21,7 +22,7 @@ export function FiltersScreen() {
     range,
     onOpen,
   } = useFilterStore();
-  const onSearch = useSearchVehicles();
+  const { search, isPending } = useSearchVehicles();
 
   const handleChange = (key: PopoverKey) => {
     setCurrentScreen("summary");
@@ -63,8 +64,14 @@ export function FiltersScreen() {
       </div>
 
       <div className="border-t p-4">
-        <Button onClick={onSearch} className="h-12 w-full text-base">
-          Search vehicles
+        <Button
+          onClick={search}
+          disabled={isPending}
+          aria-busy={isPending}
+          className="h-12 w-full gap-2 text-base"
+        >
+          {isPending && <Spinner />}
+          {isPending ? "Searching…" : "Search vehicles"}
         </Button>
       </div>
     </PortalDialog>

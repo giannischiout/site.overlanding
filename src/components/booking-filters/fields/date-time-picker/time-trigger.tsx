@@ -48,8 +48,8 @@ export function TimeTrigger({
         active={open}
         expanded={open}
         onClick={onToggle}
-        className="min-[961px]:pl-2 min-[961px]:pr-3"
-        valueClassName="text-[16px] font-semibold tabular-nums"
+        className="min-[961px]:pr-3 min-[961px]:pl-2"
+        valueClassName="text-[16px] font-normal tabular-nums"
       />
       <Popover
         top={top}
@@ -68,7 +68,7 @@ export function TimeTrigger({
               key={option.value}
               onClick={() => handleChange(option)}
               className={cn(
-                "flex min-h-10 w-full items-center justify-between rounded-md px-3 text-left text-[15px] hover:bg-hover",
+                "hover:bg-hover flex min-h-10 w-full items-center justify-between rounded-md px-3 text-left text-[15px]",
                 isActive && "font-medium",
               )}
             >

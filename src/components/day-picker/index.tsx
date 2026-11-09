@@ -1,10 +1,6 @@
-import { useEffect, useRef } from "react";
 import dayjs from "dayjs";
 import { DayPicker as ReactDayPicker } from "react-day-picker";
 import { useFilterStore } from "@/store/use-filters-store";
-
-/** Long enough to see the finished range highlight before the calendar closes */
-const CLOSE_DELAY = 450;
 
 type Props = {
   numberOfMonths?: number;
@@ -12,18 +8,14 @@ type Props = {
 
 /**
  * Two clicks make a trip: the first picks up, the second returns. Clicking again after
- * that starts a new trip rather than stretching the old one, and the calendar closes
- * by itself once the return date is chosen.
+ * that starts a new trip rather than stretching the old one. The calendar stays open
+ * until the visitor closes it (Done, Esc, clicking outside, or Back on mobile).
  */
 export function DayPicker({ numberOfMonths = 2 }: Props) {
   const range = useFilterStore((state) => state.range);
   const setDateField = useFilterStore((state) => state.setDateField);
-  const closeTimer = useRef<number | undefined>(undefined);
-
-  useEffect(() => () => window.clearTimeout(closeTimer.current), []);
 
   const onDayClick = (day: Date) => {
-    window.clearTimeout(closeTimer.current);
     const { from, to } = range;
 
     // No trip yet, a finished trip, or a day before the pickup: start again from this day
@@ -33,12 +25,6 @@ export function DayPicker({ numberOfMonths = 2 }: Props) {
     }
 
     setDateField({ from, to: day });
-    closeTimer.current = window.setTimeout(() => {
-      const { openPopover, onClose, currentScreen, setCurrentScreen } = useFilterStore.getState();
-      if (openPopover === "dateRange") onClose("dateRange");
-      // On mobile the calendar is its own screen: go back to the trip details
-      if (currentScreen === "summary") setCurrentScreen("filters");
-    }, CLOSE_DELAY);
   };
 
   return (

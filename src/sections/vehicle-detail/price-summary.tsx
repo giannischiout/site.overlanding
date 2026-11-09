@@ -1,4 +1,5 @@
 import { CalendarDays } from "lucide-react";
+import { Spinner } from "@/components/spinner";
 import { PriceBreakdown } from "@/components/price-breakdown";
 import { TripSummary } from "@/components/trip-summary";
 import { formatPrice, type PriceLine } from "@/lib/pricing";
@@ -11,10 +12,20 @@ type Props = {
   total: number;
   onEditTrip: () => void;
   onContinue: () => void;
+  /** Checkout is loading */
+  continuing?: boolean;
 };
 
 /** The sticky booking card: trip details, the price breakdown and the next step */
-export function PriceSummary({ pricePerDay, days, lines, total, onEditTrip, onContinue }: Props) {
+export function PriceSummary({
+  pricePerDay,
+  days,
+  lines,
+  total,
+  onEditTrip,
+  onContinue,
+  continuing = false,
+}: Props) {
   const { range, pickup, dropoff, pickupTime, dropoffTime } = useFilterStore();
 
   return (
@@ -22,7 +33,10 @@ export function PriceSummary({ pricePerDay, days, lines, total, onEditTrip, onCo
       <div className="rounded-panel shadow-panel sticky top-[calc(var(--nav-height)+104px)] flex flex-col gap-5 bg-white p-6 ring-1 ring-black/[0.04]">
         <p className="text-3xl font-bold tracking-[-0.02em]">
           {formatPrice(pricePerDay)}
-          <span className="text-muted-foreground text-base font-medium"> / day</span>
+          <span className="text-muted-foreground text-base font-medium">
+            {" "}
+            / day
+          </span>
         </p>
 
         <button
@@ -49,8 +63,19 @@ export function PriceSummary({ pricePerDay, days, lines, total, onEditTrip, onCo
           </p>
         )}
 
-        <button type="button" onClick={onContinue} className="btn-primary h-14 text-base">
-          {days ? "Continue to booking" : "Choose dates"}
+        <button
+          type="button"
+          onClick={onContinue}
+          disabled={continuing}
+          aria-busy={continuing}
+          className="btn-primary flex h-14 items-center justify-center gap-2 text-base disabled:cursor-wait"
+        >
+          {continuing && <Spinner />}
+          {continuing
+            ? "Opening checkout…"
+            : days
+              ? "Continue to booking"
+              : "Choose dates"}
         </button>
         <p className="text-muted-foreground text-center text-sm">
           Free cancellation up to 7 days before pickup

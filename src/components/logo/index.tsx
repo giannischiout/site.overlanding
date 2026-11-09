@@ -36,10 +36,7 @@ export const Logo = ({ className }: { className?: string }) => {
         strokeLinecap="round"
       />
       {/* Ridge */}
-      <path
-        d="M7 37l9-9 5 4 7-8 13 13z"
-        fill="#f6f7f5"
-      />
+      <path d="M7 37l9-9 5 4 7-8 13 13z" fill="#f6f7f5" />
     </svg>
   );
 };

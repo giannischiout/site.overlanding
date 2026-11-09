@@ -21,7 +21,11 @@ export function AlwaysIncluded() {
       <ul className="grid gap-3 sm:grid-cols-2">
         {INCLUDED.map((item) => (
           <li key={item} className="flex items-center gap-2.5 font-medium">
-            <Check size={16} strokeWidth={2.75} className="text-link shrink-0" />
+            <Check
+              size={16}
+              strokeWidth={2.75}
+              className="text-link shrink-0"
+            />
             {item}
           </li>
         ))}

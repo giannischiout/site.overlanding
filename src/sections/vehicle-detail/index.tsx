@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { VehicleCard } from "@/components/vehicle-card";
 import { quote, rentalDays } from "@/lib/pricing";
 import { useOpenDatePicker } from "@/hooks/use-open-date-picker";
+import { usePendingPush } from "@/hooks/use-pending-push";
 import { useFilterStore } from "@/store/use-filters-store";
 import { useBookingStore } from "@/store/use-booking-store";
 import type { Vehicle } from "@/types/content";
@@ -25,14 +25,20 @@ type Props = {
 };
 
 export function VehicleDetailView({ vehicle, similar }: Props) {
-  const router = useRouter();
+  const { push, isPending } = usePendingPush();
   const openDates = useOpenDatePicker();
   const { range, pickup, dropoff, pickupTime, dropoffTime } = useFilterStore();
   const { protectionId, extras, startCheckout } = useBookingStore();
 
   const days = rentalDays(range.from, range.to);
   const oneWay = !!pickup && !!dropoff && pickup.id !== dropoff.id;
-  const { lines, total } = quote({ vehicle, days, protectionId, extras, oneWay });
+  const { lines, total } = quote({
+    vehicle,
+    days,
+    protectionId,
+    extras,
+    oneWay,
+  });
 
   const onContinue = () => {
     if (!range.from || !range.to || !pickup || !dropoff) {
@@ -47,7 +53,7 @@ export function VehicleDetailView({ vehicle, similar }: Props) {
       pickupTime: pickupTime.value,
       dropoffTime: dropoffTime.value,
     });
-    router.push(paths.checkout);
+    push(paths.checkout);
   };
 
   return (
@@ -78,11 +84,15 @@ export function VehicleDetailView({ vehicle, similar }: Props) {
           total={total}
           onEditTrip={openDates}
           onContinue={onContinue}
+          continuing={isPending}
         />
       </div>
 
       {similar.length > 0 && (
-        <section aria-labelledby="similar" className="mt-24 flex flex-col gap-6">
+        <section
+          aria-labelledby="similar"
+          className="mt-24 flex flex-col gap-6"
+        >
           <h2 id="similar" className="text-3xl font-bold tracking-[-0.02em]">
             More {vehicle.category.name.toLowerCase()}
           </h2>

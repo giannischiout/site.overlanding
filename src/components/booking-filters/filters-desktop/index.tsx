@@ -9,7 +9,7 @@ import { useBarKeyboard } from "@/components/booking-filters/filters-desktop/use
 export function FiltersDesktop({ top = "110%" }: { top: string }) {
   const barRef = useRef<HTMLDivElement | null>(null);
   const { keepFocusInside } = useBarKeyboard(barRef);
-  const onSearch = useSearchVehicles();
+  const { search, isPending } = useSearchVehicles();
 
   return (
     <div
@@ -31,7 +31,7 @@ export function FiltersDesktop({ top = "110%" }: { top: string }) {
         </div>
         <TripLeg leg="dropoff" top={top} />
       </div>
-      <SearchButton onSubmit={onSearch} />
+      <SearchButton onSubmit={search} pending={isPending} />
       <DatePopover top={top} anchorRef={barRef} />
     </div>
   );

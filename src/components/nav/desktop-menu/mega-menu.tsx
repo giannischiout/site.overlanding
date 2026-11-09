@@ -1,7 +1,11 @@
 import { cn } from "@/lib/utils";
 import { paths } from "@/lib/paths";
 import type { MenuId, Navigation } from "@/types/content";
-import { categoryItem, RENTAL_FACTS, roadTripItem } from "@/components/nav/menu-items";
+import {
+  categoryItem,
+  RENTAL_FACTS,
+  roadTripItem,
+} from "@/components/nav/menu-items";
 import { FeaturedVehicles } from "@/components/nav/desktop-menu/featured-vehicles";
 import { PreviewPanel } from "@/components/nav/desktop-menu/preview-panel";
 
@@ -14,7 +18,10 @@ type Props = {
 /** The dark sheet under the header. With the header gone basalt too, the two read as one. */
 export function MegaMenu({ active, menus, onNavigate }: Props) {
   const { vehicles, roadTrips } = menus;
-  const fleetSize = vehicles.categories.reduce((sum, category) => sum + category.count, 0);
+  const fleetSize = vehicles.categories.reduce(
+    (sum, category) => sum + category.count,
+    0,
+  );
 
   return (
     <>
@@ -43,10 +50,16 @@ export function MegaMenu({ active, menus, onNavigate }: Props) {
               heading="Vehicle types"
               items={vehicles.categories.map(categoryItem)}
               aside={
-                <FeaturedVehicles vehicles={vehicles.featuredVehicles} onNavigate={onNavigate} />
+                <FeaturedVehicles
+                  vehicles={vehicles.featuredVehicles}
+                  onNavigate={onNavigate}
+                />
               }
               facts={RENTAL_FACTS}
-              footerLink={{ label: `See all ${fleetSize} vehicles`, href: paths.vehicles() }}
+              footerLink={{
+                label: `See all ${fleetSize} vehicles`,
+                href: paths.vehicles(),
+              }}
               onNavigate={onNavigate}
             />
           )}
@@ -54,8 +67,14 @@ export function MegaMenu({ active, menus, onNavigate }: Props) {
             <PreviewPanel
               heading="Routes from our depot"
               items={roadTrips.posts.map(roadTripItem)}
-              facts={["Every route starts at Keflavík airport", "Pick a vehicle type per route"]}
-              footerLink={{ label: "All routes on the map", href: "/#road-trips" }}
+              facts={[
+                "Every route starts at Keflavík airport",
+                "Pick a vehicle type per route",
+              ]}
+              footerLink={{
+                label: "All routes on the map",
+                href: paths.roadTrips,
+              }}
               onNavigate={onNavigate}
             />
           )}

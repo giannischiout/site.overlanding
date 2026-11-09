@@ -1,18 +1,23 @@
 import dayjs from "dayjs";
 import { CalendarDays } from "lucide-react";
+import { Spinner } from "@/components/spinner";
 import { cn } from "@/lib/utils";
 import { useFilterStore } from "@/store/use-filters-store";
 
 /** Shows the trip once dates are picked, so the button doubles as a reminder of the search */
 type Props = {
   onClick: () => void;
+  /** The results page is loading */
+  pending?: boolean;
   className?: string;
 };
 
-export function BookNowButton({ onClick, className }: Props) {
+export function BookNowButton({ onClick, pending = false, className }: Props) {
   const range = useFilterStore((state) => state.range);
   const sameMonth =
-    range.from && range.to && dayjs(range.from).month() === dayjs(range.to).month();
+    range.from &&
+    range.to &&
+    dayjs(range.from).month() === dayjs(range.to).month();
   const dates =
     range.from && range.to
       ? `${dayjs(range.from).format("MMM D")} – ${dayjs(range.to).format(sameMonth ? "D" : "MMM D")}`
@@ -22,12 +27,19 @@ export function BookNowButton({ onClick, className }: Props) {
     <button
       type="button"
       onClick={onClick}
+      disabled={pending}
+      aria-busy={pending}
       className={cn(
+        "disabled:cursor-wait",
         "bg-aurora text-basalt hover:bg-primary-dark rounded-control flex h-11 items-center justify-center gap-2.5 px-5 text-[15px] font-bold shadow-[inset_0_1px_0_rgb(255_255_255/0.45)] transition-[background-color,transform] duration-200 ease-out active:scale-[0.97]",
         className,
       )}
     >
-      <CalendarDays size={17} strokeWidth={2.25} />
+      {pending ? (
+        <Spinner size={17} />
+      ) : (
+        <CalendarDays size={17} strokeWidth={2.25} />
+      )}
       {dates ? (
         <span className="flex items-center gap-2.5">
           <span className="tabular">{dates}</span>

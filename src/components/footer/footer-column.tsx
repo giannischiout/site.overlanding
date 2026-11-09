@@ -1,10 +1,18 @@
 import Link from "next/link";
 import type { FooterLink } from "@/types/content";
 
-export function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) {
+export function FooterColumn({
+  title,
+  links,
+}: {
+  title: string;
+  links: FooterLink[];
+}) {
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-xs font-bold tracking-[0.22em] text-white/50 uppercase">{title}</h2>
+      <h2 className="text-xs font-bold tracking-[0.22em] text-white/50 uppercase">
+        {title}
+      </h2>
       <ul className="flex flex-col gap-2.5">
         {links.map((link) => (
           <li key={link.label}>

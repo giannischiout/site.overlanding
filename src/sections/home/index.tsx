@@ -3,7 +3,7 @@ import { CategoriesSection } from "@/sections/home/categories";
 import { Highlights } from "@/sections/home/highlights";
 import { FeaturedPosts } from "@/sections/home/featured-posts";
 import { FaqSection } from "@/sections/home/faq";
-import { MapBackdrop } from "@/sections/home/featured-posts/map-backdrop";
+import { MapBackdrop } from "@/components/iceland-map/map-backdrop";
 import { getFilters, getHome } from "@/data";
 
 export function HomePageView() {

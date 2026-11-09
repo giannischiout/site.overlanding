@@ -5,7 +5,7 @@ import { useInView } from "@/hooks/use-in-view";
 import { coverOutcome } from "@/lib/cover";
 import { formatPrice } from "@/lib/pricing";
 import type { Protection } from "@/types/content";
-import { Payoff } from "./payoff";
+import { Payoff } from "@/components/payoff";
 
 type Props = { scenario: DamageScenario };
 

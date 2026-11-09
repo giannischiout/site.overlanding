@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Spinner } from "@/components/spinner";
 import { ShieldCheck } from "lucide-react";
 import { PriceBreakdown } from "@/components/price-breakdown";
 import { TripSummary } from "@/components/trip-summary";
@@ -35,7 +36,13 @@ export function BookingSummary({
       <div className="rounded-panel shadow-panel sticky top-[calc(var(--nav-height)+24px)] flex flex-col gap-5 bg-white p-6 ring-1 ring-black/[0.04]">
         <div className="flex gap-4">
           <span className="rounded-control relative h-20 w-28 shrink-0 overflow-hidden">
-            <Image src={vehicle.image.url} alt="" fill sizes="112px" className="object-cover" />
+            <Image
+              src={vehicle.image.url}
+              alt=""
+              fill
+              sizes="112px"
+              className="object-cover"
+            />
           </span>
           <div className="min-w-0">
             <p className="text-link text-xs font-bold tracking-[0.1em] uppercase">
@@ -45,7 +52,8 @@ export function BookingSummary({
               {vehicle.brand.name} {vehicle.model}
             </p>
             <p className="text-muted-foreground mt-1 flex items-center gap-1 text-sm">
-              <ShieldCheck size={14} className="text-link" /> {protectionName} protection
+              <ShieldCheck size={14} className="text-link" /> {protectionName}{" "}
+              protection
             </p>
           </div>
         </div>
@@ -59,13 +67,19 @@ export function BookingSummary({
             dropoffTime={trip.dropoffTime}
           />
         </div>
-        <PriceBreakdown lines={lines} total={total} footnote={`Due today: ${formatPrice(0)}`} />
+        <PriceBreakdown
+          lines={lines}
+          total={total}
+          footnote={`Due today: ${formatPrice(0)}`}
+        />
         <button
           type="button"
           disabled={submitting}
+          aria-busy={submitting}
           onClick={onSubmit}
-          className="btn-primary hidden h-14 text-base lg:block"
+          className="btn-primary hidden h-14 items-center justify-center gap-2 text-base disabled:cursor-wait lg:flex"
         >
+          {submitting && <Spinner />}
           {submitting ? "Reserving…" : "Reserve now"}
         </button>
         <p className="text-muted-foreground text-center text-sm">

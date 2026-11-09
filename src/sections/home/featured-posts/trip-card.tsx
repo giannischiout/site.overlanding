@@ -16,7 +16,7 @@ type Props = {
 export function TripCard({ post, selected, category }: Props) {
   return (
     <Link
-      href={paths.vehicles(post.category)}
+      href={paths.roadTrip(post.id)}
       className={cn(
         "group rounded-panel shadow-card hover:shadow-card-hover flex h-full flex-col overflow-hidden bg-white ring-1 transition-[box-shadow,transform] duration-500 ease-[var(--ease-out-expo)] hover:-translate-y-1",
         selected ? "ring-link/30" : "ring-black/[0.04]",
@@ -54,7 +54,7 @@ export function TripCard({ post, selected, category }: Props) {
               <strong>{category.name.toLowerCase()}</strong>
             </span>
             <span className="text-link flex shrink-0 items-center gap-1 text-sm font-semibold whitespace-nowrap">
-              See vehicles
+              See the route
               <ArrowRight
                 size={15}
                 className="transition-transform duration-300 group-hover:translate-x-0.5"

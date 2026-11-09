@@ -12,7 +12,7 @@ export function MobileHeader({ label, onClick }: Props) {
         type="button"
         aria-label="Close"
         onClick={onClick}
-        className="flex size-11 items-center justify-center rounded-md hover:bg-hover"
+        className="hover:bg-hover flex size-11 items-center justify-center rounded-md"
       >
         <X size={20} />
       </button>

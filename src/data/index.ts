@@ -93,6 +93,20 @@ export function getNavigation(): Navigation {
   };
 }
 
+export function getPosts(): Post[] {
+  return posts;
+}
+
+export function getPost(id: string): Post | undefined {
+  return posts.find((post) => post.id === id);
+}
+
+/** A category with its vehicle count and lowest price, or undefined for an unknown id */
+export function getCategory(id: string): CategoryWithStats | undefined {
+  const category = categories.find((candidate) => candidate.id === id);
+  return category && withStats(category);
+}
+
 export function getVehicles(): Vehicle[] {
   return allVehicles;
 }

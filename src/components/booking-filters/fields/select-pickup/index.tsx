@@ -46,7 +46,10 @@ export function SelectPickup({
   };
 
   return (
-    <div ref={anchorRef} className="relative min-w-0 flex-1 xl:w-[200px] xl:flex-none">
+    <div
+      ref={anchorRef}
+      className="relative min-w-0 flex-1 xl:w-[200px] xl:flex-none"
+    >
       <FieldWrapper
         label={label}
         shortLabel={shortLabel}
@@ -74,7 +77,7 @@ export function SelectPickup({
               key={option.id}
               onClick={() => handleChange(option)}
               className={cn(
-                "flex min-h-11 w-full items-center gap-3 rounded-md px-3 py-2 text-left text-[15px] hover:bg-hover",
+                "hover:bg-hover flex min-h-11 w-full items-center gap-3 rounded-md px-3 py-2 text-left text-[15px]",
                 isActive && "font-medium",
               )}
             >

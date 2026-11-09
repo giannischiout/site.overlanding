@@ -49,14 +49,15 @@ export function ConfirmationView({ vehicles }: { vehicles: Vehicle[] }) {
     return (
       <div className="mx-auto flex min-h-[50vh] max-w-md flex-col items-center justify-center gap-4 text-center">
         <h1 className="text-3xl font-bold">No booking to show</h1>
-        <p className="text-muted-foreground">Your confirmation is in your email. Start a new booking any time.</p>
+        <p className="text-muted-foreground">
+          Your confirmation is in your email. Start a new booking any time.
+        </p>
         <Link href={paths.vehicles()} className="btn-primary px-6 py-3">
           Browse vehicles
         </Link>
       </div>
     );
   }
-
 
   return (
     <div className="mx-auto flex max-w-3xl flex-col gap-10">
@@ -72,7 +73,8 @@ export function ConfirmationView({ vehicles }: { vehicles: Vehicle[] }) {
           You&apos;re all set, {booking.driver.firstName}
         </h1>
         <p className="text-muted-foreground max-w-[48ch] text-lg">
-          We&apos;ve reserved your {vehicle.brand.name} {vehicle.model}. A confirmation is on its way to{" "}
+          We&apos;ve reserved your {vehicle.brand.name} {vehicle.model}. A
+          confirmation is on its way to{" "}
           <strong className="text-foreground">{booking.driver.email}</strong>.
         </p>
         <p className="bg-sky rounded-control px-4 py-2 font-mono text-sm font-semibold tracking-wider">
@@ -80,19 +82,31 @@ export function ConfirmationView({ vehicles }: { vehicles: Vehicle[] }) {
         </p>
       </header>
 
-      <section className="overflow-hidden rounded-panel bg-white shadow-panel ring-1 ring-black/[0.04]">
+      <section className="rounded-panel shadow-panel overflow-hidden bg-white ring-1 ring-black/[0.04]">
         <div className="relative aspect-[21/9]">
-          <Image src={vehicle.image.url} alt={vehicle.image.alt} fill sizes="768px" className="object-cover" />
+          <Image
+            src={vehicle.image.url}
+            alt={vehicle.image.alt}
+            fill
+            sizes="768px"
+            className="object-cover"
+          />
         </div>
         <div className="flex flex-col gap-5 p-6 md:p-8">
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
-              <p className="text-link text-xs font-bold tracking-[0.1em] uppercase">{vehicle.category.name}</p>
-              <p className="text-2xl font-bold">{vehicle.brand.name} {vehicle.model}</p>
+              <p className="text-link text-xs font-bold tracking-[0.1em] uppercase">
+                {vehicle.category.name}
+              </p>
+              <p className="text-2xl font-bold">
+                {vehicle.brand.name} {vehicle.model}
+              </p>
             </div>
             <p className="text-right">
               <span className="text-muted-foreground block text-sm">Total</span>
-              <span className="tabular text-2xl font-bold">{formatPrice(booking.total)}</span>
+              <span className="tabular text-2xl font-bold">
+                {formatPrice(booking.total)}
+              </span>
             </p>
           </div>
           <div className="border-t pt-5">
@@ -110,10 +124,15 @@ export function ConfirmationView({ vehicles }: { vehicles: Vehicle[] }) {
 
       <section className="grid gap-4 md:grid-cols-3">
         {NEXT_STEPS.map(({ icon: Icon, title, text }) => (
-          <div key={title} className="flex flex-col gap-2 rounded-panel bg-white p-5 ring-1 ring-black/[0.05]">
+          <div
+            key={title}
+            className="rounded-panel flex flex-col gap-2 bg-white p-5 ring-1 ring-black/[0.05]"
+          >
             <Icon size={20} className="text-link" />
             <p className="font-bold">{title}</p>
-            <p className="text-muted-foreground text-[15px] leading-snug">{text}</p>
+            <p className="text-muted-foreground text-[15px] leading-snug">
+              {text}
+            </p>
           </div>
         ))}
       </section>

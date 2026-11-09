@@ -15,12 +15,15 @@ export function Footer() {
   const footer = getFooter();
 
   const vehicleLinks = [
-    ...menus.vehicles.categories.map((c) => ({ label: c.name, href: paths.vehicles(c.id) })),
+    ...menus.vehicles.categories.map((c) => ({
+      label: c.name,
+      href: paths.vehicles(c.id),
+    })),
     { label: "All vehicles", href: paths.vehicles() },
   ];
   const tripLinks = menus.roadTrips.posts.map((p) => ({
     label: p.title,
-    href: paths.vehicles(p.category),
+    href: paths.roadTrip(p.id),
   }));
 
   return (
@@ -33,7 +36,9 @@ export function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.3fr]">
           <div className="flex flex-col gap-4 sm:col-span-2 lg:col-span-1">
             <BrandLink brand={brand} tone="dark" />
-            <p className="max-w-[36ch] leading-relaxed text-white/60">{footer.about}</p>
+            <p className="max-w-[36ch] leading-relaxed text-white/60">
+              {footer.about}
+            </p>
           </div>
           <FooterColumn title={menus.vehicles.label} links={vehicleLinks} />
           <FooterColumn title={menus.roadTrips.label} links={tripLinks} />
@@ -43,7 +48,8 @@ export function Footer() {
 
         <div className="flex flex-col gap-2 border-t border-white/10 pt-6 text-sm text-white/50 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} {brand.name} {brand.descriptor} ehf. {footer.legal}
+            © {new Date().getFullYear()} {brand.name} {brand.descriptor} ehf.{" "}
+            {footer.legal}
           </p>
           <p>
             Photos from{" "}

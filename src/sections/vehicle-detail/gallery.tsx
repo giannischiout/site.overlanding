@@ -42,7 +42,13 @@ export function Gallery({ images }: { images: Media[] }) {
                   : "opacity-75 hover:opacity-100",
               )}
             >
-              <Image src={image.url} alt="" fill sizes="280px" className="object-cover" />
+              <Image
+                src={image.url}
+                alt=""
+                fill
+                sizes="280px"
+                className="object-cover"
+              />
             </button>
           </li>
         ))}

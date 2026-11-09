@@ -4,7 +4,12 @@ import { cn } from "@/lib/utils";
 import type { Navigation } from "@/types/content";
 import { Hamburger } from "@/components/nav/components/burger";
 import { BookNowButton } from "@/components/nav/components/book-now-button";
-import { categoryItem, roadTripItem } from "@/components/nav/menu-items";
+import Link from "next/link";
+import {
+  categoryItem,
+  PAGE_LINKS,
+  roadTripItem,
+} from "@/components/nav/menu-items";
 import { MobileLinkList } from "@/components/nav/mobile-menu/mobile-link-list";
 
 type Props = {
@@ -41,7 +46,9 @@ export function MobileMenu({ data, open, onOpenChange, onBookNow }: Props) {
         className={cn(
           "bg-basalt fixed inset-x-0 top-[var(--nav-height)] bottom-0 flex flex-col text-white lg:hidden",
           "transition-[opacity,visibility] duration-200 ease-out",
-          open ? "visible opacity-100" : "pointer-events-none invisible opacity-0",
+          open
+            ? "visible opacity-100"
+            : "pointer-events-none invisible opacity-0",
         )}
       >
         <nav aria-label="Mobile" className="min-h-0 flex-1 overflow-y-auto">
@@ -56,6 +63,19 @@ export function MobileMenu({ data, open, onOpenChange, onBookNow }: Props) {
               items={roadTrips.posts.map(roadTripItem)}
               onNavigate={close}
             />
+            <ul className="flex flex-col">
+              {PAGE_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    onClick={close}
+                    className="active:text-aurora block border-b border-white/10 py-3.5 text-lg font-semibold"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </nav>
         {/* Stays on screen however far the menu is scrolled */}

@@ -7,4 +7,9 @@ export const paths = {
   vehicle: (id: string) => `/book/vehicles/${id}`,
   checkout: "/book/checkout",
   confirmation: "/book/confirmation",
+  manageBooking: "/book/manage",
+  roadTrips: "/road-trips",
+  roadTrip: (id: string) => `/road-trips/${id}`,
+  contact: "/contact",
+  about: "/about",
 };

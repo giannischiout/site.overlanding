@@ -42,11 +42,23 @@ export function TripSummary({
   );
 }
 
-function Leg({ title, date, time, place }: { title: string; date: string; time: string; place: string }) {
+function Leg({
+  title,
+  date,
+  time,
+  place,
+}: {
+  title: string;
+  date: string;
+  time: string;
+  place: string;
+}) {
   return (
     <div className="flex min-w-0 flex-col gap-0.5">
-      <span className="text-link text-xs font-bold tracking-[0.1em] uppercase">{title}</span>
-      <span className="font-semibold">{date}</span>
+      <span className="text-link text-xs font-bold tracking-[0.1em] uppercase">
+        {title}
+      </span>
+      <span>{date}</span>
       <span className="text-muted-foreground text-sm">{time}</span>
       <span className="text-muted-foreground flex items-start gap-1 text-sm leading-snug">
         <MapPin size={13} className="mt-0.5 shrink-0" />

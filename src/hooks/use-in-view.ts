@@ -3,7 +3,10 @@ import { useEffect, useState, type RefObject } from "react";
 type Options = { threshold?: number };
 
 /** Becomes true the first time the element is on screen, then stays true */
-export function useInView(ref: RefObject<Element | null>, { threshold = 0.4 }: Options = {}) {
+export function useInView(
+  ref: RefObject<Element | null>,
+  { threshold = 0.4 }: Options = {},
+) {
   const [inView, setInView] = useState(false);
 
   useEffect(() => {

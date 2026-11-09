@@ -1,12 +1,26 @@
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
 import { cn } from "@/lib/utils";
-import { FormField, inputClass } from "@/sections/checkout/form-field";
+import { FormField, inputClass } from "@/components/form-field";
 import type { CheckoutForm } from "@/sections/checkout/checkout-form";
 
 const COUNTRIES = [
-  "Iceland", "United Kingdom", "United States", "Germany", "France", "Spain", "Italy",
-  "Netherlands", "Greece", "Canada", "Denmark", "Norway", "Sweden", "Poland",
-  "Switzerland", "Australia", "Other",
+  "Iceland",
+  "United Kingdom",
+  "United States",
+  "Germany",
+  "France",
+  "Spain",
+  "Italy",
+  "Netherlands",
+  "Greece",
+  "Canada",
+  "Denmark",
+  "Norway",
+  "Sweden",
+  "Poland",
+  "Switzerland",
+  "Australia",
+  "Other",
 ];
 
 type Props = {
@@ -31,7 +45,11 @@ export function DriverFields({ register, errors }: Props) {
           className={inputClass(!!errors.lastName)}
         />
       </FormField>
-      <FormField label="Email" error={errors.email?.message} hint="We send your confirmation here">
+      <FormField
+        label="Email"
+        error={errors.email?.message}
+        hint="We send your confirmation here"
+      >
         <input
           type="email"
           {...register("email", {
@@ -45,7 +63,11 @@ export function DriverFields({ register, errors }: Props) {
           className={inputClass(!!errors.email)}
         />
       </FormField>
-      <FormField label="Phone" error={errors.phone?.message} hint="Include the country code">
+      <FormField
+        label="Phone"
+        error={errors.phone?.message}
+        hint="Include the country code"
+      >
         <input
           type="tel"
           {...register("phone", {
@@ -72,16 +94,30 @@ export function DriverFields({ register, errors }: Props) {
         </select>
       </FormField>
       <FormField label="Driver's age" error={errors.age?.message}>
-        <select {...register("age", { required: true })} className={inputClass(false)}>
+        <select
+          {...register("age", { required: true })}
+          className={inputClass(false)}
+        >
           <option value="20-22">20–22 (young driver fee at pickup)</option>
           <option value="23-24">23–24</option>
           <option value="25+">25 or older</option>
         </select>
       </FormField>
-      <FormField label="Flight number" hint="Optional. We track it and wait if you land late.">
-        <input {...register("flight")} placeholder="FI 615" className={inputClass(false)} />
+      <FormField
+        label="Flight number"
+        hint="Optional. We track it and wait if you land late."
+      >
+        <input
+          {...register("flight")}
+          placeholder="FI 615"
+          className={inputClass(false)}
+        />
       </FormField>
-      <FormField label="Anything we should know?" hint="Optional" className="sm:col-span-2">
+      <FormField
+        label="Anything we should know?"
+        hint="Optional"
+        className="sm:col-span-2"
+      >
         <textarea
           {...register("notes")}
           rows={3}

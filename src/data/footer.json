@@ -34,9 +34,26 @@
     ]
   },
   "help": [
-    { "label": "FAQ", "href": "/#faq" },
-    { "label": "Why rent with us", "href": "/#why-us" },
-    { "label": "Road trip ideas", "href": "/#road-trips" }
+    {
+      "label": "FAQ",
+      "href": "/#faq"
+    },
+    {
+      "label": "Road trips",
+      "href": "/road-trips"
+    },
+    {
+      "label": "Manage your booking",
+      "href": "/book/manage"
+    },
+    {
+      "label": "Contact us",
+      "href": "/contact"
+    },
+    {
+      "label": "About this site",
+      "href": "/about"
+    }
   ],
   "legal": "All prices in EUR, including VAT."
 }

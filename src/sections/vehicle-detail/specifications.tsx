@@ -10,7 +10,11 @@ export function Specifications({ vehicle }: { vehicle: Vehicle }) {
         Specifications
       </h2>
       <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-        <SpecTile icon={<Users size={20} />} label="Seats" value={`${vehicle.seats}`} />
+        <SpecTile
+          icon={<Users size={20} />}
+          label="Seats"
+          value={`${vehicle.seats}`}
+        />
         <SpecTile
           icon={<BedDouble size={20} />}
           label="Sleeps"
@@ -26,7 +30,11 @@ export function Specifications({ vehicle }: { vehicle: Vehicle }) {
           label="Drive"
           value={vehicle.drive === "4x4" ? "4x4" : "Front-wheel"}
         />
-        <SpecTile icon={<Fuel size={20} />} label="Fuel" value={capitalize(vehicle.fuel)} />
+        <SpecTile
+          icon={<Fuel size={20} />}
+          label="Fuel"
+          value={capitalize(vehicle.fuel)}
+        />
         <SpecTile
           icon={<Briefcase size={20} />}
           label="Large bags"
@@ -37,7 +45,15 @@ export function Specifications({ vehicle }: { vehicle: Vehicle }) {
   );
 }
 
-function SpecTile({ icon, label, value }: { icon: ReactNode; label: string; value: string }) {
+function SpecTile({
+  icon,
+  label,
+  value,
+}: {
+  icon: ReactNode;
+  label: string;
+  value: string;
+}) {
   return (
     <li className="rounded-panel flex items-center gap-3 bg-white p-4 ring-1 ring-black/[0.05]">
       <span className="bg-sky text-foreground/80 rounded-control flex size-10 shrink-0 items-center justify-center">

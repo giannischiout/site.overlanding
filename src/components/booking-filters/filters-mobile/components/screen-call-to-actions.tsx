@@ -16,7 +16,7 @@ export function CallToActionScreen() {
         currentScreen === "callToAction" ? "flex" : "hidden",
       )}
     >
-      <span className="bg-aurora text-primary-foreground flex size-11 shrink-0 items-center justify-center rounded-control">
+      <span className="bg-aurora text-primary-foreground rounded-control flex size-11 shrink-0 items-center justify-center">
         <Calendar size={20} strokeWidth={2} />
       </span>
       <span className="flex min-w-0 flex-1 flex-col">

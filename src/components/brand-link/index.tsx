@@ -16,7 +16,10 @@ export function BrandLink({ brand, tone = "light", className }: Props) {
   return (
     <Link
       href={paths.home}
-      className={cn("rounded-control flex w-fit shrink-0 items-center gap-3", className)}
+      className={cn(
+        "rounded-control flex w-fit shrink-0 items-center gap-3",
+        className,
+      )}
     >
       <Logo />
       <span className="flex flex-col leading-none">

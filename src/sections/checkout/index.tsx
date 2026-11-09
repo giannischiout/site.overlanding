@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { ArrowLeft } from "lucide-react";
 import { useBookingHydrated } from "@/components/booking-hydrator";
+import { Spinner } from "@/components/spinner";
+import { usePendingPush } from "@/hooks/use-pending-push";
 import { formatPrice, quote, rentalDays } from "@/lib/pricing";
 import { PROTECTIONS } from "@/data/extras";
 import { findPickupLocation } from "@/data/pickup-locations";
@@ -14,11 +15,14 @@ import { BookingSummary } from "@/sections/checkout/booking-summary";
 import { DriverFields } from "@/sections/checkout/driver-fields";
 import { PaymentSection } from "@/sections/checkout/payment-section";
 import { Steps } from "@/sections/checkout/steps";
-import { makeReference, type CheckoutForm } from "@/sections/checkout/checkout-form";
+import {
+  makeReference,
+  type CheckoutForm,
+} from "@/sections/checkout/checkout-form";
 import { paths } from "@/lib/paths";
 
 export function CheckoutView({ vehicles }: { vehicles: Vehicle[] }) {
-  const router = useRouter();
+  const { push, isPending } = usePendingPush();
   const hydrated = useBookingHydrated();
   const { vehicleId, trip, protectionId, extras, confirm } = useBookingStore();
   const vehicle = vehicles.find((v) => v.id === vehicleId);
@@ -30,6 +34,8 @@ export function CheckoutView({ vehicles }: { vehicles: Vehicle[] }) {
   } = useForm<CheckoutForm>({
     defaultValues: { country: "", age: "25+" },
   });
+  // Busy from the click until the confirmation page has rendered, not just while "saving"
+  const reserving = isSubmitting || isPending;
 
   if (!hydrated) return <div className="min-h-[60vh]" />;
 
@@ -68,7 +74,7 @@ export function CheckoutView({ vehicles }: { vehicles: Vehicle[] }) {
       extras,
       total,
     });
-    router.push(paths.confirmation);
+    push(paths.confirmation);
   };
 
   return (
@@ -84,14 +90,18 @@ export function CheckoutView({ vehicles }: { vehicles: Vehicle[] }) {
       </div>
 
       <div className="grid gap-10 lg:grid-cols-[1fr_420px] lg:gap-14">
-        <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col gap-10">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+          className="flex flex-col gap-10"
+        >
           <header>
             <h1 className="text-4xl font-bold tracking-[-0.02em] md:text-5xl">
               Who&apos;s driving?
             </h1>
             <p className="text-muted-foreground mt-2 text-lg">
-              The main driver needs a licence held for at least a year and a card in their name
-              at pickup.
+              The main driver needs a licence held for at least a year and a
+              card in their name at pickup.
             </p>
           </header>
 
@@ -100,10 +110,12 @@ export function CheckoutView({ vehicles }: { vehicles: Vehicle[] }) {
 
           <button
             type="submit"
-            disabled={isSubmitting}
-            className="btn-primary h-14 text-base lg:hidden"
+            disabled={reserving}
+            aria-busy={reserving}
+            className="btn-primary flex h-14 items-center justify-center gap-2 text-base disabled:cursor-wait lg:hidden"
           >
-            {isSubmitting ? "Reserving…" : `Reserve for ${formatPrice(total)}`}
+            {reserving && <Spinner />}
+            {reserving ? "Reserving…" : `Reserve for ${formatPrice(total)}`}
           </button>
 
           {/* Desktop submit lives in the summary; this keeps Enter working */}
@@ -118,7 +130,7 @@ export function CheckoutView({ vehicles }: { vehicles: Vehicle[] }) {
           dropoff={findPickupLocation(trip.dropoffId)}
           lines={lines}
           total={total}
-          submitting={isSubmitting}
+          submitting={reserving}
           onSubmit={handleSubmit(onSubmit)}
         />
       </div>

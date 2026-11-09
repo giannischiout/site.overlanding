@@ -14,7 +14,11 @@ export function Steps({ current }: { current: number }) {
             <span
               className={cn(
                 "flex items-center gap-2",
-                active ? "text-foreground" : done ? "text-link" : "text-muted-foreground",
+                active
+                  ? "text-foreground"
+                  : done
+                    ? "text-link"
+                    : "text-muted-foreground",
               )}
             >
               <span
@@ -29,7 +33,9 @@ export function Steps({ current }: { current: number }) {
               </span>
               <span className={cn(!active && "hidden sm:inline")}>{step}</span>
             </span>
-            {index < STEPS.length - 1 && <span className="bg-border h-px w-6 sm:w-10" />}
+            {index < STEPS.length - 1 && (
+              <span className="bg-border h-px w-6 sm:w-10" />
+            )}
           </li>
         );
       })}

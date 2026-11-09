@@ -1,8 +1,11 @@
 import { useEffect, useRef, type PointerEvent } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useClickOutside } from "@/hooks/use-click-outside";
 import { MegaMenu } from "@/components/nav/desktop-menu/mega-menu";
+import { PAGE_LINKS } from "@/components/nav/menu-items";
 import type { MenuId, Navigation } from "@/types/content";
 
 const MENU_IDS = ["vehicles", "roadTrips"] as const satisfies readonly MenuId[];
@@ -18,6 +21,7 @@ type Props = {
 
 export function DesktopMenu({ menus, active, onActiveChange }: Props) {
   const navRef = useRef<HTMLElement>(null);
+  const pathname = usePathname();
   const closeTimer = useRef<number | undefined>(undefined);
 
   const onClose = () => onActiveChange(null);
@@ -65,7 +69,9 @@ export function DesktopMenu({ menus, active, onActiveChange }: Props) {
                 onClick={() => onActiveChange(isOpen ? null : id)}
                 className={cn(
                   "relative flex items-center gap-1.5 px-4 text-[15px] font-semibold transition-colors duration-200",
-                  active ? "text-white/70 hover:text-white" : "text-foreground/75 hover:text-foreground",
+                  active
+                    ? "text-white/70 hover:text-white"
+                    : "text-foreground/75 hover:text-foreground",
                   isOpen && "text-white",
                 )}
               >
@@ -90,6 +96,28 @@ export function DesktopMenu({ menus, active, onActiveChange }: Props) {
             </li>
           );
         })}
+        {PAGE_LINKS.map((link) => (
+          <li key={link.href} className="flex">
+            <Link
+              href={link.href}
+              // Moving onto a plain link closes any open menu, as moving off the nav would
+              onPointerEnter={(event) => {
+                if (event.pointerType === "mouse" && active)
+                  onActiveChange(null);
+              }}
+              aria-current={pathname === link.href ? "page" : undefined}
+              className={cn(
+                "relative flex items-center px-4 text-[15px] font-semibold transition-colors duration-200",
+                active
+                  ? "text-white/70 hover:text-white"
+                  : "text-foreground/75 hover:text-foreground",
+                "aria-[current=page]:text-foreground",
+              )}
+            >
+              {link.label}
+            </Link>
+          </li>
+        ))}
       </ul>
       <MegaMenu active={active} menus={menus} onNavigate={onClose} />
     </nav>
