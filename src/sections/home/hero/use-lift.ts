@@ -5,8 +5,9 @@ const VIEWPORT_MARGIN = 16;
 
 /**
  * How far the booking bar has to move so the bar and calendar sit centred in
- * the viewport. Measured from the slot, which never moves, so the result holds
- * at any scroll position and calendar height.
+ * the viewport. Measured from the slot (which the lift never moves) and measured
+ * again on every scroll: "Book now" opens the calendar from far down the page and
+ * then scrolls up, so a single measurement taken at the click would be stale.
  */
 export function useLift(open: boolean) {
   const slotRef = useRef<HTMLDivElement>(null);
@@ -32,9 +33,20 @@ export function useLift(open: boolean) {
       const top = Math.max(VIEWPORT_MARGIN, (window.innerHeight - total) / 2);
       setLift(slotBox.top - top);
     };
+    // At most one measurement per frame while the page scrolls
+    let frame = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(measure);
+    };
     measure();
     window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("resize", measure);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, [open]);
 
   return { slotRef, lift };

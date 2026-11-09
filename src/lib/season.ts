@@ -22,8 +22,8 @@ export const isSpring = (date: Date) => {
 };
 
 /**
- * One hero photo per season, all framed the same way: a road running at eye level
- * towards the mountains, so switching season reads as the same place changing.
+ * One hero photo per season. Summer and shoulder share a framing (a road at eye level
+ * towards the mountains); winter shows one of our 4x4s on open snow at sunrise instead.
  */
 export const SEASON_BACKDROPS: Record<Season, Media & { position: string }> = {
   summer: {
@@ -37,8 +37,10 @@ export const SEASON_BACKDROPS: Record<Season, Media & { position: string }> = {
     position: "50% 65%",
   },
   winter: {
-    url: "/assets/hero/season-winter.jpg",
-    alt: "Straight road through snow-covered fields towards white mountains",
-    position: "50% 70%",
+    // Photo: Grant Ritchie on Unsplash
+    url: "/assets/hero/season-winter-defender-sunrise.jpg",
+    alt: "A white Land Rover Defender on open snow with the low winter sun behind the mountains",
+    // Anchored to the top so on wide screens the Defender sits below the booking bar
+    position: "52% 0%",
   },
 };
