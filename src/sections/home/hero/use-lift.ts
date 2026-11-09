@@ -1,0 +1,41 @@
+import { useEffect, useRef, useState } from "react";
+import { BOOKING_DESKTOP_QUERY } from "@/lib/breakpoints";
+
+const VIEWPORT_MARGIN = 16;
+
+/**
+ * How far the booking bar has to move so the bar and calendar sit centred in
+ * the viewport. Measured from the slot, which never moves, so the result holds
+ * at any scroll position and calendar height.
+ */
+export function useLift(open: boolean) {
+  const slotRef = useRef<HTMLDivElement>(null);
+  const [lift, setLift] = useState(0);
+
+  useEffect(() => {
+    if (!open) {
+      setLift(0);
+      return undefined;
+    }
+    const measure = () => {
+      const slot = slotRef.current;
+      const popover = slot
+        ?.querySelector("[data-date-popover]")
+        ?.closest<HTMLElement>("[aria-hidden]");
+      if (!slot || !popover || !window.matchMedia(BOOKING_DESKTOP_QUERY).matches) {
+        setLift(0);
+        return;
+      }
+      const slotBox = slot.getBoundingClientRect();
+      // offsetTop is measured from the bar, so this is bar + gap + calendar
+      const total = popover.offsetTop + popover.offsetHeight;
+      const top = Math.max(VIEWPORT_MARGIN, (window.innerHeight - total) / 2);
+      setLift(slotBox.top - top);
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [open]);
+
+  return { slotRef, lift };
+}

@@ -15,6 +15,12 @@ const DAYLIGHT = [5, 8, 12, 15, 19, 21, 20, 16, 13, 10, 7, 4];
 
 export const daylightHours = (date: Date) => DAYLIGHT[date.getMonth()];
 
+/** The shoulder season splits into spring (Apr–May) and autumn (Sep–Oct) for display */
+export const isSpring = (date: Date) => {
+  const month = date.getMonth();
+  return month === 3 || month === 4;
+};
+
 /**
  * One hero photo per season, all framed the same way: a road running at eye level
  * towards the mountains, so switching season reads as the same place changing.

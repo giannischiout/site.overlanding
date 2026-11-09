@@ -7,6 +7,8 @@ import { BedDouble, Cog, Mountain, Star, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formatPrice } from "@/lib/pricing";
 import type { Vehicle } from "@/types/content";
+import { paths } from "@/lib/paths";
+import { capitalize, pluralize } from "@/lib/text";
 
 type Props = {
   vehicle: Vehicle;
@@ -86,7 +88,7 @@ export function VehicleCard({ vehicle, days, priority }: Props) {
             <h3 className="mt-1 truncate text-xl font-bold tracking-[-0.02em]">
               {/* The link covers the whole card */}
               <Link
-                href={`/book/vehicles/${vehicle.id}`}
+                href={paths.vehicle(vehicle.id)}
                 className="after:absolute after:inset-0 after:rounded-panel focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-[var(--ring)]"
               >
                 {vehicle.brand.name} {vehicle.model}
@@ -126,7 +128,7 @@ export function VehicleCard({ vehicle, days, priority }: Props) {
             </p>
             <p className="text-muted-foreground text-sm">
               {days
-                ? `${formatPrice(vehicle.basePricePerDay * days)} for ${days} ${days === 1 ? "day" : "days"}`
+                ? `${formatPrice(vehicle.basePricePerDay * days)} for ${pluralize(days, "day")}`
                 : "Unlimited km included"}
             </p>
           </div>
@@ -159,5 +161,3 @@ function DriveIcon() {
     </svg>
   );
 }
-
-const capitalize = (value: string) => value[0].toUpperCase() + value.slice(1);

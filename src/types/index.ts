@@ -1,6 +1,6 @@
-import type { Brand, Category, Feature } from "@/types/content";
+import type { Brand, CategoryWithStats, Feature } from "@/types/content";
 
-export type ICategory = Category & { count: number; fromPrice: number };
+export type ICategory = CategoryWithStats;
 
 export type IFilters = {
   categories: ICategory[];

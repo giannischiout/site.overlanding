@@ -1,29 +1,26 @@
-import { useEffect, useRef, useState, type PointerEvent } from "react";
+import { useEffect, useRef, type PointerEvent } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useClickOutside } from "@/hooks/use-click-outside";
 import { MegaMenu } from "@/components/nav/desktop-menu/mega-menu";
-import type { ActiveState } from "@/components/nav/types";
-import type { Navigation } from "@/types/content";
+import type { MenuId, Navigation } from "@/types/content";
 
-type Props = {
-  data: Navigation;
-};
-
-const MENUS = [
-  { id: "vehicles", label: "Vehicles" },
-  { id: "roadtrips", label: "Road trips" },
-] as const;
+const MENU_IDS = ["vehicles", "roadTrips"] as const satisfies readonly MenuId[];
 
 // Gives the pointer time to cross from the link down into the open panel
 const CLOSE_DELAY = 150;
 
-export function DesktopMenu({ data }: Props) {
-  const [active, setActive] = useState<ActiveState>(null);
+type Props = {
+  menus: Navigation["menus"];
+  active: MenuId | null;
+  onActiveChange: (id: MenuId | null) => void;
+};
+
+export function DesktopMenu({ menus, active, onActiveChange }: Props) {
   const navRef = useRef<HTMLElement>(null);
   const closeTimer = useRef<number | undefined>(undefined);
 
-  const onClose = () => setActive(null);
+  const onClose = () => onActiveChange(null);
   useClickOutside<HTMLDivElement>(onClose, navRef, !!active);
 
   const cancelClose = () => window.clearTimeout(closeTimer.current);
@@ -38,11 +35,11 @@ export function DesktopMenu({ data }: Props) {
   useEffect(() => {
     if (!active) return undefined;
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setActive(null);
+      if (event.key === "Escape") onActiveChange(null);
     };
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [active]);
+  }, [active, onActiveChange]);
 
   return (
     <nav
@@ -50,37 +47,43 @@ export function DesktopMenu({ data }: Props) {
       aria-label="Main"
       onPointerEnter={cancelClose}
       onPointerLeave={scheduleClose}
-      className="hidden lg:block"
+      className="hidden self-stretch lg:flex"
     >
-      <ul className="flex items-center gap-1">
-        {MENUS.map((menu) => {
-          const isOpen = active === menu.id;
+      <ul className="flex items-stretch gap-1">
+        {MENU_IDS.map((id) => {
+          const isOpen = active === id;
           return (
-            <li key={menu.id}>
+            <li key={id} className="flex">
               <button
                 type="button"
                 aria-expanded={isOpen}
                 aria-controls="nav-menu-panel"
                 onPointerEnter={(event) => {
                   // Touch skips hover, so its tap below opens the menu once
-                  if (event.pointerType === "mouse") setActive(menu.id);
+                  if (event.pointerType === "mouse") onActiveChange(id);
                 }}
-                onClick={() =>
-                  setActive((current) =>
-                    current === menu.id ? null : menu.id,
-                  )
-                }
+                onClick={() => onActiveChange(isOpen ? null : id)}
                 className={cn(
-                  "flex h-11 items-center gap-1 rounded-control px-4 text-base font-medium transition-colors duration-150 ease-out hover:bg-black/[0.05]",
-                  isOpen && "bg-basalt hover:bg-basalt text-white",
+                  "relative flex items-center gap-1.5 px-4 text-[15px] font-semibold transition-colors duration-200",
+                  active ? "text-white/70 hover:text-white" : "text-foreground/75 hover:text-foreground",
+                  isOpen && "text-white",
                 )}
               >
-                {menu.label}
+                {menus[id].label}
                 <ChevronDown
-                  size={16}
+                  size={15}
+                  strokeWidth={2.25}
                   className={cn(
-                    "text-muted-foreground transition-transform duration-300 ease-[var(--ease-out-expo)]",
+                    "transition-transform duration-300 ease-[var(--ease-out-expo)]",
                     isOpen && "text-aurora rotate-180",
+                  )}
+                />
+                {/* Aurora rule on the open menu, sitting on the header's bottom edge */}
+                <span
+                  aria-hidden
+                  className={cn(
+                    "bg-aurora absolute inset-x-4 bottom-0 h-0.5 origin-left transition-transform duration-300 ease-[var(--ease-out-expo)]",
+                    isOpen ? "scale-x-100" : "scale-x-0",
                   )}
                 />
               </button>
@@ -88,7 +91,7 @@ export function DesktopMenu({ data }: Props) {
           );
         })}
       </ul>
-      <MegaMenu active={active} data={data} onNavigate={onClose} />
+      <MegaMenu active={active} menus={menus} onNavigate={onClose} />
     </nav>
   );
 }

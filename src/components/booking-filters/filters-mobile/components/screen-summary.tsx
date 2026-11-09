@@ -1,7 +1,13 @@
 import { PortalDialog } from "@/components/booking-filters/filters-mobile/components/portal-dialog";
-import { type PopoverKey, useFilterStore } from "@/store/use-filters-store";
+import {
+  type FieldKey,
+  type FiltersState,
+  type PopoverKey,
+  useFilterStore,
+} from "@/store/use-filters-store";
 import { MobileHeader } from "@/components/booking-filters/filters-mobile/components/mobile-header";
-import { pickupIcons, timeOptions } from "@/_mockup";
+import { pickupIcons } from "@/components/booking-filters/pickup-icons";
+import { timeOptions } from "@/lib/pickup-times";
 import { ListOptions } from "@/components/booking-filters/list-options";
 import { DayPicker } from "@/components/day-picker";
 import { Button } from "@/components/ui/button";
@@ -28,10 +34,13 @@ export function SummaryScreen() {
     onClose,
   } = useFilterStore();
 
-  const handleChange = (newKey: PopoverKey, option: any) => {
-    setField(newKey, option);
+  const handleChange = <K extends FieldKey>(
+    key: K,
+    value: FiltersState[K],
+  ) => {
+    setField(key, value);
     setCurrentScreen("filters");
-    onClose(newKey);
+    onClose(key);
   };
 
   const locationOptions = locations.map((option) => ({
@@ -52,7 +61,7 @@ export function SummaryScreen() {
             options={locationOptions}
             onSelect={(opt) => {
               const location = locations.find(({ id }) => id === opt.value);
-              handleChange(key, location);
+              if (location) handleChange(key, location);
             }}
           />
         );

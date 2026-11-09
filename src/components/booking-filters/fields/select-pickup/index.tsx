@@ -1,6 +1,6 @@
 import { Popover } from "@/components/popover";
 import { cn } from "@/lib/utils";
-import { pickupIcons } from "@/_mockup";
+import { pickupIcons } from "@/components/booking-filters/pickup-icons";
 import { Check } from "lucide-react";
 import type { RefObject } from "react";
 import { FieldWrapper } from "@/components/booking-filters/fields/field-wrapper";

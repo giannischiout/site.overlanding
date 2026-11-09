@@ -1,21 +1,22 @@
 {
-  "brand": "Aurora Campers",
-  "categories": [
-    "campervan",
-    "4x4-campervan",
-    "rooftop-tent",
-    "motorhome",
-    "suv",
-    "economy"
-  ],
-  "bestSellingVehicles": [
-    "vw-california-ocean",
-    "mercedes-sprinter-4x4",
-    "dacia-duster"
-  ],
-  "tripPosts": [
-    "south-coast",
-    "golden-circle",
-    "highlands"
-  ]
+  "brand": {
+    "name": "Aurora",
+    "descriptor": "Campers"
+  },
+  "contact": {
+    "phone": "+354 555 0199",
+    "email": "hello@auroracampers.is",
+    "address": "Blikavöllur 5, 262 Keflavík Airport"
+  },
+  "menus": {
+    "vehicles": {
+      "label": "Vehicles",
+      "categories": ["campervan", "4x4-campervan", "rooftop-tent", "motorhome", "suv", "economy"],
+      "featuredVehicles": ["vw-california-ocean", "mercedes-sprinter-4x4", "dacia-duster"]
+    },
+    "roadTrips": {
+      "label": "Road trips",
+      "posts": ["south-coast", "golden-circle", "highlands"]
+    }
+  }
 }

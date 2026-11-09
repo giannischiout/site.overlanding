@@ -139,6 +139,11 @@ svg {
   --shadow-float: 0 18px 48px -12px rgb(6 20 16 / 0.28);
   --color-star: #f5b400;
   --color-sun: #ffd76a;
+  /* Season badge tints on the hero photo */
+  --color-frost: #bfe3ff;
+  --color-frost-soft: #d8efff;
+  --color-ember: #ffb36b;
+  --color-ember-soft: #ffc58f;
   --color-warn: #9a4b00;
   --color-warn-soft: #fff1e0;
   --color-background: var(--background);

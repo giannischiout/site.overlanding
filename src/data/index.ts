@@ -1,6 +1,7 @@
 import brands from "./brands.json";
 import categories from "./categories.json";
 import features from "./features.json";
+import footer from "./footer.json";
 import home from "./home.json";
 import navigation from "./navigation.json";
 import postsJson from "./posts.json";
@@ -8,8 +9,10 @@ import vehicles from "./vehicles.json";
 import type {
   Brand,
   Category,
+  CategoryWithStats,
   Drive,
   Feature,
+  FooterContent,
   Fuel,
   Home,
   Navigation,
@@ -57,19 +60,35 @@ export function getHome(): Home {
   };
 }
 
+/** A category plus how many vehicles it has and its cheapest daily price */
+function withStats(category: Category): CategoryWithStats {
+  const inCategory = allVehicles.filter((v) => v.category.id === category.id);
+  return {
+    ...category,
+    count: inCategory.length,
+    fromPrice: Math.min(...inCategory.map((v) => v.basePricePerDay)),
+  };
+}
+
 export function getNavigation(): Navigation {
+  const { vehicles: vehiclesMenu, roadTrips } = navigation.menus;
   return {
     brand: navigation.brand,
-    vehicles: {
-      categories: navigation.categories.map((id) =>
-        byId<Category>(categories, id),
-      ),
-      bestSellingVehicles: navigation.bestSellingVehicles.map((id) =>
-        byId(allVehicles, id),
-      ),
-    },
-    trip: {
-      posts: navigation.tripPosts.map((id) => byId<Post>(posts, id)),
+    contact: navigation.contact,
+    menus: {
+      vehicles: {
+        label: vehiclesMenu.label,
+        categories: vehiclesMenu.categories.map((id) =>
+          withStats(byId<Category>(categories, id)),
+        ),
+        featuredVehicles: vehiclesMenu.featuredVehicles.map((id) =>
+          byId(allVehicles, id),
+        ),
+      },
+      roadTrips: {
+        label: roadTrips.label,
+        posts: roadTrips.posts.map((id) => byId<Post>(posts, id)),
+      },
     },
   };
 }
@@ -84,16 +103,16 @@ export function getVehicle(id: string): Vehicle | undefined {
 
 export function getFilters(): IFilters {
   return {
-    categories: navigation.categories.map((id) => {
-      const category = byId<Category>(categories, id);
-      const inCategory = allVehicles.filter((v) => v.category.id === id);
-      return {
-        ...category,
-        count: inCategory.length,
-        fromPrice: Math.min(...inCategory.map((v) => v.basePricePerDay)),
-      };
-    }),
+    // Every category that has vehicles, in the order of categories.json
+    categories: categories
+      .filter((category) => allVehicles.some((v) => v.category.id === category.id))
+      .map(withStats),
     brands,
     features,
   };
+}
+
+export function getFooter(): FooterContent {
+  // JSON widens the resource ids to string; the union in FooterContent picks their icons
+  return footer as FooterContent;
 }

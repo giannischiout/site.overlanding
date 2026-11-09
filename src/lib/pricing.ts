@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { EXTRAS, PROTECTIONS } from "@/data/extras";
 import type { Vehicle } from "@/types/content";
+import { pluralize } from "@/lib/text";
 
 /** Charged when the car is returned somewhere other than where it was picked up */
 export const ONE_WAY_FEE = 150;
@@ -38,7 +39,7 @@ export function quote({
   const billable = Math.max(days, 1);
 
   lines.push({
-    label: `${vehicle.brand.name} ${vehicle.model} × ${billable} ${billable === 1 ? "day" : "days"}`,
+    label: `${vehicle.brand.name} ${vehicle.model} × ${pluralize(billable, "day")}`,
     amount: vehicle.basePricePerDay * billable,
   });
 

@@ -1,5 +1,6 @@
 import { usePathname, useRouter } from "next/navigation";
-import { useFilterStore } from "@/store/use-filters-store";
+import { useOpenDatePicker } from "@/hooks/use-open-date-picker";
+import { paths } from "@/lib/paths";
 
 /**
  * Opens the booking flow from anywhere. Pages with a booking bar (home, results, vehicle)
@@ -8,21 +9,11 @@ import { useFilterStore } from "@/store/use-filters-store";
 export function useBookNow() {
   const router = useRouter();
   const pathname = usePathname();
-  const onOpen = useFilterStore((state) => state.onOpen);
-  const setCurrentScreen = useFilterStore((state) => state.setCurrentScreen);
+  const openDatePicker = useOpenDatePicker();
 
   return () => {
-    const hasBar = pathname === "/" || pathname.startsWith("/book/vehicles");
-    if (!hasBar) {
-      router.push("/book/vehicles");
-      return;
-    }
-    if (window.matchMedia("(min-width: 961px)").matches) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      onOpen("dateRange");
-    } else {
-      setCurrentScreen("summary");
-      onOpen("dateRange");
-    }
+    const hasBar = pathname === "/" || pathname.startsWith(paths.vehicles());
+    if (hasBar) openDatePicker();
+    else router.push(paths.vehicles());
   };
 }

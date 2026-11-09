@@ -3,11 +3,7 @@ import { Popover } from "@/components/popover";
 import { FieldWrapper } from "@/components/booking-filters/fields/field-wrapper";
 import { Check } from "lucide-react";
 import type { RefObject } from "react";
-
-type TimeOption = {
-  label: string;
-  value: string;
-};
+import type { TimeOption } from "@/lib/pickup-times";
 
 type Props = {
   label: string;

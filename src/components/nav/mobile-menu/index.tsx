@@ -1,114 +1,74 @@
-import { useEffect, useState, type ReactNode } from "react";
-import { ChevronDown } from "lucide-react";
+import { useEffect } from "react";
+import { NAV_DESKTOP_QUERY } from "@/lib/breakpoints";
 import { cn } from "@/lib/utils";
-import { useBoolean } from "@/hooks/use-boolean";
-import { Button } from "@/components/ui/button";
-import { Hamburger } from "@/components/nav/components/burger";
-import { OurCars } from "@/components/nav/desktop-menu/mega-menu/our-cars";
-import { Roadtrips } from "@/components/nav/desktop-menu/mega-menu/roadtrips";
 import type { Navigation } from "@/types/content";
+import { Hamburger } from "@/components/nav/components/burger";
+import { BookNowButton } from "@/components/nav/components/book-now-button";
+import { categoryItem, roadTripItem } from "@/components/nav/menu-items";
+import { MobileLinkList } from "@/components/nav/mobile-menu/mobile-link-list";
 
 type Props = {
   data: Navigation;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
   onBookNow: () => void;
 };
 
-export function MobileMenu({ data, onBookNow }: Props) {
-  const { value: open, onToggle, onFalse: onClose } = useBoolean();
-  const [active, setActive] = useState<string | null>(null);
+/** A full-height basalt sheet under the header, continuing it like the desktop menus do */
+export function MobileMenu({ data, open, onOpenChange, onBookNow }: Props) {
+  const { vehicles, roadTrips } = data.menus;
 
   // Stop the page scrolling behind the menu, and close it if the screen grows past mobile
   useEffect(() => {
     if (!open) return undefined;
+    const close = () => onOpenChange(false);
     document.body.style.overflow = "hidden";
-    const desktop = window.matchMedia("(min-width: 1024px)");
-    desktop.addEventListener("change", onClose);
+    const desktop = window.matchMedia(NAV_DESKTOP_QUERY);
+    desktop.addEventListener("change", close);
     return () => {
       document.body.style.overflow = "";
-      desktop.removeEventListener("change", onClose);
+      desktop.removeEventListener("change", close);
     };
-  }, [open, onClose]);
+  }, [open, onOpenChange]);
 
-  const toggleSection = (id: string) =>
-    setActive((current) => (current === id ? null : id));
+  const close = () => onOpenChange(false);
 
   return (
     <>
-      <Hamburger onToggle={onToggle} open={open} />
+      <Hamburger onToggle={() => onOpenChange(!open)} open={open} />
       <div
+        id="mobile-menu"
         className={cn(
-          "fixed inset-x-0 top-[var(--nav-height)] bottom-0 flex flex-col bg-white lg:hidden",
+          "bg-basalt fixed inset-x-0 top-[var(--nav-height)] bottom-0 flex flex-col text-white lg:hidden",
           "transition-[opacity,visibility] duration-200 ease-out",
-          open
-            ? "visible opacity-100"
-            : "pointer-events-none invisible opacity-0",
+          open ? "visible opacity-100" : "pointer-events-none invisible opacity-0",
         )}
       >
         <nav aria-label="Mobile" className="min-h-0 flex-1 overflow-y-auto">
-          <div className="page-container py-2">
-            <MobileSection
-              label="Vehicles"
-              open={active === "vehicles"}
-              onToggle={() => toggleSection("vehicles")}
-            >
-              <OurCars vehicles={data.vehicles} onNavigate={onClose} />
-            </MobileSection>
-            <MobileSection
-              label="Road trips"
-              open={active === "roadtrips"}
-              onToggle={() => toggleSection("roadtrips")}
-            >
-              <Roadtrips data={data.trip} onNavigate={onClose} />
-            </MobileSection>
+          <div className="flex flex-col gap-8 px-4 py-6">
+            <MobileLinkList
+              heading={vehicles.label}
+              items={vehicles.categories.map(categoryItem)}
+              onNavigate={close}
+            />
+            <MobileLinkList
+              heading={roadTrips.label}
+              items={roadTrips.posts.map(roadTripItem)}
+              onNavigate={close}
+            />
           </div>
         </nav>
         {/* Stays on screen however far the menu is scrolled */}
-        <div className="border-t border-border p-4">
-          <Button
-            size="lg"
-            className="h-12 w-full text-base"
+        <div className="border-t border-white/10 p-4">
+          <BookNowButton
+            className="h-12 w-full"
             onClick={() => {
-              onClose();
+              close();
               onBookNow();
             }}
-          >
-            Book now
-          </Button>
+          />
         </div>
       </div>
     </>
-  );
-}
-
-function MobileSection({
-  label,
-  open,
-  onToggle,
-  children,
-}: {
-  label: string;
-  open: boolean;
-  onToggle: () => void;
-  children: ReactNode;
-}) {
-  return (
-    <div className="border-b border-border">
-      <button
-        type="button"
-        onClick={onToggle}
-        aria-expanded={open}
-        className="flex h-14 w-full items-center justify-between text-lg font-medium"
-      >
-        {label}
-        <ChevronDown
-          size={20}
-          className={cn(
-            "text-muted-foreground transition-transform duration-150 ease-out",
-            open && "rotate-180",
-          )}
-        />
-      </button>
-      {open && <div className="pb-6">{children}</div>}
-    </div>
   );
 }

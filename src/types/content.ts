@@ -108,13 +108,47 @@ export type Home = {
   featuredPosts: Post[];
 };
 
+/** A category with how many vehicles it has and its cheapest daily price */
+export type CategoryWithStats = Category & { count: number; fromPrice: number };
+
+export type Contact = {
+  phone: string;
+  email: string;
+  address: string;
+};
+
 export type Navigation = {
-  brand: string;
-  vehicles: {
-    categories: Category[];
-    bestSellingVehicles: Vehicle[];
+  /** Shown as the bold name over the spaced-out descriptor */
+  brand: { name: string; descriptor: string };
+  contact: Contact;
+  menus: {
+    vehicles: {
+      label: string;
+      categories: CategoryWithStats[];
+      featuredVehicles: Vehicle[];
+    };
+    roadTrips: {
+      label: string;
+      posts: Post[];
+    };
   };
-  trip: {
-    posts: Post[];
-  };
+};
+
+export type MenuId = keyof Navigation["menus"];
+
+export type FooterLink = { label: string; href: string };
+
+export type TravelResource = {
+  id: "roads" | "weather" | "aurora" | "safety";
+  label: string;
+  description: string;
+  href: string;
+};
+
+export type FooterContent = {
+  closing: { title: string; text: string };
+  about: string;
+  resources: { title: string; items: TravelResource[] };
+  help: FooterLink[];
+  legal: string;
 };

@@ -7,10 +7,11 @@ import { CheckCircle2, Mail, Phone, Plane } from "lucide-react";
 import { useBookingHydrated } from "@/components/booking-hydrator";
 import { TripSummary } from "@/components/trip-summary";
 import { formatPrice } from "@/lib/pricing";
-import locations from "@/data/pickup-locations.json";
+import { findPickupLocation } from "@/data/pickup-locations";
 import { useBookingStore } from "@/store/use-booking-store";
 import { Steps } from "@/sections/checkout/steps";
-import type { PickupLocation, Vehicle } from "@/types/content";
+import type { Vehicle } from "@/types/content";
+import { paths } from "@/lib/paths";
 
 const NEXT_STEPS = [
   {
@@ -49,14 +50,13 @@ export function ConfirmationView({ vehicles }: { vehicles: Vehicle[] }) {
       <div className="mx-auto flex min-h-[50vh] max-w-md flex-col items-center justify-center gap-4 text-center">
         <h1 className="text-3xl font-bold">No booking to show</h1>
         <p className="text-muted-foreground">Your confirmation is in your email. Start a new booking any time.</p>
-        <Link href="/book/vehicles" className="btn-primary px-6 py-3">
+        <Link href={paths.vehicles()} className="btn-primary px-6 py-3">
           Browse vehicles
         </Link>
       </div>
     );
   }
 
-  const all = locations as PickupLocation[];
 
   return (
     <div className="mx-auto flex max-w-3xl flex-col gap-10">
@@ -99,8 +99,8 @@ export function ConfirmationView({ vehicles }: { vehicles: Vehicle[] }) {
             <TripSummary
               from={booking.trip.from}
               to={booking.trip.to}
-              pickup={all.find((l) => l.id === booking.trip.pickupId)}
-              dropoff={all.find((l) => l.id === booking.trip.dropoffId)}
+              pickup={findPickupLocation(booking.trip.pickupId)}
+              dropoff={findPickupLocation(booking.trip.dropoffId)}
               pickupTime={booking.trip.pickupTime}
               dropoffTime={booking.trip.dropoffTime}
             />

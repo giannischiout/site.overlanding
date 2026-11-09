@@ -1,6 +1,6 @@
 import { Hero } from "@/sections/home/hero";
 import { CategoriesSection } from "@/sections/home/categories";
-import { Highlights } from "@/sections/home/hightlights";
+import { Highlights } from "@/sections/home/highlights";
 import { FeaturedPosts } from "@/sections/home/featured-posts";
 import { FaqSection } from "@/sections/home/faq";
 import { MapBackdrop } from "@/sections/home/featured-posts/map-backdrop";

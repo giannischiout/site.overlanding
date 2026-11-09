@@ -1,5 +1,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useFilterStore } from "@/store/use-filters-store";
+import { BOOKING_DESKTOP_QUERY } from "@/lib/breakpoints";
+import { paths } from "@/lib/paths";
 
 /**
  * Runs the search from the booking bar. Without dates it opens the calendar first;
@@ -14,7 +16,7 @@ export function useSearchVehicles() {
 
     if (!range.from || !range.to) {
       // Mobile shows the calendar on its own screen
-      if (!window.matchMedia("(min-width: 961px)").matches) {
+      if (!window.matchMedia(BOOKING_DESKTOP_QUERY).matches) {
         setCurrentScreen("summary");
       }
       onOpen("dateRange");
@@ -22,12 +24,12 @@ export function useSearchVehicles() {
     }
 
     useFilterStore.setState({ openPopover: null, currentScreen: "callToAction" });
-    if (pathname === "/book/vehicles") {
+    if (pathname === paths.vehicles()) {
       // Already on the results: they update live from the store
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
     const category = new URLSearchParams(window.location.search).get("category");
-    router.push(category ? `/book/vehicles?category=${category}` : "/book/vehicles");
+    router.push(paths.vehicles(category));
   };
 }

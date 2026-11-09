@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { formatPrice } from "@/lib/pricing";
 import type { ICategory } from "@/types";
+import { paths } from "@/lib/paths";
 
 export function CategoriesSection({ categories }: { categories: ICategory[] }) {
   return (
@@ -22,7 +23,7 @@ export function CategoriesSection({ categories }: { categories: ICategory[] }) {
           </p>
         </div>
         <Link
-          href="/book/vehicles"
+          href={paths.vehicles()}
           className="group text-link flex shrink-0 items-center gap-1.5 text-[15px] font-semibold underline-offset-4 hover:underline"
         >
           See every vehicle
@@ -48,7 +49,7 @@ export function CategoriesSection({ categories }: { categories: ICategory[] }) {
 function CategoryCard({ category }: { category: ICategory }) {
   return (
     <Link
-      href={`/book/vehicles?category=${category.id}`}
+      href={paths.vehicles(category.id)}
       className="group flex h-full flex-col overflow-hidden rounded-panel bg-white shadow-card ring-1 ring-black/[0.04] transition-[box-shadow,transform] duration-500 ease-[var(--ease-out-expo)] hover:-translate-y-1 hover:shadow-card-hover focus-visible:outline-offset-4"
     >
       <div className="bg-sky relative aspect-[16/10] overflow-hidden">

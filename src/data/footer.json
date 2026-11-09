@@ -1,0 +1,42 @@
+{
+  "closing": {
+    "title": "Pick it up at Keflavík. The rest is road.",
+    "text": "Free shuttle from arrivals, unlimited kilometres and a local on the phone day and night."
+  },
+  "about": "Campervans, 4x4s and motorhomes for driving Iceland your own way. Family run in Keflavík since 2014.",
+  "resources": {
+    "title": "Check before you drive",
+    "items": [
+      {
+        "id": "roads",
+        "label": "Road conditions",
+        "description": "Closures and F-road status, live",
+        "href": "https://umferdin.is/en"
+      },
+      {
+        "id": "weather",
+        "label": "Weather and wind",
+        "description": "Forecasts and gust warnings",
+        "href": "https://en.vedur.is"
+      },
+      {
+        "id": "aurora",
+        "label": "Aurora forecast",
+        "description": "Cloud cover and activity by night",
+        "href": "https://en.vedur.is/weather/forecasts/aurora/"
+      },
+      {
+        "id": "safety",
+        "label": "Safetravel",
+        "description": "Alerts and your travel plan",
+        "href": "https://safetravel.is"
+      }
+    ]
+  },
+  "help": [
+    { "label": "FAQ", "href": "/#faq" },
+    { "label": "Why rent with us", "href": "/#why-us" },
+    { "label": "Road trip ideas", "href": "/#road-trips" }
+  ],
+  "legal": "All prices in EUR, including VAT."
+}
