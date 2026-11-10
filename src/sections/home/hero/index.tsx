@@ -1,5 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { useScrollLock } from "@/hooks/use-scroll-lock";
+import { BOOKING_DESKTOP_QUERY } from "@/lib/breakpoints";
 import { cn } from "@/lib/utils";
 import { useFilterStore } from "@/store/use-filters-store";
 import type { Home } from "@/types/content";
@@ -14,6 +16,8 @@ export function Hero({ data }: { data: Home["hero"] }) {
   const isDatePickerOpen = useFilterStore(
     (state) => state.openPopover === "dateRange",
   );
+  // The page holds still under the open calendar (desktop; mobile uses a full-screen sheet)
+  useScrollLock(isDatePickerOpen, { query: BOOKING_DESKTOP_QUERY });
   const { season, tripStart, seasonDate, badgeDate, tripInSeason } =
     useHeroSeason();
   const isWinter = season === "winter";

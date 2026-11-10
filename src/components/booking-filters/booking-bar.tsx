@@ -1,6 +1,8 @@
 "use client";
 
 import { FilterPanel } from "@/components/booking-filters";
+import { useScrollLock } from "@/hooks/use-scroll-lock";
+import { BOOKING_DESKTOP_QUERY } from "@/lib/breakpoints";
 import { cn } from "@/lib/utils";
 import { useFilterStore } from "@/store/use-filters-store";
 
@@ -12,6 +14,8 @@ export function BookingBar() {
   const isDatePickerOpen = useFilterStore(
     (state) => state.openPopover === "dateRange",
   );
+  // The results hold still under the open calendar, as on the home page
+  useScrollLock(isDatePickerOpen, { query: BOOKING_DESKTOP_QUERY });
 
   return (
     <>
@@ -22,16 +26,10 @@ export function BookingBar() {
           isDatePickerOpen ? "opacity-100" : "pointer-events-none opacity-0",
         )}
       />
-      <div className="sticky top-[var(--nav-height)] z-40 border-b bg-white/90 backdrop-blur-md">
+      <div className="sticky top-[var(--bar-top)] z-40 border-b bg-white/90 backdrop-blur-md transition-[top] duration-300 ease-out">
         <div className="page-container animate-in fade-in slide-in-from-bottom-6 py-2.5 duration-700 ease-[var(--ease-out-expo)] min-[961px]:py-3">
-          <div
-            className={cn(
-              "rounded-panel relative mx-auto w-full bg-white p-1 ring-1 ring-black/[0.08] transition-shadow duration-300 min-[961px]:max-w-[1040px] min-[961px]:pl-3",
-              isDatePickerOpen
-                ? "shadow-[0_24px_48px_-20px_rgb(6_20_16/0.45)]"
-                : "shadow-[0_10px_30px_-18px_rgb(6_20_16/0.35)]",
-            )}
-          >
+          {/* Flat on the strip: no border or shadow, so it reads as part of the toolbar */}
+          <div className="rounded-panel relative mx-auto w-full bg-white p-1 min-[961px]:max-w-[1040px] min-[961px]:pl-3">
             <FilterPanel top="calc(100% + 10px)" />
           </div>
         </div>

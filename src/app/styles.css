@@ -45,6 +45,8 @@
   --border-dark: oklch(0.773 0 89.876);
   /* layout */
   --nav-height: 68px;
+  /* Where the booking bar sticks: under the nav, or the very top once the nav hides on scroll */
+  --bar-top: var(--nav-height);
   --gutter: 16px;
   --backdrop: rgb(6 14 12 / 0.55);
   --hover: #edf3f0;
@@ -496,4 +498,9 @@ svg {
   .route-draw {
     animation: none;
   }
+}
+
+/* Booking pages: the nav slides away on scroll and the booking bar takes the top */
+:root[data-nav-hidden="true"] {
+  --bar-top: 0px;
 }

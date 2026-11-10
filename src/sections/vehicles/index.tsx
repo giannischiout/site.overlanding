@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { CalendarDays, SlidersHorizontal } from "lucide-react";
+import SimpleBar from "simplebar-react";
 import { rentalDays } from "@/lib/pricing";
 import { pluralize } from "@/lib/text";
 import { useOpenDatePicker } from "@/hooks/use-open-date-picker";
@@ -49,7 +50,10 @@ export function VehiclesView({ vehicles, filters, initialCategory }: Props) {
   const update = (patch: Partial<FilterState>) =>
     setState((previous) => ({ ...previous, ...patch }));
   const clear = () =>
-    setState((previous) => ({ ...initialFilters(bounds), sort: previous.sort }));
+    setState((previous) => ({
+      ...initialFilters(bounds),
+      sort: previous.sort,
+    }));
 
   // The category lives in the URL so results can be shared and survive a refresh
   const selectCategory = (id: string | null) => {
@@ -97,20 +101,28 @@ export function VehiclesView({ vehicles, filters, initialCategory }: Props) {
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[280px_1fr] lg:gap-10">
         <aside className="hidden lg:block">
-          <div className="rounded-panel shadow-card sticky top-[calc(var(--nav-height)+104px)] max-h-[calc(100vh-var(--nav-height)-128px)] overflow-y-auto bg-white p-6 ring-1 ring-black/[0.04] [scrollbar-width:thin]">
-            <div className="mb-5 flex items-center justify-between">
-              <h2 className="text-lg font-bold">Filters</h2>
-              {chips.length > 0 && (
-                <button
-                  type="button"
-                  onClick={clear}
-                  className="text-link text-sm font-semibold hover:underline"
-                >
-                  Clear all
-                </button>
-              )}
-            </div>
-            {panel}
+          {/* Scrollbar appears only while the pointer is over the panel (SimpleBar autoHide) */}
+          <div className="rounded-panel sticky top-[calc(var(--bar-top)+104px)] overflow-hidden bg-white transition-[top] duration-300 ease-out">
+            <SimpleBar
+              autoHide
+              style={{ maxHeight: "calc(100vh - var(--bar-top) - 128px)" }}
+            >
+              <div className="p-6">
+                <div className="mb-5 flex items-center justify-between">
+                  <h2 className="text-lg font-bold">Filters</h2>
+                  {chips.length > 0 && (
+                    <button
+                      type="button"
+                      onClick={clear}
+                      className="text-link text-sm font-semibold hover:underline"
+                    >
+                      Clear all
+                    </button>
+                  )}
+                </div>
+                {panel}
+              </div>
+            </SimpleBar>
           </div>
         </aside>
 
@@ -135,7 +147,10 @@ export function VehiclesView({ vehicles, filters, initialCategory }: Props) {
                   </span>
                 )}
               </button>
-              <SortSelect value={state.sort} onChange={(sort) => update({ sort })} />
+              <SortSelect
+                value={state.sort}
+                onChange={(sort) => update({ sort })}
+              />
             </div>
           </div>
 
@@ -147,8 +162,8 @@ export function VehiclesView({ vehicles, filters, initialCategory }: Props) {
             >
               <CalendarDays size={20} className="text-link shrink-0" />
               <span className="text-[15px]">
-                <strong>Add your dates</strong> to see the total price and what&apos;s
-                available.
+                <strong>Add your dates</strong> to see the total price and
+                what&apos;s available.
               </span>
             </button>
           )}

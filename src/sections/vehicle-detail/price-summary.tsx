@@ -30,7 +30,7 @@ export function PriceSummary({
 
   return (
     <aside>
-      <div className="rounded-panel shadow-panel sticky top-[calc(var(--nav-height)+104px)] flex flex-col gap-5 bg-white p-6 ring-1 ring-black/[0.04]">
+      <div className="rounded-panel shadow-panel sticky top-[calc(var(--bar-top)+104px)] flex flex-col gap-5 bg-white p-6 ring-1 ring-black/[0.04] transition-[top] duration-300 ease-out">
         <p className="text-3xl font-bold tracking-[-0.02em]">
           {formatPrice(pricePerDay)}
           <span className="text-muted-foreground text-base font-medium">

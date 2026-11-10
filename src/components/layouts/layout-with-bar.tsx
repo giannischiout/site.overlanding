@@ -8,7 +8,8 @@ export function LayoutWithBar({ children }: Props) {
   return (
     <>
       <BookingBar />
-      <div className="page-container">{children}</div>
+      {/* Same width and inset as the nav, so the results line up with the header */}
+      <div className="wide-container px-3 md:px-6">{children}</div>
     </>
   );
 }

@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { BrandLink } from "@/components/brand-link";
 import { BookNowButton } from "@/components/nav/components/book-now-button";
 import { useBookNow } from "@/components/nav/components/use-book-now";
 import { DesktopMenu } from "@/components/nav/desktop-menu";
 import { MobileMenu } from "@/components/nav/mobile-menu";
+import { paths } from "@/lib/paths";
 import { cn } from "@/lib/utils";
 import type { MenuId, Navigation } from "@/types/content";
 
@@ -13,9 +15,15 @@ type Props = {
   data: Navigation;
 };
 
+/** How far down the page (px) before the nav hides on booking pages */
+const HIDE_AFTER = 120;
+
 export function Navbar({ data }: Props) {
   const { bookNow: onBookNow, isPending: bookNowPending } = useBookNow();
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  // Past the page header: on booking pages the nav steps aside for the booking bar
+  const [pastTop, setPastTop] = useState(false);
   const [activeMenu, setActiveMenu] = useState<MenuId | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -24,16 +32,36 @@ export function Navbar({ data }: Props) {
 
   // The bar sits flat on the page at the top and lifts off it once content scrolls under
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 8);
+      setPastTop(window.scrollY > HIDE_AFTER);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Results and vehicle pages: once scrolled, the booking bar takes the top of the screen.
+  // Never while a menu is open.
+  const hidden =
+    pastTop &&
+    pathname.startsWith(paths.vehicles()) &&
+    !activeMenu &&
+    !mobileOpen;
+
+  // The booking bar and sticky panels read this flag (via --bar-top in styles.css)
+  useEffect(() => {
+    document.documentElement.dataset.navHidden = String(hidden);
+    return () => {
+      delete document.documentElement.dataset.navHidden;
+    };
+  }, [hidden]);
+
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 transition-[background-color,box-shadow] duration-300 ease-out",
+        "sticky top-0 z-50 transition-[background-color,box-shadow,transform] duration-300 ease-out",
+        hidden && "-translate-y-full",
         tone === "dark"
           ? "bg-basalt"
           : scrolled
